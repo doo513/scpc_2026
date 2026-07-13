@@ -1,0 +1,382 @@
+# AUTHORITATIVE SCPC v8 구현 Master Plan
+
+  ## 상태와 병합 원칙
+
+  이 계획은 이전 <proposed_plan> 전체를 대체한다. FixedSLM 보완 계획이나 별도 후속 계획은
+  만들지 않는다.
+
+  NOT_AVAILABLE
+
+  - 대상: /mnt/c/Users/doo33/Desktop/scpc_reports/implementation_master_plan.md
+  - 원인: 현재 파일이 존재하지 않으며 Plan Mode에서는 파일을 생성·수정할 수 없음
+  - 처리: 실행 시 이 계획을 유일한 implementation_master_plan.md로 작성
+  - 기존 계획 상태: SUPERSEDED
+  - authoritative plan: 본 문서 하나만 유효
+
+  같은 디렉터리에 다음 감사 문서를 작성하되, 구현 단계와 FixedSLM 결정은 반드시 이 Master
+  Plan을 참조한다.
+
+  - official_contract_audit.md
+  - relationship_hypothesis_audit.md
+  - production_architecture_audit.md
+  - reuse_and_migration_matrix.md
+  - implementation_master_plan.md
+  - open_questions_and_assumptions.md
+
+  ## 병합 변경 이력
+
+  ### 변경된 기존 조항
+
+  - Stage 3을 parser·FixedSLM evidence 구현 단계에서 PROMOTE / KEEP_SHADOW / REMOVE를 확정
+    하는 승격 단계로 변경한다.
+
+  - Stage 4 입력 계약을 Stage 3의 최종 FixedSLM 상태에 따라 결정하도록 변경한다.
+  - artifact manifest에 fixed_slm_status, adapter/source hash, production 영향 여부, Stage
+    3 report hash를 기록한다.
+
+  - Stage 9·10 release gate에 FixedSLM authority·fallback·승격 상태 검증을 추가한다.
+  - 향후 FixedSLM 재검토도 별도 계획이 아니라 이 Master Plan을 직접 개정하도록 고정한다.
+
+  ### 보완 조건으로 대체된 조항
+
+  - SUPERSEDED: “FixedSLM adapter를 활성화하되 낮은 authority로 사용한다.”
+      - 대체: 현재 상태는 KEEP_SHADOW이며, Stage 3의 PROMOTE gate 통과 전에는 production
+        candidate/evidence에 영향 0건이어야 한다.
+
+  - SUPERSEDED: “사용 의무가 불명확하지만 ambiguity 시 production에서 호출한다.”
+      - 대체: ambiguity 호출은 shadow 평가에서 먼저 수행하고, 승격 후에만 production
+        evidence 경로에서 호출한다.
+
+  - SUPERSEDED: Stage 4가 SLMEvidence | None을 조건 없이 입력으로 받는다.
+      - 대체: PROMOTE일 때만 validated SLMEvidence를 병합한다. KEEP_SHADOW·REMOVE에서는
+        parser-only input을 사용한다.
+
+  ### 삭제된 조항
+
+  - FixedSLM이 승격 판단 없이 production evidence에 조용히 병합될 수 있는 문구.
+  - 기존 계획과 FixedSLM 보완 계획이 병렬로 유효하다는 해석.
+  - 승격 실패를 미결정 상태로 남기거나 다음 단계에서 임의 판단하도록 하는 문구.
+  - 별도 fixedslm_plan.md, 후속 prompt 또는 병렬 migration plan 생성 가능성.
+
+  ### 유지된 조항
+
+  - 공식 ZIP·schema·dev reference의 최우선 근거 지위.
+  - current source 기준 submission 재현성과 artifact hash 감사 결과.
+  - shadow pipeline을 release gate 전까지 production으로 전환하지 않는 원칙.
+  - validation-before-commit, 단일 semantic owner, pure compiler, atomic commit 요구.
+  - task ID·이름·전체 prompt·dev answer 기반 규칙 금지.
+  - configured dev gate 0.9421을 임의로 낮추지 않는 원칙.
+  - Stage 0~10의 단계적 migration과 legacy rollback 보장.
+
+  ### 재검증할 release gate
+
+  - Stage 0: 공식 노트북 scorer와 local scorer parity.
+  - Stage 3: FixedSLM 최종 상태와 승격 증거.
+  - Stage 4: candidate provenance와 FixedSLM production 영향 경계.
+  - Stage 9: compiler isolation, authority 보존, validation-before-commit.
+  - Stage 10: official dev, metamorphic, task-specific scan, artifact freshness, FixedSLM
+    상태 완결성.
+
+  ## 검증된 기준선
+
+  - 공식 ZIP SHA-256: c53751f2dc947d7a19bc5a4af861cca47f21e16ad29b7625770e82a1be7348f5
+  - current source tree SHA-256:
+    d75985cd38206600822190ed6adce6ca898dc8d77f2952558ad9b8d0b8b1c286
+
+  - current submission SHA-256:
+    bef9b996db7c883e26ea2c6bf595b4f4ea8597dd0f5b61913dc2d8ab87e241f0
+
+  - official-notebook dev score: 0.8186
+  - project local scorer dev score: 0.8036
+  - exact/non-exact: 15 / 105
+  - 테스트: 216 passed, 1 failed
+  - production release: FAIL
+  - current FixedSLM 상태: KEEP_SHADOW
+
+  현재 production은 legacy core.decision과 rules.* compiler를 사용한다. 새
+  rulepack·constraint·candidate evaluator·DecisionIR·session overlay는 shadow-only이며
+  session commit은 consistency validation보다 먼저 수행된다.
+
+  ## 공통 인터페이스와 소유권
+
+  - 공식 submission schema와 공식 자산은 수정하지 않는다.
+  - FinalHarness.answer_task(task, session, *, commit=True) 외부 서명은 유지한다.
+  - 내부 흐름은 evaluate → project → compile → validate → atomic commit으로 변경한다.
+  - DecisionBundle, DecisionProjectionSet, SpeculativeSessionOverlay,
+    AtomicCommitCoordinator를 최종 production contract로 승격한다.
+
+  - generate_reports.py를 report·manifest의 단일 owner로 지정한다.
+  - step12_gate.py는 canonical artifact를 검증·복사할 뿐 공유 manifest를 다시 생성하지 않
+    는다.
+
+  - artifact manifest는 runtime source, scorer, config, official data, FixedSLM 상태,
+    output content hash를 분리한다. mtime은 판정 근거로 사용하지 않는다.
+
+  ## 단계별 구현 계획
+
+  ### Stage 0 — 공식 기준선·scorer·artifact provenance
+
+  - 변경 축: 평가 및 artifact provenance만 변경하며 inference는 건드리지 않는다.
+  - 입력/출력: 공식 ZIP·current source → canonical score/report/manifest.
+  - owner: generate_reports.py와 build_manifest.py.
+  - 작업: 공식 notebook scorer parity를 복원하고 중복 artifact writer와 stale report를 정
+    리한다.
+
+  - 테스트: 격리 재실행 byte parity, 공식 scorer 0.8186, submission hash, source/data/
+    scorer hash 검증.
+
+  - Gate: scorer parity와 단일 artifact owner가 모두 통과해야 한다.
+  - Rollback: tooling 변경만 되돌리고 production answer는 유지한다.
+  - 비용: MEDIUM
+
+  ### Stage 1 — Ontology·authoritative ownership
+
+  - 변경 축: 의미 타입과 최종 owner.
+  - 입력/출력: current ontology와 중복 legacy 타입 → owner가 하나인 canonical ontology.
+  - owner: core.ontology, 수정된 ownership registry.
+  - 작업: domain, operation, target, disclosure, reason code의 legacy/shadow 중복을 제거할
+    migration mapping을 확정한다.
+
+  - 테스트: enum/reference integrity, 불가능한 조합, UNKNOWN default 금지.
+  - Gate: shadow trace와 current production output이 동일해야 한다.
+  - 비용: MEDIUM
+
+  ### Stage 2 — Typed Fact·RecordAdapter
+
+  - 변경 축: raw input 해석.
+  - 입력/출력: TaskView → TypedFactSnapshot.
+  - owner: RecordAdapterRegistry, object/capability/session adapters.
+  - 작업: 현재 production-active typed fact 경로를 재사용하고
+    chronology·missing·unknown·conflict 계약을 고정한다.
+
+  - 테스트: object/record permutation, duplicate conflict, invalid/missing, raw-access AST
+    검사.
+
+  - Gate: RecordAdapter 외부 raw record 해석 0건.
+  - 비용: MEDIUM
+
+  ### Stage 3 — Parser·Context Binder·FixedSLM 승격 결정
+
+  - 변경 축: 자연어와 SLM evidence authority.
+  - 입력/출력: SurfaceParse + TypedFacts → ContextBindingResult → Pre-SLM Candidate
+    Evidence.
+
+  - owner: parser는 deterministic evidence, FixedSLM adapter는 proposal evidence, Context
+    Binder는 scope-aware authority를 소유한다.
+
+  - 현재 결정: KEEP_SHADOW. 승격 전 production 영향은 0건이다.
+
+  #### FixedSLM 공식 계약
+
+  공식 baseline에서 확인된 interface만 사용한다.
+
+  class FixedSLMClient
+  model_id = "scpc-final-fixed-slm-local-facade"
+  summarize_task(task: dict) -> dict
+
+  허용 출력:
+
+  risk_flags: list[str]
+  requires_redaction: bool
+  requires_confirmation: bool
+  audit_tags: list[str]
+
+  추가 필드나 FinalDecision 출력은 허용하지 않는다. 공식 timeout·failure 계약은 없으므로
+  실패 시 proposal을 폐기하고 parser-only 평가를 그대로 사용한다.
+
+  #### 승격 판정
+
+  Stage 3 종료 시 report에 정확히 하나만 기록한다.
+
+  PROMOTE
+
+  - 공식 interface와 위 출력 schema 검증 완료.
+  - 고정된 held-out paraphrase·ambiguity suite에서 parser-only보다 추가 통과 사례가 최소 1
+    건 존재하고 회귀는 0건.
+
+  - 공식 dev overall·필수 축·exact count가 parser-only보다 악화되지 않음.
+  - quotation·negation·correction·name/ID substitution metamorphic 검증 통과.
+  - hard fact·current direct evidence·active constraint authority 침해 0건.
+  - timeout·exception·invalid type·unknown field에서 parser-only answer와 byte-equivalent
+    하게 복구.
+
+  - SLM proposal이 직접 disposition, target, control, policy 또는 plan을 생성한 사례 0건.
+
+  KEEP_SHADOW
+
+  - interface와 schema는 검증 가능하지만 일반화 개선이 확인되지 않음.
+  - 또는 공식 dev·metamorphic 회귀나 authority 위반이 하나라도 존재함.
+  - 이 경우 해당 release line에서는 shadow diagnostic으로만 유지하고 production candidate
+    set에는 병합하지 않는다.
+
+  REMOVE
+
+  - 공식 interface를 실행할 수 없거나 output schema를 안정적으로 검증할 수 없음.
+  - parser-only 복구를 보장할 수 없음.
+  - 이 경우 adapter와 runtime dependency를 제거하고 contract 감사 기록만 보존한다.
+
+  #### Stage 3 산출물과 gate
+
+  Stage report에는 다음을 기록한다.
+
+  fixed_slm_status
+  interface/source hash
+  schema validation 결과
+  parser-only 대비 diff
+  official dev diff
+  paraphrase·metamorphic 결과
+  authority violation count
+  timeout·invalid recovery 결과
+  production influence enabled 여부
+  결정 근거
+
+  - PROMOTE일 때만 production evidence 병합을 허용한다.
+  - KEEP_SHADOW·REMOVE도 명시적으로 완료된 결정이며 미결정 상태로 취급하지 않는다.
+  - status가 없거나 증거 hash가 stale이면 Stage 4 진입을 금지한다.
+  - 비용: HIGH
+
+  ### Stage 4 — Candidate·RulePack·BaseBlueprint
+
+  - 변경 축: domain-operation 후보 의미.
+  - 입력:
+      - PROMOTE: parser evidence + validated low-authority SLMEvidence.
+      - KEEP_SHADOW 또는 REMOVE: parser evidence only.
+
+  - 출력: exact RulePackKey, role/information spec, base blueprint가 연결된 candidate set.
+  - owner: CandidateSetBuilder, RulePackRegistry.
+  - 작업: shadow rulepack/evaluator를 production 후보 경로에 연결하되 legacy 선택은 아직
+    유지한다.
+
+  - 테스트: unsupported key, role mismatch, missing slot, candidate collision, sparse
+    generation, task-specific key 부재.
+
+  - Gate: FixedSLM status와 다른 입력 경로가 사용되면 실패한다.
+  - 비용: HIGH
+
+  ### Stage 5 — ConstraintEffect·FinalPlanRequirements·Capability
+
+  - 변경 축: 후보별 실행 가능성.
+  - 입력/출력: global/pair constraint → effect algebra → final requirements → capability
+    assessment.
+
+  - owner: constraint registries, effect algebra, plan requirement composer.
+  - 작업: legacy constraint/blueprint 의미를 canonical shadow 구현으로 이전한다.
+  - 테스트: permutation, idempotence, effect conflict, target-scoped consent, capability
+    ablation, terminal 보존.
+
+  - Gate: hard restriction 해제나 compiler 재판단 0건.
+  - 비용: HIGH
+
+  ### Stage 6 — CandidateDisposition·AuthorizedFallback
+
+  - 변경 축: 후보 상태와 fallback 선택.
+  - owner: CandidateDispositionPolicy, AuthorizedFallbackSolver.
+  - 작업: hard compatibility를 통과한 후보에만 ranking을 적용하고 fallback destination을
+    같은 evaluator로 재평가한다.
+
+  - 테스트: missing/block/conflict 조합, unauthorized fallback, cycle/self-loop,
+    correction-vs-fallback.
+
+  - Gate: generic user target이나 차순위 자동 실행 0건.
+  - 비용: HIGH
+
+  ### Stage 7 — DecisionBundle·Projection
+
+  - 변경 축: 결정 잠금과 output 의미 분리.
+  - 입력/출력: candidate result → SubDecisionIR → DecisionBundle → Projection DTO.
+  - owner: DecisionBundle 및 Projection Builder.
+  - 작업: execution target과 response target을 분리하고 compiler에 필요한 의미를
+    projection에 완전하게 담는다.
+
+  - 테스트: lock digest, projection losslessness, deterministic output, mutation
+    rejection.
+
+  - Gate: 공식 aggregate 규칙이 없는 multi-operation은 production 전환하지 않는다.
+  - 비용: HIGH
+
+  ### Stage 8 — Session Overlay·Atomic Commit
+
+  - 변경 축: session/memory side-effect 시점.
+  - 입력/출력: provisional writes → validation result → commit eligibility → atomic
+    commit.
+
+  - owner: SpeculativeSessionOverlay, AtomicCommitCoordinator.
+  - 작업: current 직접 mutation을 overlay write로 교체한다.
+  - 테스트: validation failure, atomic failure, dependency rollback, independent
+    operation, stale validation, commit=False.
+
+  - Gate: validation 이전 persistent mutation 0건.
+  - 비용: HIGH
+
+  ### Stage 9 — Pure Compiler·종단 Validator
+
+  - 변경 축: public answer materialization.
+  - 입력/출력: immutable projection → schema-valid answer → validation result.
+  - owner: projection compilers와 consistency validator.
+  - 작업: shadow compiler를 production에 연결하고 validator를 commit 이전으로 이동한다.
+  - FixedSLM 검증:
+      - PROMOTE이면 compiled output이 parser/hard-fact authority를 침해하지 않았음을
+        lineage로 재검증한다.
+
+      - 다른 상태에서는 SLM-derived provenance가 production answer에 존재하면 실패한다.
+
+  - 테스트: raw task 접근 금지, 호출 순서 독립, 동일 projection 동일 output, unavailable
+    action, rollback terminal 부재.
+
+  - Gate: compiler isolation·authority preservation·validation-before-commit 모두 통과.
+  - 비용: HIGH
+
+  ### Stage 10 — Vertical slice·전체 release
+
+  - 변경 축: runtime routing.
+  - 작업: contract-confirmed single-operation 사례부터 new path로 전환하고 full dev/
+    screening shadow diff를 기록한다.
+
+  - FixedSLM release 조건:
+      - status가 정확히 PROMOTE, KEEP_SHADOW, REMOVE 중 하나.
+      - Stage 3 report와 source/test hash가 current.
+      - PROMOTE이면 모든 승격 조건을 재검증.
+      - 다른 상태이면 production influence가 0건임을 재검증.
+
+  - 전체 release gate:
+      - 공식 scorer parity.
+      - configured dev overall ≥0.9421, 축별 floor, non-exact ≤10.
+      - 전체 테스트 통과.
+      - artifact content/source/scorer/FixedSLM hash freshness.
+      - production owner 중복 0건.
+
+  - Rollback: gate 실패 시 routing만 legacy로 복귀한다.
+  - 삭제: full switch 후에만 legacy evaluator, constraint, blueprint, compiler, session
+    path를 제거한다.
+
+  - 비용: HIGH
+
+  ## 테스트 시나리오
+
+  - 공식 scorer와 local scorer의 동일 payload parity.
+  - object·record·input 순서 permutation.
+  - quotation·negation·correction·fallback 최소대립.
+  - 이름·ID·target 문자열 치환.
+  - capability·constraint·SLM evidence ablation.
+  - SLM timeout, exception, malformed output, unknown field, hallucinated reference.
+  - current direct evidence와 hard fact를 뒤집는 SLM proposal 차단.
+  - session validation failure와 atomic commit failure.
+  - isolated submission/report regeneration과 content/source hash 비교.
+  - 특정 screening ID 기반 테스트를 합성 semantic fixture로 교체.
+
+  ## 구현 시작 가능 여부와 차단 요소
+
+  - 시작 가능: 감사 문서 작성과 Stage 0.
+  - production 변경 시작 조건: Stage 0 단일 artifact/scorer gate 승인.
+  - FixedSLM production 사용 조건: Stage 3 상태가 PROMOTE.
+  - 현재 FixedSLM 상태: KEEP_SHADOW; production 영향 금지.
+  - production switch 차단 요소:
+      - scorer parity 불일치
+      - configured dev gate 실패
+      - new pipeline 미연결
+      - validation-before-commit 미연결
+      - stale report와 artifact owner 중복
+      - 평가 task ID 기반 테스트
+      - response-target와 multi-operation 공식 계약 미확정
+
+  PLAN_READY

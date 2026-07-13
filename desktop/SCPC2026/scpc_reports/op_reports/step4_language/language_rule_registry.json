@@ -1,0 +1,458 @@
+[
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#prompt",
+      "STEP4_SURFACE_CONTRACT"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [
+      "explicit_domain_verb",
+      "execution_request"
+    ],
+    "forbids": [
+      "negative"
+    ],
+    "priority": 100,
+    "requires": [
+      "not_quoted",
+      "command",
+      "positive",
+      "domain_predicate"
+    ],
+    "rule_id": "LANG-DOMAIN-EXECUTE-001",
+    "scope": "predicate_frame",
+    "semantic_slot": "domain"
+  },
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "STEP4_SURFACE_CONTRACT"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [
+      "negated_domain_verb"
+    ],
+    "forbids": [],
+    "priority": 110,
+    "requires": [
+      "not_quoted",
+      "negative",
+      "domain_predicate"
+    ],
+    "rule_id": "LANG-DOMAIN-NEGATION-001",
+    "scope": "predicate_frame",
+    "semantic_slot": "domain"
+  },
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "STEP4_SURFACE_CONTRACT"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [
+      "domain_reference",
+      "domain_verify_request",
+      "verify_request"
+    ],
+    "forbids": [
+      "command"
+    ],
+    "priority": 105,
+    "requires": [
+      "not_quoted",
+      "interrogative",
+      "domain_predicate"
+    ],
+    "rule_id": "LANG-DOMAIN-VERIFY-001",
+    "scope": "predicate_frame",
+    "semantic_slot": "domain"
+  },
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#prompt"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [
+      "domain_reference"
+    ],
+    "forbids": [
+      "command",
+      "interrogative"
+    ],
+    "priority": 10,
+    "requires": [
+      "not_quoted",
+      "domain_predicate"
+    ],
+    "rule_id": "LANG-DOMAIN-REFERENCE-001",
+    "scope": "predicate_frame",
+    "semantic_slot": "domain"
+  },
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "STEP4_SURFACE_CONTRACT"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [
+      "operation_argument"
+    ],
+    "forbids": [],
+    "priority": 50,
+    "requires": [
+      "not_quoted",
+      "domain_predicate"
+    ],
+    "rule_id": "LANG-TOGGLE-ARGUMENT-001",
+    "scope": "predicate_frame",
+    "semantic_slot": "operation_argument"
+  },
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#prompt"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [
+      "share_request"
+    ],
+    "forbids": [
+      "negative"
+    ],
+    "priority": 70,
+    "requires": [
+      "not_quoted",
+      "positive"
+    ],
+    "rule_id": "LANG-SHARE-001",
+    "scope": "predicate_frame",
+    "semantic_slot": "operation"
+  },
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "STEP4_SURFACE_CONTRACT"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [
+      "cancel_action"
+    ],
+    "forbids": [],
+    "priority": 80,
+    "requires": [
+      "not_quoted",
+      "negative"
+    ],
+    "rule_id": "LANG-SHARE-CANCEL-001",
+    "scope": "predicate_frame",
+    "semantic_slot": "operation"
+  },
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "STEP4_SURFACE_CONTRACT"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [
+      "authorized_fallback"
+    ],
+    "forbids": [],
+    "priority": 100,
+    "requires": [
+      "explicit_fallback_connector"
+    ],
+    "rule_id": "LANG-FALLBACK-001",
+    "scope": "fallback_relation",
+    "semantic_slot": "fallback"
+  },
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "STEP4_SURFACE_CONTRACT"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [],
+    "forbids": [
+      "explicit_fallback_connector"
+    ],
+    "priority": 100,
+    "requires": [
+      "same_semantic_slot"
+    ],
+    "rule_id": "LANG-CORRECTION-001",
+    "scope": "correction_relation",
+    "semantic_slot": "operation"
+  },
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "STEP4_COMPATIBILITY_RULE_AUDIT"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [
+      "stop_process"
+    ],
+    "forbids": [],
+    "priority": 200,
+    "requires": [
+      "not_quoted"
+    ],
+    "rule_id": "LANG-STOP-001",
+    "scope": "predicate_frame",
+    "semantic_slot": "operation"
+  },
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "STEP4_COMPATIBILITY_RULE_AUDIT"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [
+      "local_update_request"
+    ],
+    "forbids": [],
+    "priority": 190,
+    "requires": [
+      "not_quoted"
+    ],
+    "rule_id": "LANG-LOCAL-001",
+    "scope": "predicate_frame",
+    "semantic_slot": "operation"
+  },
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "STEP4_COMPATIBILITY_RULE_AUDIT"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [
+      "clarification_request"
+    ],
+    "forbids": [],
+    "priority": 180,
+    "requires": [
+      "not_quoted"
+    ],
+    "rule_id": "LANG-CLARIFY-001",
+    "scope": "predicate_frame",
+    "semantic_slot": "operation"
+  },
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "STEP4_COMPATIBILITY_RULE_AUDIT"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [
+      "redaction_request"
+    ],
+    "forbids": [],
+    "priority": 170,
+    "requires": [
+      "not_quoted"
+    ],
+    "rule_id": "LANG-REDACTION-001",
+    "scope": "predicate_frame",
+    "semantic_slot": "content"
+  },
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "STEP4_COMPATIBILITY_RULE_AUDIT"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [
+      "content_variant_selection"
+    ],
+    "forbids": [],
+    "priority": 160,
+    "requires": [
+      "not_quoted"
+    ],
+    "rule_id": "LANG-CONTENT-VARIANT-001",
+    "scope": "predicate_frame",
+    "semantic_slot": "content"
+  },
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "STEP4_COMPATIBILITY_RULE_AUDIT"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [
+      "value_transfer_request"
+    ],
+    "forbids": [],
+    "priority": 150,
+    "requires": [
+      "not_quoted"
+    ],
+    "rule_id": "LANG-VALUE-TRANSFER-001",
+    "scope": "predicate_frame",
+    "semantic_slot": "domain"
+  },
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "STEP4_COMPATIBILITY_RULE_AUDIT"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [
+      "memory_context_reference"
+    ],
+    "forbids": [],
+    "priority": 140,
+    "requires": [
+      "not_quoted"
+    ],
+    "rule_id": "LANG-MEMORY-CONTEXT-001",
+    "scope": "predicate_frame",
+    "semantic_slot": "memory"
+  },
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "STEP4_COMPATIBILITY_RULE_AUDIT"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [
+      "memory_rejection"
+    ],
+    "forbids": [],
+    "priority": 130,
+    "requires": [
+      "not_quoted"
+    ],
+    "rule_id": "LANG-MEMORY-REJECTION-001",
+    "scope": "predicate_frame",
+    "semantic_slot": "memory"
+  },
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "STEP4_COMPATIBILITY_RULE_AUDIT"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [
+      "session_target_reference"
+    ],
+    "forbids": [],
+    "priority": 120,
+    "requires": [
+      "not_quoted"
+    ],
+    "rule_id": "LANG-SESSION-TARGET-001",
+    "scope": "predicate_frame",
+    "semantic_slot": "target"
+  },
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "STEP4_COMPATIBILITY_RULE_AUDIT"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [
+      "historical_focal_reference"
+    ],
+    "forbids": [],
+    "priority": 120,
+    "requires": [
+      "not_quoted"
+    ],
+    "rule_id": "LANG-HISTORICAL-FOCAL-001",
+    "scope": "predicate_frame",
+    "semantic_slot": "focal"
+  },
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "STEP4_COMPATIBILITY_RULE_AUDIT"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [
+      "policy_override_attempt"
+    ],
+    "forbids": [],
+    "priority": 210,
+    "requires": [
+      "not_quoted"
+    ],
+    "rule_id": "LANG-POLICY-OVERRIDE-001",
+    "scope": "predicate_frame",
+    "semantic_slot": "authority"
+  },
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "STEP4_COMPATIBILITY_RULE_AUDIT"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [
+      "verify_request"
+    ],
+    "forbids": [],
+    "priority": 60,
+    "requires": [
+      "not_quoted"
+    ],
+    "rule_id": "LANG-VERIFY-001",
+    "scope": "predicate_frame",
+    "semantic_slot": "operation"
+  },
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "STEP4_COMPATIBILITY_RULE_AUDIT"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [
+      "execution_request"
+    ],
+    "forbids": [],
+    "priority": 60,
+    "requires": [
+      "not_quoted"
+    ],
+    "rule_id": "LANG-EXECUTION-001",
+    "scope": "predicate_frame",
+    "semantic_slot": "operation"
+  },
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "STEP4_COMPATIBILITY_RULE_AUDIT"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [
+      "memory_write_request"
+    ],
+    "forbids": [],
+    "priority": 100,
+    "requires": [
+      "not_quoted"
+    ],
+    "rule_id": "LANG-MEMORY-WRITE-001",
+    "scope": "predicate_frame",
+    "semantic_slot": "memory"
+  },
+  {
+    "assumption_refs": [],
+    "basis_refs": [
+      "STEP4_COMPATIBILITY_RULE_AUDIT"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "emits": [
+      "domain_cancel_request"
+    ],
+    "forbids": [],
+    "priority": 115,
+    "requires": [
+      "not_quoted"
+    ],
+    "rule_id": "LANG-DOMAIN-CANCEL-001",
+    "scope": "predicate_frame",
+    "semantic_slot": "domain"
+  }
+]

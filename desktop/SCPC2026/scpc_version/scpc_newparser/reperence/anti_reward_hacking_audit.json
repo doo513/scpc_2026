@@ -1,0 +1,100 @@
+{
+  "schema": "scpc.anti-reward-hacking-audit.v1",
+  "generated_at": "2026-07-12T18:59:00+09:00",
+  "timestamp_used_for_freshness": false,
+  "source_tree_sha256": "fa0b35993b05f68c5d73dc76e7b5f4627d09d79e305c3f33ce375d8e5a035de7",
+  "scanner": {
+    "name": "workspace_python_ast_specificity_and_identity_flow",
+    "scanned_file_count": 69,
+    "authoritative_runtime_file_count": 43,
+    "scanned_roots": [
+      "*.py",
+      "core/**/*.py",
+      "rules/**/*.py",
+      "utils/**/*.py"
+    ],
+    "authoritative_runtime_hits": [],
+    "passed": true
+  },
+  "manual_runtime_import_audit": {
+    "forbidden_evaluation_imports": [
+      "local_score",
+      "official_scorer",
+      "analyze_dev_errors",
+      "utils.diff",
+      "utils.report"
+    ],
+    "hits_in_core_rules_harness_or_run_submission": [],
+    "passed": true
+  },
+  "identity_use_classification": [
+    {
+      "path": "run_submission.py",
+      "use": "session_id and turn_index partition and order isolated session state",
+      "classification": "STRUCTURAL_SESSION_CONTRACT",
+      "answer_lookup": false
+    },
+    {
+      "path": "run_submission.py",
+      "use": "task_id keys the required output map",
+      "classification": "OUTPUT_IDENTITY_CONTRACT",
+      "answer_lookup": false
+    },
+    {
+      "path": "local_score.py",
+      "use": "task_id joins predictions to references",
+      "classification": "EVALUATION_ONLY",
+      "production_imported": false
+    },
+    {
+      "path": "utils/diff.py",
+      "use": "task_id aligns two report artifacts",
+      "classification": "REPORT_ONLY",
+      "production_imported": false
+    }
+  ],
+  "tooling_literal_diagnostics": {
+    "scanner_definition_literals": [
+      "release_gate.py",
+      "step12_gate.py"
+    ],
+    "report_identity_branch": [
+      "utils/diff.py:41"
+    ],
+    "evaluation_asset_readers": [
+      "analyze_dev_errors.py",
+      "local_score.py",
+      "official_scorer.py",
+      "release_gate.py",
+      "stage_gate_common.py",
+      "step1_baseline.py",
+      "step3_gate.py",
+      "step4_gate.py",
+      "step12_gate.py",
+      "validate_artifacts.py"
+    ],
+    "data_integrity_filename_registry": [
+      "utils/io.py"
+    ]
+  },
+  "removed_answer_fitting_paths": [
+    "FinalDecisionBuilder._uses_canonical_plan expected-value substitution",
+    "ConsistencyValidator canonical_amend terminal and duration exemptions",
+    "FinalDecisionBuilder._safe_scope_mode focal_type and record-code branch tree",
+    "Candidate evaluation safe_visible_fallback missing-information override",
+    "memory rejection retaining the rejected recalled target",
+    "clarification demoting a known HARD health constraint",
+    "enterprise and ops recall auto-amend substitutions without a confirmed contract",
+    "local-boundary exact record combination auto-amend",
+    "control=amend replacing every domain plan with read-redact-dispatch",
+    "share-boundary record replacing a selected dispatch action with update",
+    "focal-type and named-field disclosure profiles"
+  ],
+  "residual_structural_risks": [
+    "The task schema has no authoritative property-classification contract for unseen attributes.",
+    "Constraint activation still contains registered record and object semantics rather than a fully declarative property matrix.",
+    "Plan argument generation remains action-specific even though plan verbs are checked against EffectiveBlueprint.",
+    "Historical focal references are rejected until represented as typed current-or-historical object authority.",
+    "A missing mandatory capability fails closed instead of producing a valid alternate blocked blueprint."
+  ]
+}

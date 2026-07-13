@@ -1,0 +1,445 @@
+[
+  {
+    "adapter_id": "record_adapter:ambiguous_focal",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "ambiguous_focal",
+    "unknown_value_policy": "accept_presence",
+    "validation_rules": [
+      "value must be non-empty JSON data"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:ambiguous_target",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "ambiguous_target",
+    "unknown_value_policy": "mark_unknown",
+    "validation_rules": [
+      "value must match the record-specific structured vocabulary"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:amount_changed",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "amount_changed",
+    "unknown_value_policy": "accept_presence",
+    "validation_rules": [
+      "value must be non-empty JSON data"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:calendar_conflict",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "calendar_conflict",
+    "unknown_value_policy": "accept_presence",
+    "validation_rules": [
+      "value must be non-empty JSON data"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:consent",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "consent",
+    "unknown_value_policy": "mark_unknown",
+    "validation_rules": [
+      "value must match the record-specific structured vocabulary"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:current_request_hint",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "current_request_hint",
+    "unknown_value_policy": "accept_presence",
+    "validation_rules": [
+      "value must be non-empty JSON data"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:dispatch_authority_check",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "dispatch_authority_check",
+    "unknown_value_policy": "mark_unknown",
+    "validation_rules": [
+      "value must match the record-specific structured vocabulary"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:duration_ambiguous",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "duration_ambiguous",
+    "unknown_value_policy": "accept_presence",
+    "validation_rules": [
+      "value must be non-empty JSON data"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:enterprise_policy_recall",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "enterprise_policy_recall",
+    "unknown_value_policy": "accept_presence",
+    "validation_rules": [
+      "value must be non-empty JSON data"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:external_share_policy",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "external_share_policy",
+    "unknown_value_policy": "mark_unknown",
+    "validation_rules": [
+      "value must match the record-specific structured vocabulary"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:focal_marker_refs",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "focal_marker_refs",
+    "unknown_value_policy": "reject_invalid",
+    "validation_rules": [
+      "value.marker_to_ref must map non-empty marker IDs to reference IDs"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:focal_resolution_trace",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "focal_resolution_trace",
+    "unknown_value_policy": "reject_invalid",
+    "validation_rules": [
+      "phase_to_marker must be a string mapping",
+      "latest_phase_rule keys must be known route-binding codes"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:guardrail_ladder_signal",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "guardrail_ladder_signal",
+    "unknown_value_policy": "accept_presence",
+    "validation_rules": [
+      "value must be non-empty JSON data"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:guest_mode",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "guest_mode",
+    "unknown_value_policy": "accept_presence",
+    "validation_rules": [
+      "value must be non-empty JSON data"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:health_share_policy",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "health_share_policy",
+    "unknown_value_policy": "accept_presence",
+    "validation_rules": [
+      "value must be non-empty JSON data"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:memory_conflict",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "memory_conflict",
+    "unknown_value_policy": "accept_presence",
+    "validation_rules": [
+      "value must be non-empty JSON data"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:merchant_verification",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "merchant_verification",
+    "unknown_value_policy": "accept_presence",
+    "validation_rules": [
+      "value must be non-empty JSON data"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:ops_memory_recall",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "ops_memory_recall",
+    "unknown_value_policy": "accept_presence",
+    "validation_rules": [
+      "value must be non-empty JSON data"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:payment_policy",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "payment_policy",
+    "unknown_value_policy": "accept_presence",
+    "validation_rules": [
+      "value must be non-empty JSON data"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:persistent_memory_recall",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "persistent_memory_recall",
+    "unknown_value_policy": "reject_invalid",
+    "validation_rules": [
+      "value must be a mapping with a non-empty memory_key"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:persistent_memory_write",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "persistent_memory_write",
+    "unknown_value_policy": "reject_invalid",
+    "validation_rules": [
+      "value must be a JSON mapping or a non-empty memory alias"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:privacy_guard",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "privacy_guard",
+    "unknown_value_policy": "accept_presence",
+    "validation_rules": [
+      "value must be non-empty JSON data"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:resolved_target",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "resolved_target",
+    "unknown_value_policy": "accept_reference",
+    "validation_rules": [
+      "value must be a non-empty reference string"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:route_binding_order",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "route_binding_order",
+    "unknown_value_policy": "mark_unknown",
+    "validation_rules": [
+      "value must match the record-specific structured vocabulary"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:route_candidate_snapshot",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "route_candidate_snapshot",
+    "unknown_value_policy": "mark_unknown",
+    "validation_rules": [
+      "value must match the record-specific structured vocabulary"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:routine_scope",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "routine_scope",
+    "unknown_value_policy": "accept_presence",
+    "validation_rules": [
+      "value must be non-empty JSON data"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:safety_mode",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "safety_mode",
+    "unknown_value_policy": "accept_presence",
+    "validation_rules": [
+      "value must be non-empty JSON data"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:security_alert",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "security_alert",
+    "unknown_value_policy": "accept_presence",
+    "validation_rules": [
+      "value must be non-empty JSON data"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:session_share_policy",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "session_share_policy",
+    "unknown_value_policy": "mark_unknown",
+    "validation_rules": [
+      "value must match the record-specific structured vocabulary"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:share_boundary_update",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "share_boundary_update",
+    "unknown_value_policy": "mark_unknown",
+    "validation_rules": [
+      "value must match the record-specific structured vocabulary"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:target_changed_after_turn",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "target_changed_after_turn",
+    "unknown_value_policy": "accept_reference",
+    "validation_rules": [
+      "value is a replacement target or an explicit supersession marker"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:temporary_override_allowed",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "temporary_override_allowed",
+    "unknown_value_policy": "mark_unknown",
+    "validation_rules": [
+      "value must be an integer duration with s, m, h, or d unit"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:trusted_subscription",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "trusted_subscription",
+    "unknown_value_policy": "accept_reference",
+    "validation_rules": [
+      "value must be a non-empty reference string"
+    ]
+  },
+  {
+    "adapter_id": "record_adapter:verified_internal_target",
+    "assumption_refs": [],
+    "basis_refs": [
+      "TERMS_GUIDE.md#device-state-records"
+    ],
+    "contract_status": "SUPPORTED_INTERPRETATION",
+    "supported_record_type": "verified_internal_target",
+    "unknown_value_policy": "accept_presence",
+    "validation_rules": [
+      "value must be non-empty JSON data"
+    ]
+  }
+]

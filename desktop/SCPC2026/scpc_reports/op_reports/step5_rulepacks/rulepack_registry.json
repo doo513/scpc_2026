@@ -1,0 +1,867 @@
+{
+  "blueprint_catalog": [
+    {
+      "activation_stage": 6,
+      "blueprint_id": "BLUEPRINT-001",
+      "implementation_status": "stub",
+      "schema_version": "1.0.0"
+    },
+    {
+      "activation_stage": 6,
+      "blueprint_id": "BLUEPRINT-002",
+      "implementation_status": "stub",
+      "schema_version": "1.0.0"
+    },
+    {
+      "activation_stage": 6,
+      "blueprint_id": "BLUEPRINT-003",
+      "implementation_status": "stub",
+      "schema_version": "1.0.0"
+    },
+    {
+      "activation_stage": 6,
+      "blueprint_id": "BLUEPRINT-004",
+      "implementation_status": "stub",
+      "schema_version": "1.0.0"
+    },
+    {
+      "activation_stage": 6,
+      "blueprint_id": "BLUEPRINT-005",
+      "implementation_status": "stub",
+      "schema_version": "1.0.0"
+    },
+    {
+      "activation_stage": 6,
+      "blueprint_id": "BLUEPRINT-006",
+      "implementation_status": "stub",
+      "schema_version": "1.0.0"
+    },
+    {
+      "activation_stage": 6,
+      "blueprint_id": "BLUEPRINT-007",
+      "implementation_status": "stub",
+      "schema_version": "1.0.0"
+    },
+    {
+      "activation_stage": 6,
+      "blueprint_id": "BLUEPRINT-008",
+      "implementation_status": "stub",
+      "schema_version": "1.0.0"
+    },
+    {
+      "activation_stage": 6,
+      "blueprint_id": "BLUEPRINT-009",
+      "implementation_status": "stub",
+      "schema_version": "1.0.0"
+    },
+    {
+      "activation_stage": 6,
+      "blueprint_id": "BLUEPRINT-010",
+      "implementation_status": "stub",
+      "schema_version": "1.0.0"
+    },
+    {
+      "activation_stage": 6,
+      "blueprint_id": "BLUEPRINT-011",
+      "implementation_status": "stub",
+      "schema_version": "1.0.0"
+    },
+    {
+      "activation_stage": 6,
+      "blueprint_id": "BLUEPRINT-012",
+      "implementation_status": "stub",
+      "schema_version": "1.0.0"
+    },
+    {
+      "activation_stage": 6,
+      "blueprint_id": "BLUEPRINT-013",
+      "implementation_status": "stub",
+      "schema_version": "1.0.0"
+    },
+    {
+      "activation_stage": 6,
+      "blueprint_id": "BLUEPRINT-014",
+      "implementation_status": "stub",
+      "schema_version": "1.0.0"
+    }
+  ],
+  "constraint_catalog": [
+    {
+      "activation_stage": 7,
+      "constraint_id": "CONSTRAINT-DISPATCH-CONSENT",
+      "implementation_status": "stub",
+      "schema_version": "1.0.0"
+    },
+    {
+      "activation_stage": 7,
+      "constraint_id": "CONSTRAINT-DISPATCH-SECURITY",
+      "implementation_status": "stub",
+      "schema_version": "1.0.0"
+    },
+    {
+      "activation_stage": 7,
+      "constraint_id": "CONSTRAINT-EXTERNAL-SHARE-POLICY",
+      "implementation_status": "stub",
+      "schema_version": "1.0.0"
+    },
+    {
+      "activation_stage": 7,
+      "constraint_id": "CONSTRAINT-PAYMENT-POLICY",
+      "implementation_status": "stub",
+      "schema_version": "1.0.0"
+    },
+    {
+      "activation_stage": 7,
+      "constraint_id": "CONSTRAINT-DEVICE-SAFETY",
+      "implementation_status": "stub",
+      "schema_version": "1.0.0"
+    },
+    {
+      "activation_stage": 7,
+      "constraint_id": "CONSTRAINT-TEMPORARY-OVERRIDE",
+      "implementation_status": "stub",
+      "schema_version": "1.0.0"
+    },
+    {
+      "activation_stage": 7,
+      "constraint_id": "CONSTRAINT-CALENDAR-CONFLICT",
+      "implementation_status": "stub",
+      "schema_version": "1.0.0"
+    }
+  ],
+  "information_specs": [
+    {
+      "conditional_slots": [],
+      "conflict_rules": [
+        {
+          "kind": "multiple_distinct_values",
+          "rule_id": "CONFLICT-DISPATCH-DESTINATION",
+          "slot": "destination"
+        }
+      ],
+      "missing_slot_disposition": "needs_information",
+      "optional_slots": [
+        "content_scope"
+      ],
+      "required_slots": [
+        "destination"
+      ],
+      "spec_id": "INFO-DISPATCH",
+      "typed_derivation_rules": [
+        {
+          "rule_id": "DERIVE-DISPATCH-DESTINATION",
+          "slot": "destination",
+          "source": "selected_target",
+          "source_field": "recipient"
+        }
+      ]
+    },
+    {
+      "conditional_slots": [],
+      "conflict_rules": [],
+      "missing_slot_disposition": "needs_information",
+      "optional_slots": [],
+      "required_slots": [
+        "local_resource"
+      ],
+      "spec_id": "INFO-LOCAL",
+      "typed_derivation_rules": [
+        {
+          "rule_id": "DERIVE-LOCAL-LOCAL_RESOURCE",
+          "slot": "local_resource",
+          "source": "selected_target",
+          "source_field": "local_resource"
+        }
+      ]
+    },
+    {
+      "conditional_slots": [],
+      "conflict_rules": [
+        {
+          "kind": "multiple_distinct_values",
+          "rule_id": "CONFLICT-MEMORY-MEMORY_VALUE",
+          "slot": "memory_value"
+        }
+      ],
+      "missing_slot_disposition": "needs_information",
+      "optional_slots": [],
+      "required_slots": [
+        "local_resource",
+        "memory_value"
+      ],
+      "spec_id": "INFO-MEMORY",
+      "typed_derivation_rules": [
+        {
+          "rule_id": "DERIVE-MEMORY-MEMORY_VALUE",
+          "slot": "memory_value",
+          "source": "typed_record",
+          "source_field": "memory_value"
+        }
+      ]
+    },
+    {
+      "conditional_slots": [],
+      "conflict_rules": [
+        {
+          "kind": "multiple_distinct_values",
+          "rule_id": "CONFLICT-PAY-MERCHANT",
+          "slot": "merchant"
+        },
+        {
+          "kind": "multiple_distinct_values",
+          "rule_id": "CONFLICT-PAY-AMOUNT",
+          "slot": "amount"
+        }
+      ],
+      "missing_slot_disposition": "needs_information",
+      "optional_slots": [],
+      "required_slots": [
+        "merchant",
+        "amount",
+        "method"
+      ],
+      "spec_id": "INFO-PAY-EXECUTE",
+      "typed_derivation_rules": [
+        {
+          "rule_id": "DERIVE-PAY-MERCHANT",
+          "slot": "merchant",
+          "source": "focal_attribute",
+          "source_field": "merchant"
+        },
+        {
+          "rule_id": "DERIVE-PAY-AMOUNT",
+          "slot": "amount",
+          "source": "focal_attribute",
+          "source_field": "amount"
+        },
+        {
+          "rule_id": "DERIVE-PAY-METHOD",
+          "slot": "method",
+          "source": "focal_attribute",
+          "source_field": "method"
+        }
+      ]
+    },
+    {
+      "conditional_slots": [
+        {
+          "predicate_kind": "constraint_present",
+          "predicate_ref": "CONSTRAINT-TEMPORARY-OVERRIDE",
+          "slot": "duration"
+        }
+      ],
+      "conflict_rules": [
+        {
+          "kind": "multiple_distinct_values",
+          "rule_id": "CONFLICT-DEVICE-DESIRED_STATE",
+          "slot": "desired_state"
+        }
+      ],
+      "missing_slot_disposition": "needs_information",
+      "optional_slots": [],
+      "required_slots": [
+        "device_target",
+        "desired_state"
+      ],
+      "spec_id": "INFO-DEVICE-MODIFY",
+      "typed_derivation_rules": [
+        {
+          "rule_id": "DERIVE-DEVICE-DEVICE_TARGET",
+          "slot": "device_target",
+          "source": "focal_attribute",
+          "source_field": "name"
+        },
+        {
+          "rule_id": "DERIVE-DEVICE-DESIRED_STATE",
+          "slot": "desired_state",
+          "source": "operation_argument",
+          "source_field": "desired_state"
+        }
+      ]
+    },
+    {
+      "conditional_slots": [],
+      "conflict_rules": [
+        {
+          "kind": "multiple_distinct_values",
+          "rule_id": "CONFLICT-CALENDAR-TIME",
+          "slot": "time"
+        }
+      ],
+      "missing_slot_disposition": "needs_information",
+      "optional_slots": [
+        "recipient"
+      ],
+      "required_slots": [
+        "event",
+        "time"
+      ],
+      "spec_id": "INFO-CALENDAR-WRITE",
+      "typed_derivation_rules": [
+        {
+          "rule_id": "DERIVE-CALENDAR-EVENT",
+          "slot": "event",
+          "source": "focal_attribute",
+          "source_field": "title"
+        },
+        {
+          "rule_id": "DERIVE-CALENDAR-TIME",
+          "slot": "time",
+          "source": "focal_attribute",
+          "source_field": "time"
+        }
+      ]
+    },
+    {
+      "conditional_slots": [],
+      "conflict_rules": [
+        {
+          "kind": "multiple_distinct_values",
+          "rule_id": "CONFLICT-VERIFY-OPERATION_REFERENCE",
+          "slot": "operation_reference"
+        }
+      ],
+      "missing_slot_disposition": "needs_information",
+      "optional_slots": [],
+      "required_slots": [
+        "operation_reference"
+      ],
+      "spec_id": "INFO-DOMAIN-VERIFY",
+      "typed_derivation_rules": [
+        {
+          "rule_id": "DERIVE-VERIFY-OPERATION_REFERENCE",
+          "slot": "operation_reference",
+          "source": "focal_attribute",
+          "source_field": "operation_reference"
+        }
+      ]
+    },
+    {
+      "conditional_slots": [],
+      "conflict_rules": [],
+      "missing_slot_disposition": "needs_information",
+      "optional_slots": [],
+      "required_slots": [
+        "clarification_target"
+      ],
+      "spec_id": "INFO-CLARIFY",
+      "typed_derivation_rules": []
+    }
+  ],
+  "production_active": false,
+  "role_specs": [
+    {
+      "allowed_roles": [
+        "dispatch_destination"
+      ],
+      "compatibility_predicates": [
+        "focal_recipient_compatible"
+      ],
+      "identity_type_constraints": [
+        "external_identifier"
+      ],
+      "locality_constraints": [
+        "external"
+      ],
+      "maximum_cardinality": 1,
+      "minimum_cardinality": 1,
+      "missing_role_disposition": "needs_information",
+      "same_as_focal_policy": "forbidden",
+      "spec_id": "ROLE-DISPATCH-DESTINATION"
+    },
+    {
+      "allowed_roles": [
+        "local_resource"
+      ],
+      "compatibility_predicates": [
+        "local_resource_compatible"
+      ],
+      "identity_type_constraints": [
+        "local_resource_identifier"
+      ],
+      "locality_constraints": [
+        "local"
+      ],
+      "maximum_cardinality": 1,
+      "minimum_cardinality": 1,
+      "missing_role_disposition": "needs_information",
+      "same_as_focal_policy": "allowed",
+      "spec_id": "ROLE-LOCAL-RESOURCE"
+    },
+    {
+      "allowed_roles": [
+        "memory_owner"
+      ],
+      "compatibility_predicates": [
+        "local_resource_compatible"
+      ],
+      "identity_type_constraints": [
+        "local_resource_identifier"
+      ],
+      "locality_constraints": [
+        "local"
+      ],
+      "maximum_cardinality": 1,
+      "minimum_cardinality": 1,
+      "missing_role_disposition": "needs_information",
+      "same_as_focal_policy": "not_applicable",
+      "spec_id": "ROLE-MEMORY-OWNER"
+    },
+    {
+      "allowed_roles": [
+        "merchant"
+      ],
+      "compatibility_predicates": [
+        "focal_merchant_compatible"
+      ],
+      "identity_type_constraints": [
+        "domain_identifier"
+      ],
+      "locality_constraints": [
+        "domain"
+      ],
+      "maximum_cardinality": 1,
+      "minimum_cardinality": 1,
+      "missing_role_disposition": "needs_information",
+      "same_as_focal_policy": "forbidden",
+      "spec_id": "ROLE-MERCHANT"
+    },
+    {
+      "allowed_roles": [
+        "device_target"
+      ],
+      "compatibility_predicates": [
+        "focal_device_compatible"
+      ],
+      "identity_type_constraints": [
+        "domain_identifier"
+      ],
+      "locality_constraints": [
+        "domain"
+      ],
+      "maximum_cardinality": 1,
+      "minimum_cardinality": 1,
+      "missing_role_disposition": "needs_information",
+      "same_as_focal_policy": "allowed",
+      "spec_id": "ROLE-DEVICE"
+    },
+    {
+      "allowed_roles": [
+        "calendar_target"
+      ],
+      "compatibility_predicates": [
+        "focal_calendar_compatible"
+      ],
+      "identity_type_constraints": [
+        "domain_identifier"
+      ],
+      "locality_constraints": [
+        "domain"
+      ],
+      "maximum_cardinality": 1,
+      "minimum_cardinality": 1,
+      "missing_role_disposition": "needs_information",
+      "same_as_focal_policy": "allowed",
+      "spec_id": "ROLE-CALENDAR"
+    },
+    {
+      "allowed_roles": [
+        "clarification_target",
+        "confirmation_authority"
+      ],
+      "compatibility_predicates": [
+        "interaction_authority_compatible"
+      ],
+      "identity_type_constraints": [
+        "interaction_principal"
+      ],
+      "locality_constraints": [
+        "interaction"
+      ],
+      "maximum_cardinality": 1,
+      "minimum_cardinality": 1,
+      "missing_role_disposition": "needs_information",
+      "same_as_focal_policy": "not_applicable",
+      "spec_id": "ROLE-CLARIFICATION-AUTHORITY"
+    }
+  ],
+  "rulepacks": [
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001"
+      ],
+      "base_blueprint_id": "BLUEPRINT-001",
+      "basis_refs": [
+        "OFFICIAL-TERMS-OBJECTS",
+        "OFFICIAL-TERMS-RECORDS",
+        "DESIGN-STEP5-RULEPACK-CONTRACT"
+      ],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "information_spec_id": "INFO-DISPATCH",
+      "key": {
+        "domain": "content",
+        "operation": "share",
+        "variant": null
+      },
+      "pair_constraint_ids": [
+        "CONSTRAINT-DISPATCH-CONSENT",
+        "CONSTRAINT-DISPATCH-SECURITY",
+        "CONSTRAINT-EXTERNAL-SHARE-POLICY"
+      ],
+      "permitted_disclosure_modes": [
+        "raw",
+        "summary",
+        "redacted"
+      ],
+      "required_role_spec_id": "ROLE-DISPATCH-DESTINATION",
+      "rule_id": "RULEPACK-001",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001",
+        "ASSUMPTION-TARGET-001"
+      ],
+      "base_blueprint_id": "BLUEPRINT-002",
+      "basis_refs": [
+        "OFFICIAL-TERMS-OBJECTS",
+        "OFFICIAL-TERMS-RECORDS",
+        "DESIGN-STEP5-RULEPACK-CONTRACT"
+      ],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "information_spec_id": "INFO-LOCAL",
+      "key": {
+        "domain": "memory",
+        "operation": "local_update",
+        "variant": "local_state"
+      },
+      "pair_constraint_ids": [],
+      "permitted_disclosure_modes": [
+        "status_only"
+      ],
+      "required_role_spec_id": "ROLE-LOCAL-RESOURCE",
+      "rule_id": "RULEPACK-002",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001",
+        "ASSUMPTION-TARGET-001"
+      ],
+      "base_blueprint_id": "BLUEPRINT-003",
+      "basis_refs": [
+        "OFFICIAL-TERMS-OBJECTS",
+        "OFFICIAL-TERMS-RECORDS",
+        "DESIGN-STEP5-RULEPACK-CONTRACT"
+      ],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "information_spec_id": "INFO-MEMORY",
+      "key": {
+        "domain": "memory",
+        "operation": "local_update",
+        "variant": "persistent_memory"
+      },
+      "pair_constraint_ids": [],
+      "permitted_disclosure_modes": [
+        "status_only"
+      ],
+      "required_role_spec_id": "ROLE-MEMORY-OWNER",
+      "rule_id": "RULEPACK-003",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001",
+        "ASSUMPTION-TARGET-001"
+      ],
+      "base_blueprint_id": "BLUEPRINT-004",
+      "basis_refs": [
+        "OFFICIAL-TERMS-OBJECTS",
+        "OFFICIAL-TERMS-RECORDS",
+        "DESIGN-STEP5-RULEPACK-CONTRACT"
+      ],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "information_spec_id": "INFO-MEMORY",
+      "key": {
+        "domain": "memory",
+        "operation": "store",
+        "variant": "persistent_memory"
+      },
+      "pair_constraint_ids": [],
+      "permitted_disclosure_modes": [
+        "status_only"
+      ],
+      "required_role_spec_id": "ROLE-MEMORY-OWNER",
+      "rule_id": "RULEPACK-004",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001"
+      ],
+      "base_blueprint_id": "BLUEPRINT-005",
+      "basis_refs": [
+        "OFFICIAL-TERMS-OBJECTS",
+        "OFFICIAL-TERMS-RECORDS",
+        "DESIGN-STEP5-RULEPACK-CONTRACT"
+      ],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "information_spec_id": "INFO-PAY-EXECUTE",
+      "key": {
+        "domain": "payment",
+        "operation": "execute",
+        "variant": null
+      },
+      "pair_constraint_ids": [
+        "CONSTRAINT-DISPATCH-SECURITY",
+        "CONSTRAINT-PAYMENT-POLICY"
+      ],
+      "permitted_disclosure_modes": [
+        "status_only"
+      ],
+      "required_role_spec_id": "ROLE-MERCHANT",
+      "rule_id": "RULEPACK-005",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001"
+      ],
+      "base_blueprint_id": "BLUEPRINT-006",
+      "basis_refs": [
+        "OFFICIAL-TERMS-OBJECTS",
+        "OFFICIAL-TERMS-RECORDS",
+        "DESIGN-STEP5-RULEPACK-CONTRACT"
+      ],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "information_spec_id": "INFO-DOMAIN-VERIFY",
+      "key": {
+        "domain": "payment",
+        "operation": "verify",
+        "variant": null
+      },
+      "pair_constraint_ids": [
+        "CONSTRAINT-PAYMENT-POLICY"
+      ],
+      "permitted_disclosure_modes": [
+        "none"
+      ],
+      "required_role_spec_id": "ROLE-MERCHANT",
+      "rule_id": "RULEPACK-006",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001"
+      ],
+      "base_blueprint_id": "BLUEPRINT-007",
+      "basis_refs": [
+        "OFFICIAL-TERMS-OBJECTS",
+        "OFFICIAL-TERMS-RECORDS",
+        "DESIGN-STEP5-RULEPACK-CONTRACT"
+      ],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "information_spec_id": "INFO-DEVICE-MODIFY",
+      "key": {
+        "domain": "device_control",
+        "operation": "modify",
+        "variant": null
+      },
+      "pair_constraint_ids": [
+        "CONSTRAINT-DEVICE-SAFETY",
+        "CONSTRAINT-TEMPORARY-OVERRIDE"
+      ],
+      "permitted_disclosure_modes": [
+        "status_only"
+      ],
+      "required_role_spec_id": "ROLE-DEVICE",
+      "rule_id": "RULEPACK-007",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001"
+      ],
+      "base_blueprint_id": "BLUEPRINT-008",
+      "basis_refs": [
+        "OFFICIAL-TERMS-OBJECTS",
+        "OFFICIAL-TERMS-RECORDS",
+        "DESIGN-STEP5-RULEPACK-CONTRACT"
+      ],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "information_spec_id": "INFO-DEVICE-MODIFY",
+      "key": {
+        "domain": "device_control",
+        "operation": "execute",
+        "variant": "legacy_execute"
+      },
+      "pair_constraint_ids": [
+        "CONSTRAINT-DEVICE-SAFETY",
+        "CONSTRAINT-TEMPORARY-OVERRIDE"
+      ],
+      "permitted_disclosure_modes": [
+        "status_only"
+      ],
+      "required_role_spec_id": "ROLE-DEVICE",
+      "rule_id": "RULEPACK-008",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001"
+      ],
+      "base_blueprint_id": "BLUEPRINT-009",
+      "basis_refs": [
+        "OFFICIAL-TERMS-OBJECTS",
+        "OFFICIAL-TERMS-RECORDS",
+        "DESIGN-STEP5-RULEPACK-CONTRACT"
+      ],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "information_spec_id": "INFO-DOMAIN-VERIFY",
+      "key": {
+        "domain": "device_control",
+        "operation": "verify",
+        "variant": null
+      },
+      "pair_constraint_ids": [],
+      "permitted_disclosure_modes": [
+        "none"
+      ],
+      "required_role_spec_id": "ROLE-DEVICE",
+      "rule_id": "RULEPACK-009",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001"
+      ],
+      "base_blueprint_id": "BLUEPRINT-010",
+      "basis_refs": [
+        "OFFICIAL-TERMS-OBJECTS",
+        "OFFICIAL-TERMS-RECORDS",
+        "DESIGN-STEP5-RULEPACK-CONTRACT"
+      ],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "information_spec_id": "INFO-CALENDAR-WRITE",
+      "key": {
+        "domain": "calendar",
+        "operation": "create",
+        "variant": null
+      },
+      "pair_constraint_ids": [
+        "CONSTRAINT-CALENDAR-CONFLICT"
+      ],
+      "permitted_disclosure_modes": [
+        "status_only"
+      ],
+      "required_role_spec_id": "ROLE-CALENDAR",
+      "rule_id": "RULEPACK-010",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001"
+      ],
+      "base_blueprint_id": "BLUEPRINT-011",
+      "basis_refs": [
+        "OFFICIAL-TERMS-OBJECTS",
+        "OFFICIAL-TERMS-RECORDS",
+        "DESIGN-STEP5-RULEPACK-CONTRACT"
+      ],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "information_spec_id": "INFO-CALENDAR-WRITE",
+      "key": {
+        "domain": "calendar",
+        "operation": "modify",
+        "variant": null
+      },
+      "pair_constraint_ids": [
+        "CONSTRAINT-CALENDAR-CONFLICT"
+      ],
+      "permitted_disclosure_modes": [
+        "status_only"
+      ],
+      "required_role_spec_id": "ROLE-CALENDAR",
+      "rule_id": "RULEPACK-011",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001"
+      ],
+      "base_blueprint_id": "BLUEPRINT-012",
+      "basis_refs": [
+        "OFFICIAL-TERMS-OBJECTS",
+        "OFFICIAL-TERMS-RECORDS",
+        "DESIGN-STEP5-RULEPACK-CONTRACT"
+      ],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "information_spec_id": "INFO-CALENDAR-WRITE",
+      "key": {
+        "domain": "calendar",
+        "operation": "execute",
+        "variant": "legacy_execute"
+      },
+      "pair_constraint_ids": [
+        "CONSTRAINT-CALENDAR-CONFLICT"
+      ],
+      "permitted_disclosure_modes": [
+        "status_only"
+      ],
+      "required_role_spec_id": "ROLE-CALENDAR",
+      "rule_id": "RULEPACK-012",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001"
+      ],
+      "base_blueprint_id": "BLUEPRINT-013",
+      "basis_refs": [
+        "OFFICIAL-TERMS-OBJECTS",
+        "OFFICIAL-TERMS-RECORDS",
+        "DESIGN-STEP5-RULEPACK-CONTRACT"
+      ],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "information_spec_id": "INFO-DOMAIN-VERIFY",
+      "key": {
+        "domain": "calendar",
+        "operation": "verify",
+        "variant": null
+      },
+      "pair_constraint_ids": [],
+      "permitted_disclosure_modes": [
+        "none"
+      ],
+      "required_role_spec_id": "ROLE-CALENDAR",
+      "rule_id": "RULEPACK-013",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001",
+        "ASSUMPTION-TARGET-001"
+      ],
+      "base_blueprint_id": "BLUEPRINT-014",
+      "basis_refs": [
+        "OFFICIAL-TERMS-OBJECTS",
+        "OFFICIAL-TERMS-RECORDS",
+        "DESIGN-STEP5-RULEPACK-CONTRACT"
+      ],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "information_spec_id": "INFO-CLARIFY",
+      "key": {
+        "domain": "general",
+        "operation": "clarify",
+        "variant": null
+      },
+      "pair_constraint_ids": [],
+      "permitted_disclosure_modes": [
+        "none"
+      ],
+      "required_role_spec_id": "ROLE-CLARIFICATION-AUTHORITY",
+      "rule_id": "RULEPACK-014",
+      "version": "1.0.0"
+    }
+  ]
+}

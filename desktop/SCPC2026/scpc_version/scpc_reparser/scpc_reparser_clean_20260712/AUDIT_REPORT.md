@@ -1,0 +1,103 @@
+# scpc_reparser 검증 및 정리 보고서
+
+## 결론
+
+현재 권위 런타임은 구조적 안전성 테스트와 반례 검증을 통과한다. 다만
+정확도 품질 기준은 충족하지 않는다. 공식 노트북에서 추출한 scorer와 로컬
+scorer는 동일하게 `0.8590`을 산출했고, dev 기준 120건 중 완전 일치는
+21건뿐이다. 따라서 이 코드가 "논리적으로 안전하게 동작한다"는 주장과
+"정답 품질이 충분하다"는 주장은 분리해야 한다.
+
+## 입력 패키지와 보안 점검
+
+- `code.zip`은 최신 루트 실행·검증 스크립트이고, `etc1.zip`은 최신
+  `core/rules/tests/utils` 변경분과 이전 체크포인트를 포함한다. 두 묶음을
+  합치지 않고 `etc1.zip`의 체크포인트만 사용하면 `release_gate.py`와 테스트
+  계약이 어긋나 수집 단계에서 실패한다.
+- 세 ZIP에서 경로 탈출, 절대경로 멤버, 비정상 압축비, 네이티브 실행파일,
+  셸 스크립트는 발견되지 않았다.
+- `etc1.zip`의 `__pycache__/*.pyc`와 중첩 체크포인트 ZIP은 검토 및 배포
+  대상에서 제외했다.
+- 소스의 위험 실행 경로를 정적으로 확인했다. 네트워크 호출, 자격증명 접근,
+  셸 실행은 없었다. subprocess는 현재 Python으로 테스트·격리 재현을
+  수행하고, 삭제 동작은 프로젝트 내부 `.cache`/`.reproduction`으로 제한된다.
+- 공식 노트북의 모든 코드 셀을 실행 전에 확인했다. 공식 데이터 읽기와
+  프로젝트 내부 submission 생성 외의 외부 동작은 없었다.
+
+검증한 원본 SHA-256:
+
+- `SCPC2026_Final_data.zip`:
+  `C53751F2DC947D7A19BC5A4AF861CCA47F21E16AD29B7625770E82A1BE7348F5`
+- `code.zip`:
+  `625B6A103689E712F25BA948F156650D602A6D9AA10C33083D36A78B790A9913`
+- `etc1.zip`:
+  `93D9449EF540C08126786EDAC808A15528D8D4FFD06DE9B655DDB2FEABCA7D3F`
+
+## 재현 결과
+
+- 전체 테스트: `278 passed`
+- 실행 환경: Python `3.12.7`, pytest `7.4.4`, jsonschema `4.23.0`
+- 주의: 프로젝트 요구사항은 pytest `>=8.0`이다. PyPI 연결이 시간 초과되어
+  이번 환경에서는 pytest 8 재검증을 수행하지 못했다.
+- 로컬/공식 scorer parity: `identical=true`
+- overall: `0.8590`
+- focal: `1.0000`
+- target: `0.9500`
+- control: `0.9417`
+- content_scope: `0.7099`
+- policy: `0.8890`
+- plan: `0.8844`
+- 완전 일치/비일치: `21/99`
+
+사용자가 전달한 서버 점수 `0.8099`는 제공된 공식 노트북 scorer로는
+재현되지 않았다. 서버가 다른 scorer 버전, 비공개 축, 또는 다른 submission을
+사용했는지 확인할 자료가 없으므로 그 차이를 코드 오류로 단정할 수 없다.
+
+## 논리성·타당성·구조 검증
+
+통과한 핵심 구조 검증:
+
+- `DecisionEngine.decide` → `ProductionProjectionPipeline.compile` →
+  `ConsistencyValidator.validate_strict` → `AtomicSessionCommitter.commit`
+  순서가 도달 가능한 AST 호출로 확인됐다.
+- validation은 commit보다 앞서며, projection은 validation보다 앞선다.
+- 미분류 속성, 알 수 없는 객체의 직접 속성, 변조된 scope trace, mutable
+  authority가 모두 fail-closed 반례 검증을 통과했다.
+- 권위 런타임 44개 파일을 포함한 58개 Python 파일의 specificity scan에서
+  런타임 Answer-Fitting hit는 0건이었다.
+
+남은 품질 문제:
+
+- dev threshold는 focal을 제외한 overall/target/control/content_scope/policy/
+  plan/non-exact 기준을 모두 충족하지 못한다.
+- 최대 병목은 `content_scope` 89건이다. mode 혼동과 허용/제외 필드 정책의
+  보수적 fail-closed 동작이 정확도 손실의 중심이다.
+- policy 56건, plan 26건, control 7건, target 6건의 불일치가 남아 있다.
+- dev 기준은 스펙과 테스트에서 의도적으로 `release_blocking=false`다.
+  따라서 release gate 통과는 점수 기준 통과를 뜻하지 않는다. README의 기존
+  "hard floor" 표현은 실제 동작과 모순되어 수정했다.
+- 기존 candidate manifest는 병합된 현재 소스 해시와 달라 stale 상태였다.
+  잘못된 승격을 피하기 위해 최종 배포본에는 candidate manifest와 과거
+  생성 reports/submission을 포함하지 않았다.
+
+## 정리 내역
+
+최종 소스 배포본에서 다음을 제외했다.
+
+- `__pycache__/`, `*.pyc`, `.pytest_cache/`, `.cache/`, `.reproduction/`
+- 생성된 `reports/`, `submission.csv`, `manifest/candidate_manifest.json`
+- 중첩 체크포인트와 중복 공식 데이터 ZIP
+- 과거 `reperence/` 감사 덤프
+- 현재 런타임과 테스트에서 호출되지 않는 `stage_gate_common.py` 및
+  `step2_gate.py`부터 `step12_gate.py`까지의 레거시 단계 게이트
+
+`step1_baseline.py`는 현재 테스트 계약이 존재하므로 유지했다. 설계 문서는
+실행 의존성이 아니라도 결정 근거이므로 보존했다.
+
+## 권고
+
+점수를 정당하게 개선하려면 dev task ID나 정답별 분기를 추가하지 말고,
+`content_scope`의 속성 분류·허용 필드 정책을 입력 스키마 기반의 일반 규칙으로
+보강한 뒤 held-out/metamorphic 테스트로 검증해야 한다. 서버 `0.8099`와 로컬
+`0.8590`의 차이는 동일 submission과 scorer 버전을 확보한 뒤 별도로 대조해야
+한다.

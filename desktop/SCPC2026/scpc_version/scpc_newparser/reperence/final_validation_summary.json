@@ -1,0 +1,96 @@
+{
+  "schema": "scpc.final-validation-summary.v1",
+  "generated_at": "2026-07-12T16:35:00+09:00",
+  "timestamp_used_for_freshness": false,
+  "workspace": "/mnt/c/Users/doo33/Desktop/scpc_newparser",
+  "status": {
+    "implementation": "SUPERSEDED",
+    "release": "STALE_NOT_AUTHORITATIVE",
+    "release_gate": "HISTORICAL_PASS_ONLY",
+    "production_release_allowed": false,
+    "remaining_non_exact_reason": "HISTORICAL_REQUIRED_MEMORY_UNAVAILABLE",
+    "superseded_by": "reperence/structural_integrity_refactor_report.md",
+    "current_source_tree_sha256": "fa0b35993b05f68c5d73dc76e7b5f4627d09d79e305c3f33ce375d8e5a035de7"
+  },
+  "baseline_checkpoint": {
+    "source_tree_sha256": "f3254e51961434feae2797da1e138d17f3dab90bc930f69e3ad85238b4d55b94",
+    "source_file_count": 102,
+    "archive": "reperence/checkpoints/f3254e51961434feae2797da1e138d17f3dab90bc930f69e3ad85238b4d55b94.zip",
+    "archive_sha256": "70729cc69b2cbb8157c3f67cd04af42203124bbd03364fea6be29edaea4bef0b"
+  },
+  "hashes": {
+    "source_tree_sha256": "23c090b978b0c432e1c4b77cf0afeae9ab3a7ff6e2d5ffde4ec66134ec013c77",
+    "submission_sha256": "f2791ae6a3ebd78007a7a04a7cb05f1d1bbf5465a9605141585e402c81ec8a9c",
+    "candidate_manifest_file_sha256": "21d23c100e9a41a513f6bcf83509eb8bb3e3e37763c843a1bec56bdfa9cba389",
+    "candidate_content_fingerprint_sha256": "c143a06c087faa1f977f7feb7ca1d6b2f495e6e442ed993a433569f55c03cae9",
+    "causal_chain_report_sha256": "bfa0c6442967e9f0cfa1c1967ae90b1b982e5aefc0493b9e17fad8e4eec7554e",
+    "official_archive_sha256": "c53751f2dc947d7a19bc5a4af861cca47f21e16ad29b7625770e82a1be7348f5"
+  },
+  "dev": {
+    "n": 120,
+    "overall": 0.945,
+    "minimum_overall": 0.9421,
+    "exact": 117,
+    "non_exact": 3,
+    "maximum_non_exact": 10,
+    "input_visibility_gap_cases": 3,
+    "axes": {
+      "focal": 1.0,
+      "target": 0.975,
+      "control": 1.0,
+      "content_scope": 0.975,
+      "policy": 0.975,
+      "plan": 0.975
+    },
+    "official_local_scorer_parity": true,
+    "hard_gate_passed": true
+  },
+  "remaining_cases": [
+    "final_dev_6903fe98eb6a",
+    "final_dev_511b1dc0b84d",
+    "final_dev_a7f2a443f654"
+  ],
+  "tests": {
+    "ruff": "PASSED",
+    "full_pytest": {
+      "passed": 246,
+      "failed": 0
+    },
+    "without_dev_hard_gate": {
+      "passed": 245,
+      "deselected": 1
+    },
+    "artifact_reproduction": {
+      "passed": true,
+      "submission_byte_identical": true,
+      "dev_metrics_identical": true,
+      "report_count": 9,
+      "manifest_fingerprint_identical": true
+    },
+    "architecture_ast": {
+      "passed": true,
+      "prohibited_markers": [],
+      "authoritative_decision_engine_wired": true,
+      "validation_before_commit": true
+    }
+  },
+  "fixed_slm": {
+    "decision": "KEEP_SHADOW",
+    "production_influence": false
+  },
+  "external_dependencies": {
+    "scpc_Gparser_discovery_or_copy": false,
+    "external_api": false
+  },
+  "report_artifact_hashes": {
+    "reports/consistency_report.md": "fcc3f4d5fae7061ebb100ed53d77afeffde78e69676a18d2705ad03c7dda29b0",
+    "reports/decision_trace.jsonl": "7e666cb89e61242b27d6687febf8530d1543c5827d5550aee3064e1753a8619e",
+    "reports/dev_score_report.md": "c1a4876c1391809d8e58eb6a43851f884c2d8e183bac3d93a5a22aef9a193791",
+    "reports/diff_vs_baseline.md": "99586a8ca3bde2824b85678302d38a1eba2786c2f59ec538486eee59fe98fd44",
+    "reports/error_cases.jsonl": "007492dc3a8dc5ae4ff3edc38f870b4e3c49fd7935b6decdc19392b114f11d64",
+    "reports/release_gate_report.json": "807d8219e8e3b31ed6b2dd40668469a6ff96041e9ed0d94055ed62289ad2ce96",
+    "reports/release_gate_report.md": "016cc2993f56fcf41e8716af36561b2c0c048aab4fef62763fe69943847c3749",
+    "reports/screening_structural_report.md": "c49c7e70d59adcd31be771cdedcedc53b081f2c8a70c382582ab2c8b6d561800",
+    "reports/stage3_fixed_slm_report.md": "98b2d7ac4c281f1ac58ad828bfcf879b7dfb8754ea0d90156437e58f28a73e66"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "artifacts": {
+    "CANDIDATE_FALLBACK_CONTRACT.md": "03b67f68aa870c3931afb5775227600b14b02607b3f630feb01abfd27708c456",
+    "STEP8_REPORT.md": "76456035d8b8486fb72badb63d3e9ee2c94eb643c74aa515a2c49dbaeb8ed7c6",
+    "candidate_evaluation_audit.json": "1a3b28dbd4c83f3c09b2875f508c62d0c118b5849b751ce879f6eb06c26e26d7",
+    "consistency_report.md": "1b2475a6d6ce1fac05d77d5af440815cb7af75e656c6ead7f8a5ec041301e896",
+    "shadow_diff_vs_previous.md": "106536c3cb3b569560fdc9dc62c8e2469d5329d0cb5e03eb75e3c04cab2b75fa",
+    "step8_result.json": "905919dc4a06bc314bcb78ae00d762e7206e0760293bcd415e1aec1234d9c1b3",
+    "submission.csv": "bef9b996db7c883e26ea2c6bf595b4f4ea8597dd0f5b61913dc2d8ab87e241f0"
+  },
+  "generated_at": "2026-07-11T15:43:16.267360+00:00",
+  "official_data_sha256": {
+    "dev_answers.json": "2ec6723345c78ccb5613ed90b4b778ecf3b5da3db92e341e8b8bfaa7724bd1c3",
+    "dev_tasks.jsonl": "871fcb52708d66fa1eec39073a9803ef29204315c5ee3a013799cc364bc55e1d",
+    "screening_tasks.jsonl": "36248ede94b89fd0d89024ed14fd554ee75196d052dcac90dec579d8185ffd57"
+  },
+  "source_tree_sha256": "2586c074e1de96a15cb435ef0f60e47a65e44edccda5106e9160d685b64e943e",
+  "stage": "step8_evaluator"
+}

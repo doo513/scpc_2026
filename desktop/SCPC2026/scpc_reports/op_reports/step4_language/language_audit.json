@@ -1,0 +1,52 @@
+{
+  "audit_sha256": "c76754f2685ee524b675b8dabcde2944016c2064790cf4f5ffee2dde4e9acbbe",
+  "counts": {
+    "arguments": 13,
+    "binding_decisions": 166,
+    "clauses": 2553,
+    "corrections": 99,
+    "fallback_relations": 0,
+    "negations": 72,
+    "predicate_frames": 1999,
+    "quotations": 0,
+    "references": 28,
+    "supersessions": 99
+  },
+  "errors": [],
+  "nondeterministic_tasks": [],
+  "quoted_execution_violations": [],
+  "rule_hits": {
+    "LANG-CLARIFY-001": 391,
+    "LANG-CONTENT-VARIANT-001": 250,
+    "LANG-DOMAIN-EXECUTE-001": 39,
+    "LANG-DOMAIN-NEGATION-001": 1,
+    "LANG-DOMAIN-REFERENCE-001": 131,
+    "LANG-DOMAIN-VERIFY-001": 1,
+    "LANG-EXECUTION-001": 413,
+    "LANG-HISTORICAL-FOCAL-001": 193,
+    "LANG-LOCAL-001": 855,
+    "LANG-MEMORY-CONTEXT-001": 28,
+    "LANG-MEMORY-REJECTION-001": 2,
+    "LANG-MEMORY-WRITE-001": 36,
+    "LANG-REDACTION-001": 234,
+    "LANG-SESSION-TARGET-001": 353,
+    "LANG-SHARE-001": 2042,
+    "LANG-SHARE-CANCEL-001": 472,
+    "LANG-STOP-001": 158,
+    "LANG-TOGGLE-ARGUMENT-001": 17,
+    "LANG-VALUE-TRANSFER-001": 2,
+    "LANG-VERIFY-001": 1909
+  },
+  "rules_without_official_hits": [
+    "LANG-CORRECTION-001",
+    "LANG-DOMAIN-CANCEL-001",
+    "LANG-FALLBACK-001",
+    "LANG-POLICY-OVERRIDE-001"
+  ],
+  "source_counts": {
+    "dev_tasks.jsonl": 120,
+    "screening_tasks.jsonl": 700
+  },
+  "task_count": 820,
+  "unregistered_rule_ids": []
+}

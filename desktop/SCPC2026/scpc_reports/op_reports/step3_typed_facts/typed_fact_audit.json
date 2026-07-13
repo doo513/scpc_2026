@@ -1,0 +1,56 @@
+{
+  "all_facts_present": true,
+  "chronology_domains": {},
+  "collection_contract_ok": true,
+  "collection_statuses": {
+    "capabilities:present": 820,
+    "objects:present": 820,
+    "records:present": 820
+  },
+  "non_present_examples": [],
+  "object_statuses": {
+    "present": 5040
+  },
+  "permutation_failures": [],
+  "record_statuses": {
+    "present": 6090
+  },
+  "record_types": {
+    "ambiguous_focal": 145,
+    "ambiguous_target": 316,
+    "calendar_conflict": 1,
+    "consent": 12,
+    "current_request_hint": 820,
+    "dispatch_authority_check": 457,
+    "duration_ambiguous": 3,
+    "enterprise_policy_recall": 3,
+    "external_share_policy": 199,
+    "focal_marker_refs": 546,
+    "focal_resolution_trace": 546,
+    "guardrail_ladder_signal": 207,
+    "guest_mode": 1,
+    "memory_conflict": 5,
+    "ops_memory_recall": 4,
+    "payment_policy": 3,
+    "persistent_memory_recall": 33,
+    "persistent_memory_write": 9,
+    "privacy_guard": 1,
+    "resolved_target": 564,
+    "route_binding_order": 457,
+    "route_candidate_snapshot": 457,
+    "safety_mode": 5,
+    "security_alert": 6,
+    "session_share_policy": 820,
+    "share_boundary_update": 457,
+    "target_changed_after_turn": 9,
+    "temporary_override_allowed": 2,
+    "trusted_subscription": 1,
+    "verified_internal_target": 1
+  },
+  "snapshot_sha256": "513f08c1d3f0b7db0c83ce8841fb62e2e24b2d9f7d07d3d7932ce4aaad5b003a",
+  "source_counts": {
+    "dev_tasks.jsonl": 120,
+    "screening_tasks.jsonl": 700
+  },
+  "task_count": 820
+}

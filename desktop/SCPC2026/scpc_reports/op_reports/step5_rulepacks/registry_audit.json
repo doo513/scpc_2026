@@ -1,0 +1,15 @@
+{
+  "blueprint_stub_count": 14,
+  "constraint_stub_count": 7,
+  "errors": [],
+  "information_spec_count": 8,
+  "production_active": false,
+  "production_imports": [],
+  "registered_exact": true,
+  "resolutions": {
+    "found": 14,
+    "unsupported": 250
+  },
+  "role_spec_count": 7,
+  "rulepack_count": 14
+}

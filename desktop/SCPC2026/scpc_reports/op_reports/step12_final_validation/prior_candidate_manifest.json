@@ -1,0 +1,53 @@
+{
+  "candidate": "scpc_coparser_final_decision",
+  "contract": {
+    "fixed_slm_policy": "local_fixed_slm_only",
+    "schema": "scpc.final.answer.v1",
+    "uses_external_api": false
+  },
+  "data_sha256": {
+    "dev_answers.json": "2ec6723345c78ccb5613ed90b4b778ecf3b5da3db92e341e8b8bfaa7724bd1c3",
+    "dev_tasks.jsonl": "871fcb52708d66fa1eec39073a9803ef29204315c5ee3a013799cc364bc55e1d",
+    "screening_tasks.jsonl": "36248ede94b89fd0d89024ed14fd554ee75196d052dcac90dec579d8185ffd57"
+  },
+  "dev": {
+    "axes": {
+      "content_scope": 0.975,
+      "control": 0.9917,
+      "counterfactual": 0.0,
+      "focal": 1.0,
+      "plan": 0.975,
+      "policy": 0.9643,
+      "semantic_response": 0.0,
+      "target": 0.975
+    },
+    "control_confusion": {
+      "amend->amend": 27,
+      "amend->ask": 1,
+      "ask->ask": 26,
+      "hold->hold": 20,
+      "proceed->proceed": 46
+    },
+    "input_visibility_gap_cases": 3,
+    "mode_confusion": {
+      "none->none": 22,
+      "raw->raw": 4,
+      "redacted->redacted": 36,
+      "status_only->status_only": 40,
+      "summary->summary": 18
+    },
+    "n": 120,
+    "overall": 0.9421,
+    "wrong": 10
+  },
+  "generated_at": "2026-07-10T14:57:26.070587+00:00",
+  "notes": [
+    "screening distributions are diagnostic only",
+    "semantic_response is not locally scoreable from public references",
+    "official dev score includes every task without regression exclusions",
+    "missing persistent memory values never trigger person- or task-specific target defaults"
+  ],
+  "source_tree_sha256": "ad8eb0f4d5d980474d36c727a59271bb8bba871269d64aa9dafa8b9c71c6a223",
+  "submission_answers": 700,
+  "submission_sha256": "c349e8ac61d2bd5b707e879cfc1e79fd9cabd08ca0d6ac28283097058d755347"
+}

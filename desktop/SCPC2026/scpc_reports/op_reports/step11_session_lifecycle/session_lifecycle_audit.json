@@ -1,0 +1,74 @@
+{
+  "atomic_commit": {
+    "atomic_failure_persistent_changed": false,
+    "atomic_failure_status": "atomic_failure",
+    "atomic_failure_unchanged": true,
+    "success_status": "committed",
+    "success_trace_decision": "decision:success",
+    "success_version": 8,
+    "validation_failure_eligibility": "validation_failed",
+    "validation_failure_status": "rejected",
+    "validation_failure_unchanged": true
+  },
+  "boundaries": {
+    "dependency_constructor_count": 1,
+    "legacy_commits_before_validation": true,
+    "manual_dependency_method_present": false,
+    "production_active": false,
+    "production_imports": [],
+    "prohibited_tokens": [],
+    "public_overlay_methods": [
+      "mark_committed",
+      "read",
+      "rollback_decision",
+      "snapshot",
+      "write"
+    ]
+  },
+  "lifecycle": {
+    "affected_decisions": [
+      "decision:a",
+      "decision:b"
+    ],
+    "commit_eligibility": "partial_commit_unresolved",
+    "commit_status": "rejected",
+    "dependencies_after_read": 1,
+    "dependencies_before_read": 0,
+    "independent_write_visible": true,
+    "partial_commit_assumption": true,
+    "persistent_unchanged": true,
+    "plan_validation_valid": true,
+    "provisional_read_source": "provisional",
+    "provisional_read_value": {
+      "target": "provisional"
+    },
+    "read_set": [
+      "session:last_target"
+    ],
+    "write_rollback_status": {
+      "decision:a": "direct",
+      "decision:b": "cascaded",
+      "decision:c": "none"
+    },
+    "write_set": [
+      "memory:preference",
+      "session:independent",
+      "session:last_target"
+    ]
+  },
+  "rollback_release": {
+    "corrected_non_terminal_valid": true,
+    "rolled_back_decisions": [
+      "decision:consumer",
+      "decision:producer"
+    ],
+    "stale_validation_eligibility": "release_invalid",
+    "stale_validation_reason": [
+      "stale_rollback_plan_validation"
+    ],
+    "terminal_decisions": [
+      "decision:consumer"
+    ],
+    "terminal_release_rejected": true
+  }
+}

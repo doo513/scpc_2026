@@ -1,0 +1,295 @@
+ # SCPC v8 사전 감사 및 구현 Master Plan
+
+  ## 요약
+
+  Plan Mode 제약상 로컬 파일은 아직 생성하지 않았다. 승인 후 다음 문서만 /mnt/c/Users/
+  doo33/Desktop/scpc_reports에 작성한다.
+
+  - official_contract_audit.md
+  - relationship_hypothesis_audit.md
+  - production_architecture_audit.md
+  - reuse_and_migration_matrix.md
+  - implementation_master_plan.md
+  - open_questions_and_assumptions.md
+
+  검증 기준 자산:
+
+  - 공식 ZIP SHA-256: c53751f2dc947d7a19bc5a4af861cca47f21e16ad29b7625770e82a1be7348f5
+  - 현재 source tree SHA-256:
+    d75985cd38206600822190ed6adce6ca898dc8d77f2952558ad9b8d0b8b1c286
+
+  - screening submission SHA-256:
+    bef9b996db7c883e26ea2c6bf595b4f4ea8597dd0f5b61913dc2d8ab87e241f0
+
+  - 공식 데이터: dev 120건, screening 700건
+  - 전체 테스트: 216 passed, 1 failed
+  - 실패 원인: dev hard gate 0.8036 < 0.9421
+
+  ## 감사 결론
+
+  - submission.csv는 격리 재생성 결과와 바이트 단위로 일치하므로 현재 production source 기
+    준 stale이 아니다.
+
+  - 실제 production 흐름은 run_submission → FinalHarness → StateAssembler →
+    core.decision.DecisionEngine → legacy FinalDecisionBuilder → rules.* compiler →
+    session commit → ConsistencyValidator이다.
+
+  - core.rulepacks, constraints, candidate_evaluation, fallbacks, plan_requirements,
+    decision_ir, projection_compilers, session_overlay, slm_contract는 테스트된 shadow 구
+    현이며 submission 경로에는 연결되지 않았다.
+
+  - session·memory commit이 consistency validation보다 먼저 실행되어 validation-before-
+    commit 계약과 충돌한다.
+
+  - 공식 FixedSLM은 노트북의 FixedSLMClient.summarize_task(task) -> dict façade만 제공한
+    다. 필수 사용 여부와 timeout·invalid-output 계약은 명시되지 않았고 현재 production에는
+    연결되지 않았다.
+
+  - 프로젝트 scorer는 현재 payload를 0.8036으로, 공식 노트북 scorer는 0.8186으로 계산한다.
+    차이는 plan 축 0.6889 대 0.7723이며 local scorer parity가 깨져 있다.
+
+  - step12_gate.py의 최종 보고서는 격리 재실행으로 정확히 재현됐고 production release는
+    FAIL이다.
+
+  - generate_reports.py로 재생성한 결과와 비교하면 dev_score_report.md,
+    screening_structural_report.md, error_cases.jsonl, diff_vs_baseline.md가 stale이다.
+    error_cases.jsonl은 기존 10건과 재현 105건으로 불일치한다.
+
+  - candidate manifest는 generate_reports.py와 step12_gate.py가 같은 경로에 서로 다른 dev
+    구조를 기록하므로 DUPLICATED_OWNER다. 기존 manifest는 step12 결과와는 일치한다.
+
+  - 관계도의 “hold/ask → none”은 공식 dev reference와 충돌한다. ask 26건 중 16건은
+    summary, 8건은 redacted, 2건만 none이다. “summary↔summarize”, “redacted↔redact”도 ask
+    사례에는 보편적으로 성립하지 않는다.
+
+  - production에서 task ID·전체 prompt lookup은 발견되지 않았다. 다만 tests/
+    test_generalization.py가 특정 screening ID 2개를 직접 사용하며, historical baseline에
+    는 jimin, privacy_review, audit_vendor 등의 평가 특화 규칙이 있어 재사용 금지 대상으로
+    분류한다.
+
+  ## 인터페이스와 소유권 변경
+
+  - 공식 scpc.final.answer.v1, 공식 ZIP, dev reference 및 schema는 수정하지 않는다.
+  - FinalHarness.answer_task(task, session, *, commit=True) 서명은 유지하되 내부 순서를
+    evaluate → project → compile → validate → atomic commit으로 변경한다.
+
+  - DecisionBundle, DecisionProjectionSet, SpeculativeSessionOverlay,
+    AtomicCommitCoordinator를 authoritative production contract로 승격한다.
+
+  - OfficialFixedSLMAdapter는 공식 façade의 네 출력 필드만 검증된 SLMEvidence로 변환한다.
+    실패·timeout·invalid output은 proposal 폐기로 처리하고 parser-only 경로를 계속한다.
+
+  - generate_reports.py를 report·manifest의 단일 owner로 지정한다. step12_gate.py는
+    canonical bundle을 검증·복사만 하며 공유 manifest를 별도 형식으로 덮어쓰지 않는다.
+
+  - artifact manifest v2에는 producer ID·실행 명령·runtime source hash·scorer hash·공식
+    data hash·output hash를 분리한다. mtime은 진단값으로만 남긴다.
+
+  ## 단계별 구현 계획
+
+  ### Stage 0 — 공식 기준선·scorer·artifact provenance
+
+  - 목표/축: 추론 동작을 바꾸지 않고 평가·산출물 근거만 단일화한다.
+  - 계약/owner: 공식 ZIP과 현재 source를 입력으로 generate_reports.py가 submission,
+    report, manifest를 한 번에 생성한다.
+
+  - 작업: 공식 노트북 scorer와 local scorer의 normalization을 일치시키고, 두 artifact
+    writer를 통합하며 stale 보고서를 재생성한다.
+
+  - 검증: 현재 official-notebook 기준 0.8186, exact 15/120, submission hash를 고정하고 격
+    리 재실행 byte parity를 검사한다. configured gate 0.9421은 낮추지 않는다.
+
+  - Rollback/gate: tooling 변경만 되돌릴 수 있어야 하며, scorer parity·단일
+    producer·source/content hash 검증이 모두 통과해야 Stage 1로 간다.
+
+  - 남은 assumption: 0.9421의 깨끗한 재현 source는 현재 없다. historical 0.9468은 task-
+    specific 오염 때문에 진단값으로만 보존한다.
+
+  - 비용: MEDIUM
+
+  ### Stage 1 — Ontology와 authoritative ownership
+
+  - 목표/축: domain·operation·target·disposition 소유권만 정리한다.
+  - 계약/owner: core.ontology가 enum, 수정된 ownership registry가 각 의미의 최종 owner를
+    하나씩 지정한다.
+
+  - 작업: legacy DomainAction, slot/capability 상태와 shadow ontology의 중복을 매핑하고
+    ownership registry에서 legacy final owner를 제거한다.
+
+  - 검증: enum/reference integrity, 불가능한 조합 거부, UNKNOWN이 dispatch/user로 변환되지
+    않음을 검사한다. production output은 아직 변경하지 않는다.
+
+  - Rollback/gate: legacy 경로를 유지하며 shadow trace가 byte-identical이어야 한다.
+  - 남은 assumption: 공식 answer.target mapping은 assumption ID로 유지한다.
+  - 비용: MEDIUM
+
+  ### Stage 2 — Typed Fact·RecordAdapter
+
+  - 목표/축: raw object/record 해석 경계를 고정한다.
+  - 계약/owner: TaskView → TypedFactSnapshot; RecordAdapterRegistry만 raw record value를
+    해석한다.
+
+  - 작업: 현재 production-active TaskView/facts/records를 재사용하고
+    chronology·unknown·conflict 처리를 정리한다.
+
+  - 검증: object/record permutation, duplicate/conflict, invalid/missing, chronology-
+    domain 테스트와 raw-access AST gate를 실행한다.
+
+  - Rollback/gate: current production과 dev/submission diff가 없어야 Stage 3로 간다.
+  - 비용: MEDIUM
+
+  ### Stage 3 — Parser·Context Binder·FixedSLM evidence
+
+  - 목표/축: 자연어·SLM을 answer가 아닌 evidence 생성기로 한정한다.
+  - 계약/owner: SurfaceParse + TypedFacts → ContextBindingResult → Pre-SLM Candidate
+    Evidence; ambiguity 시에만 FixedSLM adapter를 호출한다.
+
+  - 작업: 기존 parser/language registry/context binder를 재사용하고, 공식 façade adapter와
+    output validation을 추가한다.
+
+  - 검증: quotation, negation, correction, name/ID substitution, SLM timeout·invalid
+    output·hard-fact conflict를 검사한다.
+
+  - Rollback/gate: SLM 제거 시 parser-only 결과가 독립적으로 유효해야 하며 SLM 실패로
+    hold/ask가 생기면 실패한다.
+
+  - 남은 assumption: FixedSLM 사용 의무는 공식 자료에 명시되지 않았으므로 adapter는 활성화
+    하되 영향은 낮은 authority proposal로 제한한다.
+
+  - 비용: HIGH
+
+  ### Stage 4 — Candidate·RulePack·BaseBlueprint
+
+  - 목표/축: domain-operation 후보 의미만 shadow에서 authoritative 후보 체계로 이전한다.
+  - 계약/owner: CandidateSetBuilder → exact RulePackKey → RequiredRoleSpec/
+    InformationSpec/BasePlanBlueprint.
+
+  - 작업: shadow rulepacks, candidate_evaluation, plan_requirements를 production 후보 경로
+    에 연결하되 legacy 선택 결과는 유지한다.
+
+  - 검증: unsupported key, role mismatch, missing slot, candidate identity collision,
+    sparse generation, task-specific key 부재를 검사한다.
+
+  - Rollback/gate: dev·metamorphic diff를 기록하고 legacy production은 유지한다.
+  - 비용: HIGH
+
+  ### Stage 5 — ConstraintEffect·FinalPlanRequirements·Capability
+
+  - 목표/축: 후보별 실행 가능성 계산을 단일화한다.
+  - 계약/owner: GlobalConstraintFact + PairConstraintSpec → ConstraintEffectAlgebra →
+    FinalPlanRequirements → FullCapabilityAssessment.
+
+  - 작업: legacy ConstraintActivator와 core.blueprint의 의미를 shadow constraints/plan
+    requirements로 옮긴다.
+
+  - 검증: effect permutation/idempotence/conflict, target-scoped consent, capability
+    ablation, terminal 보존을 검사한다.
+
+  - Rollback/gate: hard restriction 해제나 compiler의 재판단이 발생하면 Stage 4 상태로 되
+    돌린다.
+
+  - 비용: HIGH
+
+  ### Stage 6 — CandidateDisposition·AuthorizedFallback
+
+  - 목표/축: 후보 상태와 fallback 선택만 authoritative하게 만든다.
+  - 계약/owner: CandidateEvaluator → CandidateDispositionPolicy; fallback은 명시적 사용자
+    대안 또는 공식 policy edge만 허용한다.
+
+  - 작업: ranking은 hard compatibility 통과 뒤 tie-breaker로만 사용하고 fallback
+    destination을 같은 evaluator로 재평가한다.
+
+  - 검증: missing/block/conflict 조합, unauthorized fallback, cycle/self-loop, correction-
+    vs-fallback 최소대립 테스트를 실행한다.
+
+  - Rollback/gate: 차순위 자동 실행이나 generic user target 삽입 시 즉시 rollback한다.
+  - 비용: HIGH
+
+  ### Stage 7 — DecisionBundle·Projection
+
+  - 목표/축: 선택 결과를 불변 IR로 잠그고 output 의미를 분리한다.
+  - 계약/owner: CandidateEvaluationResult → SubDecisionIR → DecisionBundle → Scope/Policy/
+    PlanProjection.
+
+  - 작업: execution target과 response target을 분리하고 모든 compiler 입력을 projection
+    DTO에 포함한다.
+
+  - 검증: lock digest, projection losslessness/determinism, scope-policy-plan lineage,
+    mutation rejection을 검사한다.
+
+  - Rollback/gate: 공식 aggregate 규칙이 없는 multi-operation은 production 전환하지 않고
+    single-subdecision bundle만 허용한다.
+
+  - 남은 assumption: response-target와 multi-operation aggregate mapping은 full switch 차
+    단 요소다.
+
+  - 비용: HIGH
+
+  ### Stage 8 — Session Overlay·Atomic Commit
+
+  - 목표/축: session/memory side effect 시점만 변경한다.
+  - 계약/owner: SpeculativeSessionOverlay → ValidationResult → CommitEligibility →
+    AtomicCommitCoordinator.
+
+  - 작업: current session_state 직접 갱신을 overlay write로 바꾸고 branch isolation·read-
+    after-write dependency를 보존한다.
+
+  - 검증: validation failure, atomic write failure, cascading/independent rollback, stale
+    validation, commit=False 무변경을 검사한다.
+
+  - Rollback/gate: validation 이전 persistent mutation이 하나라도 관측되면 legacy 경로로
+    복귀한다.
+
+  - 비용: HIGH
+
+  ### Stage 9 — Pure Compiler·종단 Validator
+
+  - 목표/축: public answer materialization만 전환한다.
+  - 계약/owner: compiler는 DecisionProjectionSet만 받고 validator는 compiled answer·lock
+    lineage·commit plan만 검사한다.
+
+  - 작업: shadow projection compilers를 production에 연결하고 ConsistencyValidator를
+    commit 이전으로 이동한다.
+
+  - 검증: raw task 접근 금지, compiler 호출 순서 독립, 동일 projection 동일 output, max 18
+    events, unavailable action, rollback terminal 부재를 검사한다.
+
+  - Rollback/gate: confirmed vertical slice에서 legacy와 byte parity가 없으면 production
+  - 비용: HIGH
+
+  ### Stage 10 — Vertical slice·전체 release
+
+  - 목표/축: runtime routing만 단계적으로 전환한다.
+  - 작업: contract-confirmed single-operation 사례부터 new path로 전환하고, 전체 dev/
+    screening shadow diff를 기록한다. 최종 gate 전에는 legacy를 삭제하지 않는다.
+
+  - Release gate: 공식 scorer parity, configured dev gate ≥0.9421, 축별 floor, non-exact
+    ≤10, 217개 전체 테스트 통과, task-specific 처리 0건, validation-before-commit,
+    artifact freshness, rollback 가능성을 모두 요구한다.
+
+  - Historical baseline: 0.9468은 보존하되 오염된 source를 복사하거나 release 근거로 사용
+    하지 않는다.
+
+  - Rollback/삭제: gate 실패 시 routing만 legacy로 되돌린다. full switch 후에만
+    core.decision의 중복 evaluator/constraint/fallback, legacy blueprint/compiler/session
+    path를 삭제한다.
+
+  - 다음 단계: full switch 뒤 동일 환경에서 submission·report·manifest를 재생성하고 최종
+    source/content hash를 잠근다.
+
+  - 비용: HIGH
+
+  ## 구현 가능 여부와 차단 요소
+
+  - 지금 시작 가능한 범위: 감사 문서 작성과 Stage 0의 scorer/artifact tooling 정합화.
+  - production 리팩터링 시작 조건: Stage 0 문서·hash·단일 producer gate 승인.
+  - production switch 차단 요소:
+      - official scorer와 local scorer 불일치
+      - configured dev gate 실패
+      - new pipeline shadow-only
+      - validation-before-commit 미연결
+      - artifact writer 중복과 stale reports
+      - 특정 screening ID 기반 테스트
+      - response-target·multi-operation·partial commit 공식 계약 미확정
+
+  PLAN_READY

@@ -1,0 +1,19 @@
+{
+  "artifacts": {
+    "PURE_COMPILER_CONTRACT.md": "74211d0b15b706189fd6f24ad90c11676bd4d14cc27f448f17ca6e2e831aa841",
+    "STEP10_REPORT.md": "b3dcf4f2c9a7ce59dc177fddf63b97ea41cbaa608e861833a347f08490cb2a20",
+    "consistency_report.md": "1b2475a6d6ce1fac05d77d5af440815cb7af75e656c6ead7f8a5ec041301e896",
+    "pure_compiler_audit.json": "c2311df0edd9756dfba453a2e543156f0d6368d29c7a7dab7f6bdf7da546df65",
+    "shadow_diff_vs_previous.md": "d89982b2b9a9e0987bc5e5d8ccf2e403363688478ebd7db32355cb400193fd9d",
+    "step10_result.json": "1e4d9c0ac4cdac859e472f1fee06a093455cd743097218016951d0a4c28aa117",
+    "submission.csv": "bef9b996db7c883e26ea2c6bf595b4f4ea8597dd0f5b61913dc2d8ab87e241f0"
+  },
+  "generated_at": "2026-07-11T16:27:53.253115+00:00",
+  "official_data_sha256": {
+    "dev_answers.json": "2ec6723345c78ccb5613ed90b4b778ecf3b5da3db92e341e8b8bfaa7724bd1c3",
+    "dev_tasks.jsonl": "871fcb52708d66fa1eec39073a9803ef29204315c5ee3a013799cc364bc55e1d",
+    "screening_tasks.jsonl": "36248ede94b89fd0d89024ed14fd554ee75196d052dcac90dec579d8185ffd57"
+  },
+  "source_tree_sha256": "85cb14442574abe2b7be9d2c6c88225017a7195fc3ec9b1debb8aa862d72e21b",
+  "stage": "step10_pure_compiler"
+}

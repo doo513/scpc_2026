@@ -1,0 +1,44 @@
+{
+  "boundaries": {
+    "mutable_globals": [],
+    "production_active": false,
+    "production_imports": [],
+    "prohibited_tokens": [],
+    "signature_contract": true,
+    "signatures": {
+      "plan": [
+        "projection",
+        "config"
+      ],
+      "policy": [
+        "projection"
+      ],
+      "scope": [
+        "projection"
+      ],
+      "set": [
+        "projections",
+        "config"
+      ]
+    }
+  },
+  "compiler": {
+    "call_order_independent": true,
+    "deterministic": true,
+    "lineage_mismatch_rejected": true,
+    "opaque_args_preserved": true,
+    "output_fields": [
+      "content_scope",
+      "plan_events",
+      "policy"
+    ],
+    "plan_limit_rejected": true,
+    "plan_order": [
+      "read",
+      "dispatch"
+    ],
+    "raw_context_independent": true,
+    "schema_fragment_valid": true,
+    "source_lock_digest": "lock:gate"
+  }
+}

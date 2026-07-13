@@ -1,0 +1,21 @@
+{
+  "artifacts": {
+    "PLAN_REQUIREMENTS_CONTRACT.md": "a0db3da50a0ffe1b02d3799a0cd29561e5ab397b37bb3932b9228373d8f32b8d",
+    "SLM_CONTRACT_AMENDMENT.md": "045c36f7f20acb9626b32e04ed945d33602d2280cdd6b740c091ec45e1a12c44",
+    "STEP6_REPORT.md": "3d70beacb82335f5f9402493aeba45e952a5aba1a6eaacabffff4feae1262145",
+    "consistency_report.md": "1b2475a6d6ce1fac05d77d5af440815cb7af75e656c6ead7f8a5ec041301e896",
+    "plan_blueprint_registry.json": "4c2068a0f4a7d2a49d75271a7b9081e6d627f0dd8586fc43723e4f18a44e5fbb",
+    "shadow_diff_vs_previous.md": "d8b46b2d4f187ad089fcecb45a213cb1947f94a23c49bf976d98ce18fd0933ab",
+    "step6_contract_audit.json": "2cd308e67fa62a66cbade915758a65bd6d347b89f20a422fa1384b5358f93278",
+    "step6_result.json": "a161400115c104dcedc0feed832b884e32417c8629d449fc38ac2ec3a0d5e060",
+    "submission.csv": "bef9b996db7c883e26ea2c6bf595b4f4ea8597dd0f5b61913dc2d8ab87e241f0"
+  },
+  "generated_at": "2026-07-11T15:07:15.343968+00:00",
+  "official_data_sha256": {
+    "dev_answers.json": "2ec6723345c78ccb5613ed90b4b778ecf3b5da3db92e341e8b8bfaa7724bd1c3",
+    "dev_tasks.jsonl": "871fcb52708d66fa1eec39073a9803ef29204315c5ee3a013799cc364bc55e1d",
+    "screening_tasks.jsonl": "36248ede94b89fd0d89024ed14fd554ee75196d052dcac90dec579d8185ffd57"
+  },
+  "source_tree_sha256": "31f038770fd51bd8d49601f84f13a43ce4d8a2456ca1c9bcfd60248327c1d1e1",
+  "stage": "step6_blueprints"
+}

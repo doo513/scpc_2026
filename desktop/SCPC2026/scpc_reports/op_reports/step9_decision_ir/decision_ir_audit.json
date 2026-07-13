@@ -1,0 +1,47 @@
+{
+  "boundaries": {
+    "builder_production_active": false,
+    "production_imports": [],
+    "prohibited_raw_dependencies": [],
+    "projection_production_active": false,
+    "projection_reinterpretation_tokens": []
+  },
+  "bundle": {
+    "aggregate_control_field_present": false,
+    "aggregate_status": "multiple_unresolved",
+    "bundle_assumption_present": true,
+    "cycle_rejected": true,
+    "dependency_count": 1,
+    "input_order_independent": true,
+    "subdecision_dispositions": [
+      "ask",
+      "proceed"
+    ]
+  },
+  "decision_lock": {
+    "ask_disposition": "ask",
+    "ask_plan": [
+      "read",
+      "clarify"
+    ],
+    "execution_target": "merchant:gate",
+    "hold_disposition": "hold",
+    "hold_plan": [
+      "read",
+      "guard"
+    ],
+    "invalid_capability_lock_rejected": true,
+    "non_execution_terminal_absent": true,
+    "plan_order_preserved": true,
+    "plan_reason_lineage_preserved": true,
+    "projection_deterministic": true,
+    "projection_lossless": true,
+    "response_target": "interaction:user",
+    "semantic_terminal_preserved": true,
+    "single_aggregate_status": "single",
+    "stale_mutation_rejected": true,
+    "target_provenance_preserved": true,
+    "target_separation_preserved": true,
+    "viable_disposition": "proceed"
+  }
+}

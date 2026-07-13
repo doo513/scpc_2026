@@ -1,0 +1,136 @@
+1. 파일을 참고하게 할때 - (경로 찾기 등)
+
+1. HOLD는 최종 control 결과로서 처리가 필요함.
+IntentEvidence의 분리
+decisive STOP/CANCEL evidence
+OR
+hard active constraint
+OR
+required capability unavailable
+→ control=hold
+강한 cancellation/blocking 근거
+
+2. action-target 조합별 constraint 평가
+target 확정 전 target-dependent constraint 활성화될 수도 있는 문제 생김
+
+별도의 action, target < (action_candidate, target_candidate)
+Candidate A
+action = DISPATCH
+target = external_caregiver
+active_constraints = [consent_revoked]
+result = HOLD
+
+Candidate B
+action = LOCAL_UPDATE
+target = local_record
+active_constraints = []
+result = PROCEED
+
+3. 중복 evidence 병합 -> 텍스트만 canonicalize
+최신 prompt에서 재강조, 이전 turn에서만 등장, 현재 사용자 명령, 단순 history 인용 여부, 동일 문장 재사용 확인 여부 등의 유실 문제 발생
+=> canonical evidence group
+
+4. capability 부재, 정보 부재 -> 별도 판정 축으로 고정
+
+상태	결과
+capability 없음, fallback 없음	hold
+capability 없음, 실행 가능한 대안 하나	해당 대안 후보 평가
+capability 없음, 사용자 선택이 필요한 여러 대안	ask
+required slot 누락	ask
+required slot 충돌	ask
+optional slot 누락, 안전한 기본값 존재	후보 평가 계속
+capability와 required slot 모두 충족	constraint 평가 계속
+
+5. Domain promotion trace: 제안한 필드를 추가하는 것이 맞음
+
+현재 domain verb 승격은 새로운 일반화 가설 따라서 결과만 저장하면 점수가 변한 원인을 분석할 수 없게 됨. ??
+
+다음 구조를 넣는 것이 적절합니다.
+
+DomainPromotionTrace
+- domain_action_candidate
+- promotion_eligible
+- promotion_applied
+- promotion_rejected_reason
+- fallback_profile
+- required_slots
+- capability_status
+- active_constraints
+- supporting_evidence_ids
+
+promotion_rejected_reason은 자유문자열보다 enum이 낫습니다.
+
+NO_EXPLICIT_EXECUTION_INTENT
+FOCAL_DOMAIN_MISMATCH
+TARGET_UNRESOLVED
+REQUIRED_SLOT_MISSING
+CAPABILITY_UNAVAILABLE
+HARD_CONSTRAINT_ACTIVE
+SHARE_ONLY_REQUEST
+VERIFY_ONLY_REQUEST
+CLARIFICATION_ONLY_REQUEST
+LOW_CONFIDENCE
+LOWER_RANKED_CANDIDATE
+
+중요한 구분은 다음입니다.
+
+promotion_eligible = 조건상 승격 가능
+promotion_applied = 최종 후보로 실제 선택됨
+
+예를 들어 두 개의 eligible 후보 중 하나만 최종 선택될 수 있으므로 두 필드는 동일하지 않습니다.
+
+또한 현재 IntentEvidence에 PAY, TOGGLE, SCHEDULE을 직접 넣는 구조도 정리할 필요가 있습니다.
+
+이들은 최종적으로는 DomainActionCandidate입니다. 텍스트 단계에서는 다음 정도만 evidence로 기록하는 편이 깨끗합니다.
+
+EXPLICIT_DOMAIN_VERB(action=PAY)
+EXPLICIT_DOMAIN_VERB(action=TOGGLE)
+EXPLICIT_DOMAIN_VERB(action=SCHEDULE)
+
+그 후 focal, target, capability와 결합해 실제 후보로 승격합니다.
+
+6. 내부 인터페이스: 공통 필드 설계는 일부 수정해야 함
+
+FinalDecision이나 DecisionCandidate는 원문에서 직접 추출된 객체가 아니기 때문입니다. 여기에 임의의 span을 넣으면 직접 근거와 파생 결과가 구분되지 않습니다.
+
+7. dev 회귀 허용 조건: 제안대로 객관화해야 함
+설명되는 회귀 허용에 대한 내용이 부족함
+
+A. 기존 규칙이 이름·문장·배열 위치에 의존함이 코드 또는 고정 테스트로 확인됨
+
+AND
+
+B. 수정 후 사전에 등록된 metamorphic test가 개선됨
+
+AND
+
+C. 의도적으로 변경한 축 외의 출력 축은 유지됨
+
+AND
+
+D. 회귀 task의 trace reason code가 사전 정의된 기대값과 일치함
+
+AND
+
+E. schema, focal, available_actions, consistency hard gate에는 회귀가 없음
+
+AND
+
+F. 회귀 허용 규칙과 기대 trace가 수정 실행 전에 versioned test spec에 등록됨
+
+최종 판단
+
+당신이 제안한 수정 중 다음은 그대로 반영해야 합니다.
+
+HOLD를 IntentEvidence에서 제거
+Action–Target 조합별 constraint 계산
+중복 evidence provenance 보존
+capability와 missing information 분리
+domain promotion trace 추가
+내부 인터페이스 확정
+dev 회귀 허용 조건 사전 객관화
+
+다만 두 부분은 수정해서 넣어야 합니다.
+
+BLOCK_REQUEST는 전부 IntentEvidence가 아니다. 사용자 취소와 시스템 constraint를 분리해야 한다.
+모든 객체에 source/turn/span을 넣지 말고, 직접 추출 객체는 provenance, 파생 객체는 derived_from을 사용해야 한다.

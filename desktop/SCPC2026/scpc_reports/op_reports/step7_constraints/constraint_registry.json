@@ -1,0 +1,452 @@
+{
+  "global_rules": [
+    {
+      "constraint_type": "target_binding",
+      "inactive_codes": [],
+      "record_type": "ambiguous_focal"
+    },
+    {
+      "constraint_type": "target_binding",
+      "inactive_codes": [],
+      "record_type": "ambiguous_target"
+    },
+    {
+      "constraint_type": "information_conflict",
+      "inactive_codes": [],
+      "record_type": "amount_changed"
+    },
+    {
+      "constraint_type": "calendar_conflict",
+      "inactive_codes": [],
+      "record_type": "calendar_conflict"
+    },
+    {
+      "constraint_type": "consent",
+      "inactive_codes": [
+        "granted"
+      ],
+      "record_type": "consent"
+    },
+    {
+      "constraint_type": "information_conflict",
+      "inactive_codes": [],
+      "record_type": "duration_ambiguous"
+    },
+    {
+      "constraint_type": "local_boundary",
+      "inactive_codes": [],
+      "record_type": "external_share_policy"
+    },
+    {
+      "constraint_type": "unknown",
+      "inactive_codes": [],
+      "record_type": "guardrail_ladder_signal"
+    },
+    {
+      "constraint_type": "safety",
+      "inactive_codes": [],
+      "record_type": "health_share_policy"
+    },
+    {
+      "constraint_type": "information_conflict",
+      "inactive_codes": [],
+      "record_type": "memory_conflict"
+    },
+    {
+      "constraint_type": "payment_policy",
+      "inactive_codes": [],
+      "record_type": "merchant_verification"
+    },
+    {
+      "constraint_type": "payment_policy",
+      "inactive_codes": [],
+      "record_type": "payment_policy"
+    },
+    {
+      "constraint_type": "security",
+      "inactive_codes": [],
+      "record_type": "privacy_guard"
+    },
+    {
+      "constraint_type": "local_boundary",
+      "inactive_codes": [],
+      "record_type": "routine_scope"
+    },
+    {
+      "constraint_type": "safety",
+      "inactive_codes": [],
+      "record_type": "safety_mode"
+    },
+    {
+      "constraint_type": "security",
+      "inactive_codes": [],
+      "record_type": "security_alert"
+    },
+    {
+      "constraint_type": "local_boundary",
+      "inactive_codes": [],
+      "record_type": "session_share_policy"
+    },
+    {
+      "constraint_type": "temporary_override",
+      "inactive_codes": [],
+      "record_type": "temporary_override_allowed"
+    }
+  ],
+  "pair_specs": [
+    {
+      "applicability": [
+        {
+          "key": {
+            "domain": "content",
+            "operation": "share",
+            "variant": null
+          },
+          "target_localities": [
+            "external"
+          ]
+        }
+      ],
+      "assumption_refs": [
+        "ASSUMPTION-CONSTRAINT-EFFECT-001"
+      ],
+      "basis_refs": [
+        "OFFICIAL-TERMS-RECORDS",
+        "DESIGN-STEP7-CONSTRAINT-CONTRACT"
+      ],
+      "constraint_id": "CONSTRAINT-DISPATCH-CONSENT",
+      "constraint_type": "consent",
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "effect_rules": [
+        {
+          "effect": "block_execution",
+          "parameter_source": "none",
+          "reason_code": "CONSENT_REVOKED",
+          "required_codes": [
+            "revoked"
+          ],
+          "source_record_type": "consent"
+        }
+      ],
+      "source_record_types": [
+        "consent"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "applicability": [
+        {
+          "key": {
+            "domain": "content",
+            "operation": "share",
+            "variant": null
+          },
+          "target_localities": [
+            "external"
+          ]
+        },
+        {
+          "key": {
+            "domain": "payment",
+            "operation": "execute",
+            "variant": null
+          },
+          "target_localities": [
+            "domain"
+          ]
+        }
+      ],
+      "assumption_refs": [
+        "ASSUMPTION-CONSTRAINT-EFFECT-001"
+      ],
+      "basis_refs": [
+        "OFFICIAL-TERMS-RECORDS",
+        "DESIGN-STEP7-CONSTRAINT-CONTRACT"
+      ],
+      "constraint_id": "CONSTRAINT-DISPATCH-SECURITY",
+      "constraint_type": "security",
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "effect_rules": [
+        {
+          "effect": "block_execution",
+          "parameter_source": "none",
+          "reason_code": "SECURITY_BLOCK",
+          "required_codes": [],
+          "source_record_type": "security_alert"
+        }
+      ],
+      "source_record_types": [
+        "security_alert"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "applicability": [
+        {
+          "key": {
+            "domain": "content",
+            "operation": "share",
+            "variant": null
+          },
+          "target_localities": [
+            "external"
+          ]
+        }
+      ],
+      "assumption_refs": [
+        "ASSUMPTION-CONSTRAINT-EFFECT-001"
+      ],
+      "basis_refs": [
+        "OFFICIAL-TERMS-RECORDS",
+        "DESIGN-STEP7-CONSTRAINT-CONTRACT"
+      ],
+      "constraint_id": "CONSTRAINT-EXTERNAL-SHARE-POLICY",
+      "constraint_type": "local_boundary",
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "effect_rules": [
+        {
+          "effect": "add_redaction",
+          "parameter_source": "none",
+          "reason_code": "EXTERNAL_DISCLOSURE_RESTRICTED",
+          "required_codes": [
+            "raw_quote_forbidden",
+            "raw_sensitive_forbidden"
+          ],
+          "source_record_type": "external_share_policy"
+        },
+        {
+          "effect": "force_summary",
+          "parameter_source": "none",
+          "reason_code": "EXTERNAL_DISCLOSURE_RESTRICTED",
+          "required_codes": [
+            "summary_only_allowed"
+          ],
+          "source_record_type": "external_share_policy"
+        },
+        {
+          "effect": "block_execution",
+          "parameter_source": "none",
+          "reason_code": "EXTERNAL_DISCLOSURE_BLOCKED",
+          "required_codes": [
+            "doctor_note_forbidden"
+          ],
+          "source_record_type": "external_share_policy"
+        }
+      ],
+      "source_record_types": [
+        "external_share_policy"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "applicability": [
+        {
+          "key": {
+            "domain": "payment",
+            "operation": "execute",
+            "variant": null
+          },
+          "target_localities": [
+            "domain"
+          ]
+        },
+        {
+          "key": {
+            "domain": "payment",
+            "operation": "verify",
+            "variant": null
+          },
+          "target_localities": [
+            "domain"
+          ]
+        }
+      ],
+      "assumption_refs": [
+        "ASSUMPTION-CONSTRAINT-EFFECT-001"
+      ],
+      "basis_refs": [
+        "OFFICIAL-TERMS-RECORDS",
+        "DESIGN-STEP7-CONSTRAINT-CONTRACT"
+      ],
+      "constraint_id": "CONSTRAINT-PAYMENT-POLICY",
+      "constraint_type": "payment_policy",
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "effect_rules": [
+        {
+          "effect": "add_confirmation",
+          "parameter_source": "none",
+          "reason_code": "PAYMENT_POLICY_REVIEW",
+          "required_codes": [],
+          "source_record_type": "payment_policy"
+        }
+      ],
+      "source_record_types": [
+        "payment_policy"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "applicability": [
+        {
+          "key": {
+            "domain": "device_control",
+            "operation": "modify",
+            "variant": null
+          },
+          "target_localities": [
+            "domain"
+          ]
+        },
+        {
+          "key": {
+            "domain": "device_control",
+            "operation": "execute",
+            "variant": "legacy_execute"
+          },
+          "target_localities": [
+            "domain"
+          ]
+        }
+      ],
+      "assumption_refs": [
+        "ASSUMPTION-CONSTRAINT-EFFECT-001"
+      ],
+      "basis_refs": [
+        "OFFICIAL-TERMS-RECORDS",
+        "DESIGN-STEP7-CONSTRAINT-CONTRACT"
+      ],
+      "constraint_id": "CONSTRAINT-DEVICE-SAFETY",
+      "constraint_type": "safety",
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "effect_rules": [
+        {
+          "effect": "block_execution",
+          "parameter_source": "none",
+          "reason_code": "SAFETY_BLOCK",
+          "required_codes": [],
+          "source_record_type": "safety_mode"
+        }
+      ],
+      "source_record_types": [
+        "safety_mode"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "applicability": [
+        {
+          "key": {
+            "domain": "device_control",
+            "operation": "modify",
+            "variant": null
+          },
+          "target_localities": [
+            "domain"
+          ]
+        },
+        {
+          "key": {
+            "domain": "device_control",
+            "operation": "execute",
+            "variant": "legacy_execute"
+          },
+          "target_localities": [
+            "domain"
+          ]
+        }
+      ],
+      "assumption_refs": [
+        "ASSUMPTION-CONSTRAINT-EFFECT-001"
+      ],
+      "basis_refs": [
+        "OFFICIAL-TERMS-RECORDS",
+        "DESIGN-STEP7-CONSTRAINT-CONTRACT"
+      ],
+      "constraint_id": "CONSTRAINT-TEMPORARY-OVERRIDE",
+      "constraint_type": "temporary_override",
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "effect_rules": [
+        {
+          "effect": "limit_duration",
+          "parameter_source": "fact_parameters",
+          "reason_code": "TEMPORARY_OVERRIDE_LIMIT",
+          "required_codes": [],
+          "source_record_type": "temporary_override_allowed"
+        },
+        {
+          "effect": "add_confirmation",
+          "parameter_source": "none",
+          "reason_code": "DURATION_REQUIRES_CLARIFICATION",
+          "required_codes": [],
+          "source_record_type": "duration_ambiguous"
+        }
+      ],
+      "source_record_types": [
+        "temporary_override_allowed",
+        "duration_ambiguous"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "applicability": [
+        {
+          "key": {
+            "domain": "calendar",
+            "operation": "create",
+            "variant": null
+          },
+          "target_localities": [
+            "domain"
+          ]
+        },
+        {
+          "key": {
+            "domain": "calendar",
+            "operation": "modify",
+            "variant": null
+          },
+          "target_localities": [
+            "domain"
+          ]
+        },
+        {
+          "key": {
+            "domain": "calendar",
+            "operation": "execute",
+            "variant": "legacy_execute"
+          },
+          "target_localities": [
+            "domain"
+          ]
+        }
+      ],
+      "assumption_refs": [
+        "ASSUMPTION-CONSTRAINT-EFFECT-001"
+      ],
+      "basis_refs": [
+        "OFFICIAL-TERMS-RECORDS",
+        "DESIGN-STEP7-CONSTRAINT-CONTRACT"
+      ],
+      "constraint_id": "CONSTRAINT-CALENDAR-CONFLICT",
+      "constraint_type": "calendar_conflict",
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "effect_rules": [
+        {
+          "effect": "add_confirmation",
+          "parameter_source": "none",
+          "reason_code": "CALENDAR_CONFLICT",
+          "required_codes": [],
+          "source_record_type": "calendar_conflict"
+        }
+      ],
+      "source_record_types": [
+        "calendar_conflict"
+      ],
+      "version": "1.0.0"
+    }
+  ],
+  "production_active": {
+    "global": false,
+    "pair": false
+  }
+}

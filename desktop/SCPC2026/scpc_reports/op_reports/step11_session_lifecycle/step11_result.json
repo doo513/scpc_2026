@@ -1,0 +1,243 @@
+{
+  "atomic_commit_audit": {
+    "atomic_failure_persistent_changed": false,
+    "atomic_failure_status": "atomic_failure",
+    "atomic_failure_unchanged": true,
+    "success_status": "committed",
+    "success_trace_decision": "decision:success",
+    "success_version": 8,
+    "validation_failure_eligibility": "validation_failed",
+    "validation_failure_status": "rejected",
+    "validation_failure_unchanged": true
+  },
+  "audit_sha256": "bbfc69c12458f783f2a76462674bec804787362afb4f5bd22d79727c4f0f71bd",
+  "baseline_command": "/home/doo33/.venv/bin/python step11_gate.py",
+  "boundary_audit": {
+    "dependency_constructor_count": 1,
+    "legacy_commits_before_validation": true,
+    "manual_dependency_method_present": false,
+    "production_active": false,
+    "production_imports": [],
+    "prohibited_tokens": [],
+    "public_overlay_methods": [
+      "mark_committed",
+      "read",
+      "rollback_decision",
+      "snapshot",
+      "write"
+    ]
+  },
+  "contract_sha256": "fb74f62d391b5cf6df72731f186b9202eac6bbb9fdc0c8eb00716ccc4e2b6bc3",
+  "dev": {
+    "axes": {
+      "content_scope": 0.7419,
+      "control": 0.9583,
+      "counterfactual": 0.0,
+      "focal": 1.0,
+      "plan": 0.6889,
+      "policy": 0.6845,
+      "semantic_response": 0.0,
+      "target": 0.9333
+    },
+    "control_confusion": {
+      "amend->amend": 25,
+      "amend->ask": 3,
+      "ask->ask": 24,
+      "ask->hold": 2,
+      "hold->hold": 20,
+      "proceed->proceed": 46
+    },
+    "exact_definition": "all required score axes equal 1.0",
+    "exact_match_count": 15,
+    "field_error_counts": {
+      "content_scope": 79,
+      "control": 5,
+      "plan": 49,
+      "policy": 99,
+      "target": 8
+    },
+    "mode_confusion": {
+      "none->none": 21,
+      "none->summary": 1,
+      "raw->raw": 4,
+      "redacted->none": 1,
+      "redacted->raw": 1,
+      "redacted->redacted": 19,
+      "redacted->status_only": 1,
+      "redacted->summary": 14,
+      "status_only->status_only": 38,
+      "status_only->summary": 2,
+      "summary->none": 2,
+      "summary->raw": 1,
+      "summary->redacted": 2,
+      "summary->summary": 13
+    },
+    "n": 120,
+    "non_exact_count": 105,
+    "overall": 0.8036
+  },
+  "dev_unchanged": true,
+  "generated_at": "2026-07-11T16:28:44.705290+00:00",
+  "lifecycle_audit": {
+    "affected_decisions": [
+      "decision:a",
+      "decision:b"
+    ],
+    "commit_eligibility": "partial_commit_unresolved",
+    "commit_status": "rejected",
+    "dependencies_after_read": 1,
+    "dependencies_before_read": 0,
+    "independent_write_visible": true,
+    "partial_commit_assumption": true,
+    "persistent_unchanged": true,
+    "plan_validation_valid": true,
+    "provisional_read_source": "provisional",
+    "provisional_read_value": {
+      "target": "provisional"
+    },
+    "read_set": [
+      "session:last_target"
+    ],
+    "write_rollback_status": {
+      "decision:a": "direct",
+      "decision:b": "cascaded",
+      "decision:c": "none"
+    },
+    "write_set": [
+      "memory:preference",
+      "session:independent",
+      "session:last_target"
+    ]
+  },
+  "output_dir": "/mnt/c/Users/doo33/Desktop/scpc_reports/step11_session_lifecycle",
+  "previous_stage": {
+    "checks": {
+      "manifest_present": true,
+      "manifest_submission_hash": true,
+      "release_gate": true,
+      "result_manifest_hash": true,
+      "stage_name": true,
+      "submission_hash": true,
+      "submission_present": true
+    },
+    "errors": [],
+    "resolved_directory": "/mnt/c/Users/doo33/Desktop/scpc_reports/step10_pure_compiler"
+  },
+  "release_gate": {
+    "checks": {
+      "atomic_commit_success_trace": true,
+      "atomic_failure_rolls_back": true,
+      "contracts_valid": true,
+      "dependency_only_from_actual_read": true,
+      "dependency_rollback_scoped": true,
+      "dev_unchanged": true,
+      "legacy_debt_explicit": true,
+      "no_language_or_raw_dependencies": true,
+      "only_known_full_test_failure": true,
+      "partial_commit_withheld": true,
+      "provisional_read_visible": true,
+      "rollback_terminal_not_released": true,
+      "screening_submission_unchanged": true,
+      "shadow_only": true,
+      "source_stable_during_gate": true,
+      "stage_specific_tests": true,
+      "stale_validation_rejected": true,
+      "step10_artifact_integrity": true,
+      "validation_before_commit": true,
+      "without_known_dev_gate": true
+    },
+    "next_stage_allowed": true,
+    "reasons": [
+      "provisional read에만 dependency를 만들고 dependency rollback과 독립 write를 분리했다.",
+      "검증 실패·부분 성공·atomic write 실패에서 persistent state가 변하지 않았다.",
+      "rollback terminal은 후처리하지 않고 release를 거부하며 stale validation도 차단했다.",
+      "Step 10 대비 public dev 수치와 screening submission이 변하지 않았다.",
+      "legacy production validation-before-commit 연결은 미완료 debt로 명시했다."
+    ],
+    "status": "PASS_WITH_BASELINE_DEBT"
+  },
+  "report_root": "/mnt/c/Users/doo33/Desktop/scpc_reports",
+  "report_root_source": "user_desktop",
+  "rollback_release_audit": {
+    "corrected_non_terminal_valid": true,
+    "rolled_back_decisions": [
+      "decision:consumer",
+      "decision:producer"
+    ],
+    "stale_validation_eligibility": "release_invalid",
+    "stale_validation_reason": [
+      "stale_rollback_plan_validation"
+    ],
+    "terminal_decisions": [
+      "decision:consumer"
+    ],
+    "terminal_release_rejected": true
+  },
+  "screening_submission_sha256": "bef9b996db7c883e26ea2c6bf595b4f4ea8597dd0f5b61913dc2d8ab87e241f0",
+  "screening_submission_unchanged": true,
+  "source_tree_sha256": "85cb14442574abe2b7be9d2c6c88225017a7195fc3ec9b1debb8aa862d72e21b",
+  "stage": "step11_session_lifecycle",
+  "stage_manifest_path": "/mnt/c/Users/doo33/Desktop/scpc_reports/step11_session_lifecycle/stage_manifest.json",
+  "tests": {
+    "full": {
+      "command": [
+        "/home/doo33/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "exit_code": 1,
+      "failed_tests": [
+        "tests/test_regression.py::test_dev_score_and_optional_fields"
+      ],
+      "log": "/mnt/c/Users/doo33/Desktop/scpc_reports/step11_session_lifecycle/pytest_full.log",
+      "summary": [
+        "1 failed",
+        "210 passed"
+      ]
+    },
+    "stage_specific": {
+      "command": [
+        "/home/doo33/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_session_overlay.py",
+        "tests/test_projection_compilers.py",
+        "tests/test_decision_ir.py",
+        "tests/test_candidate_evaluation.py",
+        "tests/test_fallbacks.py",
+        "tests/test_constraints.py",
+        "tests/test_plan_requirements.py",
+        "tests/test_rulepacks.py",
+        "tests/test_slm_contract.py",
+        "tests/test_ontology.py",
+        "tests/test_architecture.py"
+      ],
+      "exit_code": 0,
+      "failed_tests": [],
+      "log": "/mnt/c/Users/doo33/Desktop/scpc_reports/step11_session_lifecycle/pytest_stage.log",
+      "summary": [
+        "155 passed"
+      ]
+    },
+    "without_known_dev_gate": {
+      "command": [
+        "/home/doo33/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-k",
+        "not test_dev_score_and_optional_fields"
+      ],
+      "exit_code": 0,
+      "failed_tests": [],
+      "log": "/mnt/c/Users/doo33/Desktop/scpc_reports/step11_session_lifecycle/pytest_without_known_dev_gate.log",
+      "summary": [
+        "210 passed",
+        "1 deselected"
+      ]
+    }
+  },
+  "validation_errors": []
+}

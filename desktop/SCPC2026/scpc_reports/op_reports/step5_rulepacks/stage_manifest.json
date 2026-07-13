@@ -1,0 +1,20 @@
+{
+  "artifacts": {
+    "RULEPACK_CONTRACT.md": "5a8a48658e613756a4ae9f74f8dcf5cbba3f79dfe12961708aec531c67274d61",
+    "STEP5_REPORT.md": "a523721c6143079908a5e581d490342ea4ae1a3550cfc251f4c3c5550e74ff8d",
+    "consistency_report.md": "1b2475a6d6ce1fac05d77d5af440815cb7af75e656c6ead7f8a5ec041301e896",
+    "registry_audit.json": "d823c69089c86d12c363b187b414984448a31823865f2ae9cc14e213b5500028",
+    "rulepack_registry.json": "97357b445e64cb9d98ecf7d095cf2912ed13d1822ecdaaaafeda2a4d582295e0",
+    "shadow_diff_vs_previous.md": "df69dae0d8cba39b65b16e9f48dee8e9bff86bce05cb4cf74a29ed4ee3e7bd7e",
+    "step5_result.json": "56e06d8efc4a453bd153a0cec73690b60a2c7cb39ace2f7282429a403883de9a",
+    "submission.csv": "bef9b996db7c883e26ea2c6bf595b4f4ea8597dd0f5b61913dc2d8ab87e241f0"
+  },
+  "generated_at": "2026-07-11T14:46:55.300991+00:00",
+  "official_data_sha256": {
+    "dev_answers.json": "2ec6723345c78ccb5613ed90b4b778ecf3b5da3db92e341e8b8bfaa7724bd1c3",
+    "dev_tasks.jsonl": "871fcb52708d66fa1eec39073a9803ef29204315c5ee3a013799cc364bc55e1d",
+    "screening_tasks.jsonl": "36248ede94b89fd0d89024ed14fd554ee75196d052dcac90dec579d8185ffd57"
+  },
+  "source_tree_sha256": "e411495901e2a004234875b0a47a224319f4d71086a56c7d550140845a16ec45",
+  "stage": "step5_rulepacks"
+}

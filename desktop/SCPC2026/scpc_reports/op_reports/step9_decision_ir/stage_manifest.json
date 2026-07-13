@@ -1,0 +1,19 @@
+{
+  "artifacts": {
+    "DECISION_IR_CONTRACT.md": "3bed067ebe91ac42cbcd03531164c29da92282a3cc54ffd5d9e9cea7d16c6a2b",
+    "STEP9_REPORT.md": "9b8bef5844ae319fafab8ce45ddc55d239af4ab881fda35fa1514e4dfcbfceba",
+    "consistency_report.md": "1b2475a6d6ce1fac05d77d5af440815cb7af75e656c6ead7f8a5ec041301e896",
+    "decision_ir_audit.json": "902a0698658cfa271ddd356b9e8406e1e63d8ce5c89e5ac999b188f2770b1c97",
+    "shadow_diff_vs_previous.md": "27a39b9cdfb263d1c86dd900525640771f7197dec0aac191af4127c983b6590e",
+    "step9_result.json": "5778b437ad2907c31d2363bc6089f18ee349873e6e432b08d273ec04eb462c44",
+    "submission.csv": "bef9b996db7c883e26ea2c6bf595b4f4ea8597dd0f5b61913dc2d8ab87e241f0"
+  },
+  "generated_at": "2026-07-11T16:27:03.610944+00:00",
+  "official_data_sha256": {
+    "dev_answers.json": "2ec6723345c78ccb5613ed90b4b778ecf3b5da3db92e341e8b8bfaa7724bd1c3",
+    "dev_tasks.jsonl": "871fcb52708d66fa1eec39073a9803ef29204315c5ee3a013799cc364bc55e1d",
+    "screening_tasks.jsonl": "36248ede94b89fd0d89024ed14fd554ee75196d052dcac90dec579d8185ffd57"
+  },
+  "source_tree_sha256": "85cb14442574abe2b7be9d2c6c88225017a7195fc3ec9b1debb8aa862d72e21b",
+  "stage": "step9_decision_ir"
+}

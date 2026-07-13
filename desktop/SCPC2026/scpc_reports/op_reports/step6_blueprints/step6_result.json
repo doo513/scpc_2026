@@ -1,0 +1,241 @@
+{
+  "baseline_command": "/home/doo33/.venv/bin/python step6_gate.py",
+  "blueprint_registry_sha256": "4c2068a0f4a7d2a49d75271a7b9081e6d627f0dd8586fc43723e4f18a44e5fbb",
+  "contract_sha256": "f1dc57a2cd8ba0f579913d2c1a4a1e4f9a5f0e6d0a5e30c3d2ff2e00a78633d9",
+  "dev": {
+    "axes": {
+      "content_scope": 0.7419,
+      "control": 0.9583,
+      "counterfactual": 0.0,
+      "focal": 1.0,
+      "plan": 0.6889,
+      "policy": 0.6845,
+      "semantic_response": 0.0,
+      "target": 0.9333
+    },
+    "control_confusion": {
+      "amend->amend": 25,
+      "amend->ask": 3,
+      "ask->ask": 24,
+      "ask->hold": 2,
+      "hold->hold": 20,
+      "proceed->proceed": 46
+    },
+    "exact_definition": "all required score axes equal 1.0",
+    "exact_match_count": 15,
+    "field_error_counts": {
+      "content_scope": 79,
+      "control": 5,
+      "plan": 49,
+      "policy": 99,
+      "target": 8
+    },
+    "mode_confusion": {
+      "none->none": 21,
+      "none->summary": 1,
+      "raw->raw": 4,
+      "redacted->none": 1,
+      "redacted->raw": 1,
+      "redacted->redacted": 19,
+      "redacted->status_only": 1,
+      "redacted->summary": 14,
+      "status_only->status_only": 38,
+      "status_only->summary": 2,
+      "summary->none": 2,
+      "summary->raw": 1,
+      "summary->redacted": 2,
+      "summary->summary": 13
+    },
+    "n": 120,
+    "non_exact_count": 105,
+    "overall": 0.8036
+  },
+  "dev_unchanged": true,
+  "generated_at": "2026-07-11T15:07:15.297934+00:00",
+  "output_dir": "/mnt/c/Users/doo33/Desktop/scpc_reports/step6_blueprints",
+  "plan_audit": {
+    "all_terminal_counts_one": true,
+    "blueprint_count": 14,
+    "catalog_count": 14,
+    "catalog_implemented": true,
+    "constraints_still_stubbed": true,
+    "effect_permutation_equal": true,
+    "effect_trace_ids": [
+      "redact-a",
+      "redact-b",
+      "summary"
+    ],
+    "errors": [],
+    "production_active": false,
+    "production_imports": [],
+    "terminal_counts": {
+      "RULEPACK-001": 1,
+      "RULEPACK-002": 1,
+      "RULEPACK-003": 1,
+      "RULEPACK-004": 1,
+      "RULEPACK-005": 1,
+      "RULEPACK-006": 1,
+      "RULEPACK-007": 1,
+      "RULEPACK-008": 1,
+      "RULEPACK-009": 1,
+      "RULEPACK-010": 1,
+      "RULEPACK-011": 1,
+      "RULEPACK-012": 1,
+      "RULEPACK-013": 1,
+      "RULEPACK-014": 1
+    }
+  },
+  "previous_stage": {
+    "checks": {
+      "manifest_present": true,
+      "manifest_submission_hash": true,
+      "release_gate": true,
+      "result_manifest_hash": true,
+      "stage_name": true,
+      "submission_hash": true,
+      "submission_present": true
+    },
+    "errors": [],
+    "resolved_directory": "/mnt/c/Users/doo33/Desktop/scpc_reports/step5_rulepacks"
+  },
+  "release_gate": {
+    "checks": {
+      "blueprint_catalog_coverage": true,
+      "contract_valid": true,
+      "dev_unchanged": true,
+      "effect_permutation": true,
+      "no_slm_runtime_dependency": true,
+      "one_semantic_terminal": true,
+      "only_known_full_test_failure": true,
+      "screening_submission_unchanged": true,
+      "shadow_only": true,
+      "slm_pipeline_order": true,
+      "slm_status_axes": true,
+      "source_stable_during_gate": true,
+      "stage_specific_tests": true,
+      "step5_artifact_integrity": true,
+      "step7_constraints_inactive": true,
+      "without_known_dev_gate": true
+    },
+    "next_stage_allowed": true,
+    "reasons": [
+      "BasePlanBlueprint coverage와 FinalPlanRequirements invariant가 통과했다.",
+      "Blueprint 선행, capability 선행 CandidateEvaluator 순서를 계약으로 고정했다.",
+      "SLM validation·merge·influence 상태와 scoped authority를 분리했다.",
+      "Step 5 대비 public dev 수치와 screening submission이 변하지 않았다."
+    ],
+    "status": "PASS_WITH_BASELINE_DEBT"
+  },
+  "report_root": "/mnt/c/Users/doo33/Desktop/scpc_reports",
+  "report_root_source": "user_desktop",
+  "screening_submission_sha256": "bef9b996db7c883e26ea2c6bf595b4f4ea8597dd0f5b61913dc2d8ab87e241f0",
+  "screening_submission_unchanged": true,
+  "slm_contract": {
+    "accepted_shortcut_absent": true,
+    "blueprint_before_constraint": true,
+    "capability_before_evaluator": true,
+    "influence_statuses": [
+      "unused",
+      "candidate_added",
+      "rank_changed",
+      "final_impact"
+    ],
+    "merge_statuses": [
+      "proposed",
+      "supporting",
+      "conflicting",
+      "rejected"
+    ],
+    "pipeline_order": [
+      "deterministic_parser",
+      "parser_evidence",
+      "pre_slm_candidate_set",
+      "ambiguity_trigger",
+      "slm_adapter",
+      "slm_proposal_validation",
+      "proposal_merge",
+      "updated_candidate_set",
+      "rulepack_lookup",
+      "base_blueprint_load",
+      "required_role_evaluation",
+      "information_evaluation",
+      "global_constraint_activation",
+      "pair_constraint_activation",
+      "constraint_effect_composition",
+      "final_plan_requirements",
+      "full_capability_evaluation",
+      "candidate_evaluator",
+      "candidate_disposition",
+      "authorized_fallback",
+      "decision_lock"
+    ],
+    "production_active": false,
+    "requirements_before_capability": true,
+    "rulepack_before_blueprint": true,
+    "runtime_dependencies": [],
+    "validation_statuses": [
+      "valid",
+      "invalid",
+      "unresolved"
+    ]
+  },
+  "source_tree_sha256": "31f038770fd51bd8d49601f84f13a43ce4d8a2456ca1c9bcfd60248327c1d1e1",
+  "stage": "step6_blueprints",
+  "stage_manifest_path": "/mnt/c/Users/doo33/Desktop/scpc_reports/step6_blueprints/stage_manifest.json",
+  "tests": {
+    "full": {
+      "command": [
+        "/home/doo33/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "exit_code": 1,
+      "failed_tests": [
+        "tests/test_regression.py::test_dev_score_and_optional_fields"
+      ],
+      "log": "/mnt/c/Users/doo33/Desktop/scpc_reports/step6_blueprints/pytest_full.log",
+      "summary": [
+        "1 failed",
+        "113 passed"
+      ]
+    },
+    "stage_specific": {
+      "command": [
+        "/home/doo33/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_plan_requirements.py",
+        "tests/test_slm_contract.py",
+        "tests/test_rulepacks.py",
+        "tests/test_ontology.py",
+        "tests/test_architecture.py"
+      ],
+      "exit_code": 0,
+      "failed_tests": [],
+      "log": "/mnt/c/Users/doo33/Desktop/scpc_reports/step6_blueprints/pytest_stage.log",
+      "summary": [
+        "58 passed"
+      ]
+    },
+    "without_known_dev_gate": {
+      "command": [
+        "/home/doo33/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-k",
+        "not test_dev_score_and_optional_fields"
+      ],
+      "exit_code": 0,
+      "failed_tests": [],
+      "log": "/mnt/c/Users/doo33/Desktop/scpc_reports/step6_blueprints/pytest_without_known_dev_gate.log",
+      "summary": [
+        "113 passed",
+        "1 deselected"
+      ]
+    }
+  },
+  "validation_errors": []
+}

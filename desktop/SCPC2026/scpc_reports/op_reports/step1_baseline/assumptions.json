@@ -1,0 +1,108 @@
+[
+  {
+    "affected_modules": [
+      "core/blueprint.py",
+      "rules/plan.py"
+    ],
+    "affected_types": [],
+    "assumption_id": "ASSUMPTION-ACTIONS-001",
+    "counterexample_refs": [],
+    "current_resolution": "현재 구현은 emitted plan verb 전체를 제한 대상으로 취급한다.",
+    "review_owner": "unassigned",
+    "statement": "available_actions가 platform action과 internal transform 중 어느 범위를 제한하는지",
+    "status": "UNRESOLVED_ASSUMPTION",
+    "supporting_evidence_refs": []
+  },
+  {
+    "affected_modules": [
+      "core/blueprint.py"
+    ],
+    "affected_types": [],
+    "assumption_id": "ASSUMPTION-CANCEL-001",
+    "counterexample_refs": [],
+    "current_resolution": "확인된 blueprint가 없어 unsupported 상태로 유지한다.",
+    "review_owner": "unassigned",
+    "statement": "cancel operation의 공식 terminal mapping",
+    "status": "UNRESOLVED_ASSUMPTION",
+    "supporting_evidence_refs": []
+  },
+  {
+    "affected_modules": [
+      "core/decision.py"
+    ],
+    "affected_types": [],
+    "assumption_id": "ASSUMPTION-BUNDLE-001",
+    "counterexample_refs": [],
+    "current_resolution": "미해결 복수 후보는 DecisionGate로 실행을 보류한다.",
+    "review_owner": "unassigned",
+    "statement": "복수 operation의 공식 aggregate output 규칙",
+    "status": "UNRESOLVED_ASSUMPTION",
+    "supporting_evidence_refs": []
+  },
+  {
+    "affected_modules": [
+      "harness.py",
+      "run_submission.py"
+    ],
+    "affected_types": [],
+    "assumption_id": "ASSUMPTION-SESSION-001",
+    "counterexample_refs": [],
+    "current_resolution": "현재 single-task 경로는 validation 전에 commit한다.",
+    "review_owner": "unassigned",
+    "statement": "persistent session commit의 공식 의미와 범위",
+    "status": "UNRESOLVED_ASSUMPTION",
+    "supporting_evidence_refs": []
+  },
+  {
+    "affected_modules": [
+      "harness.py"
+    ],
+    "affected_types": [],
+    "assumption_id": "ASSUMPTION-PARTIAL-COMMIT-001",
+    "counterexample_refs": [],
+    "current_resolution": "공식 근거가 없어 부분 commit 계약이 없다.",
+    "review_owner": "unassigned",
+    "statement": "부분 성공 시 commit 범위",
+    "status": "UNRESOLVED_ASSUMPTION",
+    "supporting_evidence_refs": []
+  },
+  {
+    "affected_modules": [
+      "core/decision.py"
+    ],
+    "affected_types": [],
+    "assumption_id": "ASSUMPTION-FALLBACK-001",
+    "counterexample_refs": [],
+    "current_resolution": "현재 사용자·official policy·official transformation 세 source만 허용한다.",
+    "review_owner": "unassigned",
+    "statement": "fallback의 공식 허용 범위",
+    "status": "UNRESOLVED_ASSUMPTION",
+    "supporting_evidence_refs": []
+  },
+  {
+    "affected_modules": [
+      "core/decision.py"
+    ],
+    "affected_types": [],
+    "assumption_id": "ASSUMPTION-TARGET-001",
+    "counterexample_refs": [],
+    "current_resolution": "내부 operation_target과 output target을 분리하지만 공식 mapping은 미확정이다.",
+    "review_owner": "unassigned",
+    "statement": "공식 answer.target의 execution/response target 의미",
+    "status": "UNRESOLVED_ASSUMPTION",
+    "supporting_evidence_refs": []
+  },
+  {
+    "affected_modules": [
+      "core/blueprint.py"
+    ],
+    "affected_types": [],
+    "assumption_id": "ASSUMPTION-TRANSFORM-001",
+    "counterexample_refs": [],
+    "current_resolution": "현재는 모두 available_actions 검사를 받는 plan verb다.",
+    "review_owner": "unassigned",
+    "statement": "redact·summarize·verify의 platform action/internal transform 구분",
+    "status": "UNRESOLVED_ASSUMPTION",
+    "supporting_evidence_refs": []
+  }
+]

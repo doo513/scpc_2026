@@ -1,0 +1,519 @@
+{
+  "audit_sha256": "1a3b28dbd4c83f3c09b2875f508c62d0c118b5849b751ce879f6eb06c26e26d7",
+  "baseline_command": "/home/doo33/.venv/bin/python step8_gate.py",
+  "boundary_audit": {
+    "candidate_evaluator_prerequisite_calls": [],
+    "default_fallback_registry_empty": true,
+    "production_active": false,
+    "production_imports": []
+  },
+  "candidate_counterfactual": {
+    "blocked_state": "blocked",
+    "local_candidate_id": "candidate:18554c3b0bd950eabb30",
+    "local_state": "executable",
+    "rank_bypass_prevented": true,
+    "same_semantic_candidate_count": 2,
+    "same_semantic_distinct_ids": true,
+    "same_semantic_lineage_count": 2,
+    "same_semantic_selection_status": "selected",
+    "selected_candidate_id": "candidate:18554c3b0bd950eabb30"
+  },
+  "contract_sha256": "661a13c9b2f9dec07a64d764958ef274b9aef9fa7a2d220fca6ce08893b7da92",
+  "dev": {
+    "axes": {
+      "content_scope": 0.7419,
+      "control": 0.9583,
+      "counterfactual": 0.0,
+      "focal": 1.0,
+      "plan": 0.6889,
+      "policy": 0.6845,
+      "semantic_response": 0.0,
+      "target": 0.9333
+    },
+    "control_confusion": {
+      "amend->amend": 25,
+      "amend->ask": 3,
+      "ask->ask": 24,
+      "ask->hold": 2,
+      "hold->hold": 20,
+      "proceed->proceed": 46
+    },
+    "exact_definition": "all required score axes equal 1.0",
+    "exact_match_count": 15,
+    "field_error_counts": {
+      "content_scope": 79,
+      "control": 5,
+      "plan": 49,
+      "policy": 99,
+      "target": 8
+    },
+    "mode_confusion": {
+      "none->none": 21,
+      "none->summary": 1,
+      "raw->raw": 4,
+      "redacted->none": 1,
+      "redacted->raw": 1,
+      "redacted->redacted": 19,
+      "redacted->status_only": 1,
+      "redacted->summary": 14,
+      "status_only->status_only": 38,
+      "status_only->summary": 2,
+      "summary->none": 2,
+      "summary->raw": 1,
+      "summary->redacted": 2,
+      "summary->summary": 13
+    },
+    "n": 120,
+    "non_exact_count": 105,
+    "overall": 0.8036
+  },
+  "dev_unchanged": true,
+  "fallback_audit": {
+    "applied_status": "applied",
+    "cycle_rejected": true,
+    "destination_rulepack_id": "RULEPACK-001",
+    "expected_destination_id": "candidate:06247b63a89454956a07",
+    "selected_destination_id": "candidate:06247b63a89454956a07",
+    "self_loop_rejected": true,
+    "source_rulepack_id": "RULEPACK-005",
+    "trace_destinations": [
+      "candidate:06247b63a89454956a07"
+    ],
+    "without_edge_status": "not_applied"
+  },
+  "generated_at": "2026-07-11T15:43:16.194238+00:00",
+  "output_dir": "/mnt/c/Users/doo33/Desktop/scpc_reports/step8_evaluator",
+  "previous_stage": {
+    "checks": {
+      "manifest_present": true,
+      "manifest_submission_hash": true,
+      "release_gate": true,
+      "result_manifest_hash": true,
+      "stage_name": true,
+      "submission_hash": true,
+      "submission_present": true
+    },
+    "errors": [],
+    "resolved_directory": "/mnt/c/Users/doo33/Desktop/scpc_reports/step7_constraints"
+  },
+  "release_gate": {
+    "checks": {
+      "authorized_fallback_re_evaluated": true,
+      "candidate_evaluator_is_aggregator": true,
+      "candidate_identity_preserved": true,
+      "contracts_valid": true,
+      "dev_unchanged": true,
+      "fallback_graph_valid": true,
+      "full_capability_ablation": true,
+      "no_automatic_fallback": true,
+      "only_known_full_test_failure": true,
+      "rank_cannot_bypass_block": true,
+      "rulepack_matrix": true,
+      "screening_submission_unchanged": true,
+      "shadow_only": true,
+      "source_stable_during_gate": true,
+      "stage_specific_tests": true,
+      "step7_artifact_integrity": true,
+      "without_known_dev_gate": true
+    },
+    "next_stage_allowed": true,
+    "reasons": [
+      "14개 RulePack axis 평가와 full capability ablation이 통과했다.",
+      "hard role·constraint가 rank로 우회되지 않음을 확인했다.",
+      "authorized fallback destination 재평가와 무권한 자동 전환 금지를 확인했다.",
+      "Step 7 대비 public dev 수치와 screening submission이 변하지 않았다."
+    ],
+    "status": "PASS_WITH_BASELINE_DEBT"
+  },
+  "report_root": "/mnt/c/Users/doo33/Desktop/scpc_reports",
+  "report_root_source": "user_desktop",
+  "rulepack_matrix": {
+    "capability_ablation_errors": [],
+    "errors": [],
+    "evaluated_count": 14,
+    "rows": [
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "dispatch"
+        ],
+        "rulepack_id": "RULEPACK-001"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify",
+          "update"
+        ],
+        "rulepack_id": "RULEPACK-002"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify",
+          "update"
+        ],
+        "rulepack_id": "RULEPACK-003"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify",
+          "update"
+        ],
+        "rulepack_id": "RULEPACK-004"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify",
+          "pay"
+        ],
+        "rulepack_id": "RULEPACK-005"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify"
+        ],
+        "rulepack_id": "RULEPACK-006"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify",
+          "toggle"
+        ],
+        "rulepack_id": "RULEPACK-007"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify",
+          "toggle"
+        ],
+        "rulepack_id": "RULEPACK-008"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify"
+        ],
+        "rulepack_id": "RULEPACK-009"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify",
+          "schedule"
+        ],
+        "rulepack_id": "RULEPACK-010"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify",
+          "schedule"
+        ],
+        "rulepack_id": "RULEPACK-011"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify",
+          "schedule"
+        ],
+        "rulepack_id": "RULEPACK-012"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify"
+        ],
+        "rulepack_id": "RULEPACK-013"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "clarify"
+        ],
+        "rulepack_id": "RULEPACK-014"
+      }
+    ],
+    "rulepack_count": 14
+  },
+  "screening_submission_sha256": "bef9b996db7c883e26ea2c6bf595b4f4ea8597dd0f5b61913dc2d8ab87e241f0",
+  "screening_submission_unchanged": true,
+  "source_tree_sha256": "2586c074e1de96a15cb435ef0f60e47a65e44edccda5106e9160d685b64e943e",
+  "stage": "step8_evaluator",
+  "stage_manifest_path": "/mnt/c/Users/doo33/Desktop/scpc_reports/step8_evaluator/stage_manifest.json",
+  "tests": {
+    "full": {
+      "command": [
+        "/home/doo33/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "exit_code": 1,
+      "failed_tests": [
+        "tests/test_regression.py::test_dev_score_and_optional_fields"
+      ],
+      "log": "/mnt/c/Users/doo33/Desktop/scpc_reports/step8_evaluator/pytest_full.log",
+      "summary": [
+        "1 failed",
+        "167 passed"
+      ]
+    },
+    "stage_specific": {
+      "command": [
+        "/home/doo33/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_candidate_evaluation.py",
+        "tests/test_fallbacks.py",
+        "tests/test_constraints.py",
+        "tests/test_plan_requirements.py",
+        "tests/test_rulepacks.py",
+        "tests/test_slm_contract.py",
+        "tests/test_ontology.py",
+        "tests/test_architecture.py"
+      ],
+      "exit_code": 0,
+      "failed_tests": [],
+      "log": "/mnt/c/Users/doo33/Desktop/scpc_reports/step8_evaluator/pytest_stage.log",
+      "summary": [
+        "112 passed"
+      ]
+    },
+    "without_known_dev_gate": {
+      "command": [
+        "/home/doo33/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-k",
+        "not test_dev_score_and_optional_fields"
+      ],
+      "exit_code": 0,
+      "failed_tests": [],
+      "log": "/mnt/c/Users/doo33/Desktop/scpc_reports/step8_evaluator/pytest_without_known_dev_gate.log",
+      "summary": [
+        "167 passed",
+        "1 deselected"
+      ]
+    }
+  },
+  "validation_errors": []
+}

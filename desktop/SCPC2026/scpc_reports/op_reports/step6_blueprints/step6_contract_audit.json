@@ -1,0 +1,83 @@
+{
+  "plan": {
+    "all_terminal_counts_one": true,
+    "blueprint_count": 14,
+    "catalog_count": 14,
+    "catalog_implemented": true,
+    "constraints_still_stubbed": true,
+    "effect_permutation_equal": true,
+    "effect_trace_ids": [
+      "redact-a",
+      "redact-b",
+      "summary"
+    ],
+    "errors": [],
+    "production_active": false,
+    "production_imports": [],
+    "terminal_counts": {
+      "RULEPACK-001": 1,
+      "RULEPACK-002": 1,
+      "RULEPACK-003": 1,
+      "RULEPACK-004": 1,
+      "RULEPACK-005": 1,
+      "RULEPACK-006": 1,
+      "RULEPACK-007": 1,
+      "RULEPACK-008": 1,
+      "RULEPACK-009": 1,
+      "RULEPACK-010": 1,
+      "RULEPACK-011": 1,
+      "RULEPACK-012": 1,
+      "RULEPACK-013": 1,
+      "RULEPACK-014": 1
+    }
+  },
+  "slm": {
+    "accepted_shortcut_absent": true,
+    "blueprint_before_constraint": true,
+    "capability_before_evaluator": true,
+    "influence_statuses": [
+      "unused",
+      "candidate_added",
+      "rank_changed",
+      "final_impact"
+    ],
+    "merge_statuses": [
+      "proposed",
+      "supporting",
+      "conflicting",
+      "rejected"
+    ],
+    "pipeline_order": [
+      "deterministic_parser",
+      "parser_evidence",
+      "pre_slm_candidate_set",
+      "ambiguity_trigger",
+      "slm_adapter",
+      "slm_proposal_validation",
+      "proposal_merge",
+      "updated_candidate_set",
+      "rulepack_lookup",
+      "base_blueprint_load",
+      "required_role_evaluation",
+      "information_evaluation",
+      "global_constraint_activation",
+      "pair_constraint_activation",
+      "constraint_effect_composition",
+      "final_plan_requirements",
+      "full_capability_evaluation",
+      "candidate_evaluator",
+      "candidate_disposition",
+      "authorized_fallback",
+      "decision_lock"
+    ],
+    "production_active": false,
+    "requirements_before_capability": true,
+    "rulepack_before_blueprint": true,
+    "runtime_dependencies": [],
+    "validation_statuses": [
+      "valid",
+      "invalid",
+      "unresolved"
+    ]
+  }
+}

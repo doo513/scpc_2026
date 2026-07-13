@@ -1,0 +1,20 @@
+{
+  "artifacts": {
+    "CONSTRAINT_EFFECT_ALGEBRA.md": "9cc3c3472fa1e05631de470470856f504b036f5a0a9e696b57da4e61a86713c0",
+    "STEP7_REPORT.md": "68a2aeb8f8757d154df8d8775ef1fc30a3b99c056d67def0974de48dbac12c25",
+    "consistency_report.md": "1b2475a6d6ce1fac05d77d5af440815cb7af75e656c6ead7f8a5ec041301e896",
+    "constraint_audit.json": "e40ede1fe4fb6780e60eb145457ae486dadd29d1e2cce87927e31f3cec4ce028",
+    "constraint_registry.json": "b2b881a3d5d18a09fad35d731e4c9fbee0a4a0c0fa84df43a1f4cdf3cdf7e9c9",
+    "shadow_diff_vs_previous.md": "25b5487271a7680614e2baeafab8893cf486d4878b15f861aceabd97c12f502b",
+    "step7_result.json": "ee04f0af65e9f183e84fa352dd364b2e748a51f8f1c48ec624e697d3c28bbf6b",
+    "submission.csv": "bef9b996db7c883e26ea2c6bf595b4f4ea8597dd0f5b61913dc2d8ab87e241f0"
+  },
+  "generated_at": "2026-07-11T15:22:38.835227+00:00",
+  "official_data_sha256": {
+    "dev_answers.json": "2ec6723345c78ccb5613ed90b4b778ecf3b5da3db92e341e8b8bfaa7724bd1c3",
+    "dev_tasks.jsonl": "871fcb52708d66fa1eec39073a9803ef29204315c5ee3a013799cc364bc55e1d",
+    "screening_tasks.jsonl": "36248ede94b89fd0d89024ed14fd554ee75196d052dcac90dec579d8185ffd57"
+  },
+  "source_tree_sha256": "c631d9f8d35f97534b633bd3628e10461f03d1c6f55a38370da25863413552d7",
+  "stage": "step7_constraints"
+}

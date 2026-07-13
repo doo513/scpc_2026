@@ -1,0 +1,277 @@
+{
+  "assumptions": [
+    {
+      "affected_modules": [
+        "core/blueprint.py",
+        "rules/plan.py"
+      ],
+      "affected_types": [],
+      "assumption_id": "ASSUMPTION-ACTIONS-001",
+      "counterexample_refs": [],
+      "current_resolution": "현재 구현은 emitted plan verb 전체를 제한 대상으로 취급한다.",
+      "review_owner": "unassigned",
+      "statement": "available_actions가 platform action과 internal transform 중 어느 범위를 제한하는지",
+      "status": "UNRESOLVED_ASSUMPTION",
+      "supporting_evidence_refs": []
+    },
+    {
+      "affected_modules": [
+        "core/blueprint.py"
+      ],
+      "affected_types": [],
+      "assumption_id": "ASSUMPTION-CANCEL-001",
+      "counterexample_refs": [],
+      "current_resolution": "확인된 blueprint가 없어 unsupported 상태로 유지한다.",
+      "review_owner": "unassigned",
+      "statement": "cancel operation의 공식 terminal mapping",
+      "status": "UNRESOLVED_ASSUMPTION",
+      "supporting_evidence_refs": []
+    },
+    {
+      "affected_modules": [
+        "core/decision.py"
+      ],
+      "affected_types": [],
+      "assumption_id": "ASSUMPTION-BUNDLE-001",
+      "counterexample_refs": [],
+      "current_resolution": "미해결 복수 후보는 DecisionGate로 실행을 보류한다.",
+      "review_owner": "unassigned",
+      "statement": "복수 operation의 공식 aggregate output 규칙",
+      "status": "UNRESOLVED_ASSUMPTION",
+      "supporting_evidence_refs": []
+    },
+    {
+      "affected_modules": [
+        "harness.py",
+        "run_submission.py"
+      ],
+      "affected_types": [],
+      "assumption_id": "ASSUMPTION-SESSION-001",
+      "counterexample_refs": [],
+      "current_resolution": "현재 single-task 경로는 validation 전에 commit한다.",
+      "review_owner": "unassigned",
+      "statement": "persistent session commit의 공식 의미와 범위",
+      "status": "UNRESOLVED_ASSUMPTION",
+      "supporting_evidence_refs": []
+    },
+    {
+      "affected_modules": [
+        "harness.py"
+      ],
+      "affected_types": [],
+      "assumption_id": "ASSUMPTION-PARTIAL-COMMIT-001",
+      "counterexample_refs": [],
+      "current_resolution": "공식 근거가 없어 부분 commit 계약이 없다.",
+      "review_owner": "unassigned",
+      "statement": "부분 성공 시 commit 범위",
+      "status": "UNRESOLVED_ASSUMPTION",
+      "supporting_evidence_refs": []
+    },
+    {
+      "affected_modules": [
+        "core/decision.py"
+      ],
+      "affected_types": [],
+      "assumption_id": "ASSUMPTION-FALLBACK-001",
+      "counterexample_refs": [],
+      "current_resolution": "현재 사용자·official policy·official transformation 세 source만 허용한다.",
+      "review_owner": "unassigned",
+      "statement": "fallback의 공식 허용 범위",
+      "status": "UNRESOLVED_ASSUMPTION",
+      "supporting_evidence_refs": []
+    },
+    {
+      "affected_modules": [
+        "core/decision.py"
+      ],
+      "affected_types": [],
+      "assumption_id": "ASSUMPTION-TARGET-001",
+      "counterexample_refs": [],
+      "current_resolution": "내부 operation_target과 output target을 분리하지만 공식 mapping은 미확정이다.",
+      "review_owner": "unassigned",
+      "statement": "공식 answer.target의 execution/response target 의미",
+      "status": "UNRESOLVED_ASSUMPTION",
+      "supporting_evidence_refs": []
+    },
+    {
+      "affected_modules": [
+        "core/blueprint.py"
+      ],
+      "affected_types": [],
+      "assumption_id": "ASSUMPTION-TRANSFORM-001",
+      "counterexample_refs": [],
+      "current_resolution": "현재는 모두 available_actions 검사를 받는 plan verb다.",
+      "review_owner": "unassigned",
+      "statement": "redact·summarize·verify의 platform action/internal transform 구분",
+      "status": "UNRESOLVED_ASSUMPTION",
+      "supporting_evidence_refs": []
+    }
+  ],
+  "baseline_command": "/home/doo33/.venv/bin/python step1_baseline.py",
+  "data_dir": "/mnt/c/Users/doo33/Desktop/data/SCPC2026_Final_data/data",
+  "dev": {
+    "axes": {
+      "content_scope": 0.7419,
+      "control": 0.9583,
+      "counterfactual": 0.0,
+      "focal": 1.0,
+      "plan": 0.6889,
+      "policy": 0.6845,
+      "semantic_response": 0.0,
+      "target": 0.9333
+    },
+    "control_confusion": {
+      "amend->amend": 25,
+      "amend->ask": 3,
+      "ask->ask": 24,
+      "ask->hold": 2,
+      "hold->hold": 20,
+      "proceed->proceed": 46
+    },
+    "exact_definition": "all required score axes equal 1.0",
+    "exact_match_count": 15,
+    "field_error_counts": {
+      "content_scope": 79,
+      "control": 5,
+      "plan": 49,
+      "policy": 99,
+      "target": 8
+    },
+    "mode_confusion": {
+      "none->none": 21,
+      "none->summary": 1,
+      "raw->raw": 4,
+      "redacted->none": 1,
+      "redacted->raw": 1,
+      "redacted->redacted": 19,
+      "redacted->status_only": 1,
+      "redacted->summary": 14,
+      "status_only->status_only": 38,
+      "status_only->summary": 2,
+      "summary->none": 2,
+      "summary->raw": 1,
+      "summary->redacted": 2,
+      "summary->summary": 13
+    },
+    "n": 120,
+    "non_exact_count": 105,
+    "overall": 0.8036
+  },
+  "existing_artifacts": {
+    "actual_dev_overall": 0.8036,
+    "current_source_sha256": "e7eb0149dd914338c966ff2abb1abbf04defdc975d79a38a076a36f330d1959a",
+    "dev_metric_matches": false,
+    "dev_report_path": "/mnt/c/Users/doo33/Desktop/scpc_coparser/reports/dev_score_report.md",
+    "manifest_dev_overall": 0.9421,
+    "manifest_path": "/mnt/c/Users/doo33/Desktop/scpc_coparser/manifest/candidate_manifest.json",
+    "manifest_source_sha256": "ad8eb0f4d5d980474d36c727a59271bb8bba871269d64aa9dafa8b9c71c6a223",
+    "report_dev_overall": 0.9421,
+    "report_metric_matches": false,
+    "report_predates_source": true,
+    "source_hash_matches": false,
+    "submission_hash_matches": true,
+    "submission_path": "/mnt/c/Users/doo33/Desktop/scpc_coparser/submission.csv",
+    "submission_predates_source": true,
+    "submission_sha256": "c349e8ac61d2bd5b707e879cfc1e79fd9cabd08ca0d6ac28283097058d755347",
+    "validator_error": "ValueError: candidate manifest source hash is stale",
+    "validator_status": "STALE"
+  },
+  "generated_artifact_validation": {
+    "answers": 700,
+    "newest_source_mtime_ns": 1783774459000490100,
+    "official_schema_sha256": "1c88c1b357ffa7d70c0aa02b358842e39edc47c754aebeed3f4cee9f6d4cf418",
+    "source_tree_sha256": "e7eb0149dd914338c966ff2abb1abbf04defdc975d79a38a076a36f330d1959a",
+    "status": "PASS",
+    "submission_mtime_ns": 1783774565786669100,
+    "submission_sha256": "bef9b996db7c883e26ea2c6bf595b4f4ea8597dd0f5b61913dc2d8ab87e241f0"
+  },
+  "generated_at": "2026-07-11T12:56:09.732200+00:00",
+  "hashes": {
+    "config_sha256": "a9ef5e9909ebbb2cc8cb455e820926554569a3280208d172d80f41889bdd98a1",
+    "data_files": {
+      "dev_answers.json": "2ec6723345c78ccb5613ed90b4b778ecf3b5da3db92e341e8b8bfaa7724bd1c3",
+      "dev_tasks.jsonl": "871fcb52708d66fa1eec39073a9803ef29204315c5ee3a013799cc364bc55e1d",
+      "screening_tasks.jsonl": "36248ede94b89fd0d89024ed14fd554ee75196d052dcac90dec579d8185ffd57"
+    },
+    "data_tree_sha256": "597cc3bbf3e1f2d631d76f8e46fc7144602aa4f4ec3d222a1427e45003278e06",
+    "local_schema_sha256": "1c88c1b357ffa7d70c0aa02b358842e39edc47c754aebeed3f4cee9f6d4cf418",
+    "official_schema_sha256": "1c88c1b357ffa7d70c0aa02b358842e39edc47c754aebeed3f4cee9f6d4cf418",
+    "registry_ontology_sha256": "46b28bc31be864ec46acdc5c8cefe66c37a330eea2ba1493dad64930dda75428",
+    "registry_version": "UNVERSIONED_PARTIAL_REGISTRIES",
+    "source_tree_sha256": "e7eb0149dd914338c966ff2abb1abbf04defdc975d79a38a076a36f330d1959a",
+    "submission_sha256": "bef9b996db7c883e26ea2c6bf595b4f4ea8597dd0f5b61913dc2d8ab87e241f0"
+  },
+  "output_dir": "/mnt/c/Users/doo33/Desktop/scpc_reports/step1_baseline",
+  "project_dir": "/mnt/c/Users/doo33/Desktop/scpc_coparser",
+  "reference_manifest_validation": {
+    "data_hash_mismatches": {},
+    "historical_best": {
+      "control": 1.0,
+      "dev_overall": 0.9468,
+      "focal": 1.0,
+      "name": "baseline_v5_compatible_actionprofile",
+      "source_tree_sha256": "dcc1407ca242cbc9ad78cbceab2c87a1c2ee6d9c6d87b3d1665e57f99b247bbf",
+      "target": 1.0
+    },
+    "path": "/mnt/c/Users/doo33/Desktop/scpc_coparser/manifest/reference_manifest.json",
+    "sha256": "8383fd504b05fb021663c8e935047970c213221274acaf122ff693cdee253f53",
+    "status": "PASS"
+  },
+  "release_gate": {
+    "checks": {
+      "generated_artifact_validation": true,
+      "only_known_full_test_failure": true,
+      "reference_data_hash_validation": true,
+      "reproducible_command": true,
+      "stage_specific_tests": true,
+      "stale_artifacts_distinguished": true
+    },
+    "next_stage_allowed": true,
+    "reasons": [
+      "재현 명령, current hash, generated artifact validation과 stage-specific test가 일치한다.",
+      "전체 pytest의 dev hard gate 실패 1건은 해결되지 않은 baseline debt로 고정한다.",
+      "기존 report/submission/manifest는 current baseline과 분리해 stale로 표시했다."
+    ],
+    "status": "PASS_WITH_BASELINE_DEBT"
+  },
+  "report_root": "/mnt/c/Users/doo33/Desktop/scpc_reports",
+  "report_root_source": "user_desktop",
+  "screening_answers": 700,
+  "stage": "step1_baseline",
+  "tests": {
+    "full": {
+      "command": [
+        "/home/doo33/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "exit_code": 1,
+      "failed_tests": [
+        "tests/test_regression.py::test_dev_score_and_optional_fields"
+      ],
+      "log": "/mnt/c/Users/doo33/Desktop/scpc_reports/step1_baseline/pytest_full.log",
+      "summary": [
+        "1 failed",
+        "51 passed"
+      ]
+    },
+    "without_known_dev_gate": {
+      "command": [
+        "/home/doo33/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-k",
+        "not test_dev_score_and_optional_fields"
+      ],
+      "exit_code": 0,
+      "failed_tests": [],
+      "log": "/mnt/c/Users/doo33/Desktop/scpc_reports/step1_baseline/pytest_without_known_dev_gate.log",
+      "summary": [
+        "51 passed",
+        "1 deselected"
+      ]
+    }
+  }
+}

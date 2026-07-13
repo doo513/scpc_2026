@@ -1,0 +1,217 @@
+{
+  "adapter_contract_statuses": {
+    "SUPPORTED_INTERPRETATION": 34
+  },
+  "adapter_count": 34,
+  "adapter_registry_sha256": "363ee9cb79a10eb4e323d44c8fdfc30a493d48646577a811e651ceec72b2272f",
+  "baseline_command": "/home/doo33/.venv/bin/python step3_gate.py",
+  "dev": {
+    "axes": {
+      "content_scope": 0.7419,
+      "control": 0.9583,
+      "counterfactual": 0.0,
+      "focal": 1.0,
+      "plan": 0.6889,
+      "policy": 0.6845,
+      "semantic_response": 0.0,
+      "target": 0.9333
+    },
+    "control_confusion": {
+      "amend->amend": 25,
+      "amend->ask": 3,
+      "ask->ask": 24,
+      "ask->hold": 2,
+      "hold->hold": 20,
+      "proceed->proceed": 46
+    },
+    "exact_definition": "all required score axes equal 1.0",
+    "exact_match_count": 15,
+    "field_error_counts": {
+      "content_scope": 79,
+      "control": 5,
+      "plan": 49,
+      "policy": 99,
+      "target": 8
+    },
+    "mode_confusion": {
+      "none->none": 21,
+      "none->summary": 1,
+      "raw->raw": 4,
+      "redacted->none": 1,
+      "redacted->raw": 1,
+      "redacted->redacted": 19,
+      "redacted->status_only": 1,
+      "redacted->summary": 14,
+      "status_only->status_only": 38,
+      "status_only->summary": 2,
+      "summary->none": 2,
+      "summary->raw": 1,
+      "summary->redacted": 2,
+      "summary->summary": 13
+    },
+    "n": 120,
+    "non_exact_count": 105,
+    "overall": 0.8036
+  },
+  "dev_unchanged": true,
+  "generated_at": "2026-07-11T13:36:14.385807+00:00",
+  "output_dir": "/mnt/c/Users/doo33/Desktop/scpc_reports/step3_typed_facts",
+  "previous_stage": {
+    "checks": {
+      "dev_result_present": true,
+      "release_gate": true,
+      "stage_name": true,
+      "submission_hash": true,
+      "submission_present": true
+    },
+    "declared_output_directory": "/mnt/c/Users/doo33/Desktop/scpc_reports/step2_ontology",
+    "errors": [],
+    "relocated": true,
+    "resolved_directory": "/mnt/c/Users/doo33/Desktop/scpc_reports/op_reports/step2_ontology"
+  },
+  "raw_record_violations": [],
+  "release_gate": {
+    "checks": {
+      "dev_unchanged": true,
+      "official_collection_contract": true,
+      "official_fact_parsing": true,
+      "only_known_full_test_failure": true,
+      "ontology_and_adapter_registry_valid": true,
+      "raw_record_boundary_clean": true,
+      "screening_submission_unchanged": true,
+      "source_stable_during_gate": true,
+      "stage_specific_tests": true,
+      "step2_artifact_integrity": true,
+      "step2_gate_available": true,
+      "typed_fact_permutation": true,
+      "without_known_dev_gate": true
+    },
+    "next_stage_allowed": true,
+    "reasons": [
+      "Typed Fact 상태 분리와 RecordAdapter 경계 검증이 통과했다.",
+      "공식 820개 입력의 typed parsing과 배열 permutation 검증이 통과했다.",
+      "Step 2 대비 public dev 수치와 screening submission이 변하지 않았다.",
+      "기존 dev hard gate 실패 1건은 baseline debt로 유지한다."
+    ],
+    "status": "PASS_WITH_BASELINE_DEBT"
+  },
+  "report_root": "/mnt/c/Users/doo33/Desktop/scpc_reports",
+  "report_root_source": "user_desktop",
+  "screening_submission_sha256": "bef9b996db7c883e26ea2c6bf595b4f4ea8597dd0f5b61913dc2d8ab87e241f0",
+  "screening_submission_unchanged": true,
+  "source_tree_sha256": "69c3ee70c569c0cf20c1a7276f6aca2faddbb605bb45c76571db1a8a64df69fd",
+  "stage": "step3_typed_facts",
+  "stage_manifest_path": "/mnt/c/Users/doo33/Desktop/scpc_reports/step3_typed_facts/stage_manifest.json",
+  "step3_contract_sha256": "a2cd8f45ef1be8dd0884325b6f9a0af91491f42e909d8ce072ead66ecdbd165d",
+  "tests": {
+    "full": {
+      "command": [
+        "/home/doo33/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "exit_code": 1,
+      "failed_tests": [
+        "tests/test_regression.py::test_dev_score_and_optional_fields"
+      ],
+      "log": "/mnt/c/Users/doo33/Desktop/scpc_reports/step3_typed_facts/pytest_full.log",
+      "summary": [
+        "1 failed",
+        "66 passed"
+      ]
+    },
+    "stage_specific": {
+      "command": [
+        "/home/doo33/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_typed_facts.py",
+        "tests/test_task_view.py",
+        "tests/test_architecture.py",
+        "tests/test_ontology.py"
+      ],
+      "exit_code": 0,
+      "failed_tests": [],
+      "log": "/mnt/c/Users/doo33/Desktop/scpc_reports/step3_typed_facts/pytest_stage3.log",
+      "summary": [
+        "33 passed"
+      ]
+    },
+    "without_known_dev_gate": {
+      "command": [
+        "/home/doo33/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-k",
+        "not test_dev_score_and_optional_fields"
+      ],
+      "exit_code": 0,
+      "failed_tests": [],
+      "log": "/mnt/c/Users/doo33/Desktop/scpc_reports/step3_typed_facts/pytest_without_known_dev_gate.log",
+      "summary": [
+        "66 passed",
+        "1 deselected"
+      ]
+    }
+  },
+  "typed_fact_audit": {
+    "all_facts_present": true,
+    "chronology_domains": {},
+    "collection_contract_ok": true,
+    "collection_statuses": {
+      "capabilities:present": 820,
+      "objects:present": 820,
+      "records:present": 820
+    },
+    "non_present_examples": [],
+    "object_statuses": {
+      "present": 5040
+    },
+    "permutation_failures": [],
+    "record_statuses": {
+      "present": 6090
+    },
+    "record_types": {
+      "ambiguous_focal": 145,
+      "ambiguous_target": 316,
+      "calendar_conflict": 1,
+      "consent": 12,
+      "current_request_hint": 820,
+      "dispatch_authority_check": 457,
+      "duration_ambiguous": 3,
+      "enterprise_policy_recall": 3,
+      "external_share_policy": 199,
+      "focal_marker_refs": 546,
+      "focal_resolution_trace": 546,
+      "guardrail_ladder_signal": 207,
+      "guest_mode": 1,
+      "memory_conflict": 5,
+      "ops_memory_recall": 4,
+      "payment_policy": 3,
+      "persistent_memory_recall": 33,
+      "persistent_memory_write": 9,
+      "privacy_guard": 1,
+      "resolved_target": 564,
+      "route_binding_order": 457,
+      "route_candidate_snapshot": 457,
+      "safety_mode": 5,
+      "security_alert": 6,
+      "session_share_policy": 820,
+      "share_boundary_update": 457,
+      "target_changed_after_turn": 9,
+      "temporary_override_allowed": 2,
+      "trusted_subscription": 1,
+      "verified_internal_target": 1
+    },
+    "snapshot_sha256": "513f08c1d3f0b7db0c83ce8841fb62e2e24b2d9f7d07d3d7932ce4aaad5b003a",
+    "source_counts": {
+      "dev_tasks.jsonl": 120,
+      "screening_tasks.jsonl": 700
+    },
+    "task_count": 820
+  },
+  "validation_errors": []
+}

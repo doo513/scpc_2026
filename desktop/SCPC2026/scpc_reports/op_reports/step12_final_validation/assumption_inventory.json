@@ -1,0 +1,166 @@
+[
+  {
+    "affected_modules": [
+      "core/blueprint.py",
+      "core/plan_requirements.py",
+      "rules/plan.py"
+    ],
+    "affected_types": [
+      "CapabilityType",
+      "CapabilitySource"
+    ],
+    "assumption_id": "ASSUMPTION-ACTIONS-001",
+    "current_resolution": "production은 emitted plan verb 전체를 제한 대상으로 취급한다. Step 6 shadow 계약은 platform action과 internal requirement를 별도 타입으로 유지한다.",
+    "statement": "available_actions가 platform action과 internal transform 중 어느 범위를 제한하는지",
+    "status": "UNRESOLVED_ASSUMPTION"
+  },
+  {
+    "affected_modules": [
+      "core/blueprint.py"
+    ],
+    "affected_types": [
+      "Operation",
+      "PlanStepType"
+    ],
+    "assumption_id": "ASSUMPTION-CANCEL-001",
+    "current_resolution": "확인된 blueprint가 없어 unsupported 상태로 유지한다.",
+    "statement": "cancel operation의 공식 terminal mapping",
+    "status": "UNRESOLVED_ASSUMPTION"
+  },
+  {
+    "affected_modules": [
+      "core/decision.py"
+    ],
+    "affected_types": [
+      "CandidateState",
+      "ExecutionDisposition"
+    ],
+    "assumption_id": "ASSUMPTION-BUNDLE-001",
+    "current_resolution": "미해결 복수 후보는 DecisionGate로 실행을 보류한다.",
+    "statement": "복수 operation의 공식 aggregate output 규칙",
+    "status": "UNRESOLVED_ASSUMPTION"
+  },
+  {
+    "affected_modules": [
+      "harness.py",
+      "run_submission.py",
+      "core/session_overlay.py"
+    ],
+    "affected_types": [
+      "CommittedSessionState",
+      "SpeculativeSessionOverlay",
+      "CommitAssessment"
+    ],
+    "assumption_id": "ASSUMPTION-SESSION-001",
+    "current_resolution": "production single-task 경로는 validation 전에 commit한다. Step 11 shadow 경로는 validation-before-commit과 atomic store 계약을 강제한다.",
+    "statement": "persistent session commit의 공식 의미와 범위",
+    "status": "UNRESOLVED_ASSUMPTION"
+  },
+  {
+    "affected_modules": [
+      "harness.py",
+      "core/session_overlay.py"
+    ],
+    "affected_types": [
+      "CommitAssessment",
+      "CommitEligibility"
+    ],
+    "assumption_id": "ASSUMPTION-PARTIAL-COMMIT-001",
+    "current_resolution": "공식 근거가 없어 shadow 경로도 부분 persistent commit을 수행하지 않는다.",
+    "statement": "부분 성공 시 commit 범위",
+    "status": "UNRESOLVED_ASSUMPTION"
+  },
+  {
+    "affected_modules": [
+      "core/decision.py"
+    ],
+    "affected_types": [
+      "Operation"
+    ],
+    "assumption_id": "ASSUMPTION-FALLBACK-001",
+    "current_resolution": "현재 사용자·official policy·official transformation 세 source만 허용한다.",
+    "statement": "fallback의 공식 허용 범위",
+    "status": "UNRESOLVED_ASSUMPTION"
+  },
+  {
+    "affected_modules": [
+      "core/decision.py"
+    ],
+    "affected_types": [
+      "TargetRole",
+      "TargetLocality"
+    ],
+    "assumption_id": "ASSUMPTION-TARGET-001",
+    "current_resolution": "내부 operation_target과 output target을 분리하지만 공식 mapping은 미확정이다.",
+    "statement": "공식 answer.target의 execution/response target 의미",
+    "status": "UNRESOLVED_ASSUMPTION"
+  },
+  {
+    "affected_modules": [
+      "core/blueprint.py",
+      "core/plan_requirements.py"
+    ],
+    "affected_types": [
+      "CapabilityType",
+      "CapabilitySource"
+    ],
+    "assumption_id": "ASSUMPTION-TRANSFORM-001",
+    "current_resolution": "production은 모두 available_actions 검사를 받는다. Step 6 shadow 계약은 output verb의 platform capability와 내부 preparation requirement를 분리한다.",
+    "statement": "redact·summarize·verify의 platform action/internal transform 구분",
+    "status": "UNRESOLVED_ASSUMPTION"
+  },
+  {
+    "affected_modules": [
+      "core/ontology.py",
+      "core/decision.py"
+    ],
+    "affected_types": [
+      "CandidateState",
+      "ExecutionDisposition"
+    ],
+    "assumption_id": "ASSUMPTION-DISPOSITION-001",
+    "current_resolution": "현재 policy는 unsupported, block, conflict, missing, confirmation, amend 순으로 상태를 해소한다.",
+    "statement": "정보 부족·conflict·hard block·capability 부재가 동시에 존재할 때의 우선순위",
+    "status": "UNRESOLVED_ASSUMPTION"
+  },
+  {
+    "affected_modules": [
+      "core/plan_requirements.py"
+    ],
+    "affected_types": [
+      "BasePlanBlueprint",
+      "FinalPlanRequirements"
+    ],
+    "assumption_id": "ASSUMPTION-PLAN-ORDER-001",
+    "current_resolution": "현재 shadow composer는 redact 후 summarize 순서를 사용하며 production projection에는 아직 연결하지 않는다.",
+    "statement": "redact와 summarize requirement가 동시에 활성화될 때의 canonical transform 순서",
+    "status": "UNRESOLVED_ASSUMPTION"
+  },
+  {
+    "affected_modules": [
+      "core/constraints.py"
+    ],
+    "affected_types": [
+      "GlobalConstraintFact",
+      "PairConstraintSpec",
+      "ConstraintEffect"
+    ],
+    "assumption_id": "ASSUMPTION-CONSTRAINT-EFFECT-001",
+    "current_resolution": "record label은 fact 후보만 만들며 exact RulePack과 target scope가 맞을 때만 supported interpretation effect를 활성화한다.",
+    "statement": "구조화된 constraint record type과 value가 만드는 정확한 effect mapping",
+    "status": "UNRESOLVED_ASSUMPTION"
+  },
+  {
+    "affected_modules": [
+      "core/decision_ir.py"
+    ],
+    "affected_types": [
+      "PlanProjection",
+      "SubDecisionIR"
+    ],
+    "assumption_id": "ASSUMPTION-DISPOSITION-PLAN-001",
+    "current_resolution": "Decision Lock 전에 명시적 PlanProjection을 요구하고 ask는 clarify, hold는 guard를 포함하는지 검증하되 compiler에서 생성하지 않는다.",
+    "statement": "ask·hold disposition의 공식 non-execution plan requirement와 target mapping",
+    "status": "UNRESOLVED_ASSUMPTION"
+  }
+]

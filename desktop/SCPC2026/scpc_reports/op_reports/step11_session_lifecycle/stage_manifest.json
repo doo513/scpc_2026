@@ -1,0 +1,19 @@
+{
+  "artifacts": {
+    "SESSION_LIFECYCLE_CONTRACT.md": "d9ab48ec87aae4a2a79adfb2731ddf0a5e7268bc8d3d123dbedbdc3bc27be8e9",
+    "STEP11_REPORT.md": "f703c92d1fe01875d30f9b9c0cb4d644c1e211c10ec75d443ee3454f2e15d0b9",
+    "consistency_report.md": "1b2475a6d6ce1fac05d77d5af440815cb7af75e656c6ead7f8a5ec041301e896",
+    "session_lifecycle_audit.json": "bbfc69c12458f783f2a76462674bec804787362afb4f5bd22d79727c4f0f71bd",
+    "shadow_diff_vs_previous.md": "c7257511717d47fa7bb6a559998e68d37b5ba7af2c7a91ba036aa971ac0671e5",
+    "step11_result.json": "27205a8f073267471cb8c652d6d95d2f322d95fce7ded7907920b03d137ac6d5",
+    "submission.csv": "bef9b996db7c883e26ea2c6bf595b4f4ea8597dd0f5b61913dc2d8ab87e241f0"
+  },
+  "generated_at": "2026-07-11T16:28:44.748080+00:00",
+  "official_data_sha256": {
+    "dev_answers.json": "2ec6723345c78ccb5613ed90b4b778ecf3b5da3db92e341e8b8bfaa7724bd1c3",
+    "dev_tasks.jsonl": "871fcb52708d66fa1eec39073a9803ef29204315c5ee3a013799cc364bc55e1d",
+    "screening_tasks.jsonl": "36248ede94b89fd0d89024ed14fd554ee75196d052dcac90dec579d8185ffd57"
+  },
+  "source_tree_sha256": "85cb14442574abe2b7be9d2c6c88225017a7195fc3ec9b1debb8aa862d72e21b",
+  "stage": "step11_session_lifecycle"
+}

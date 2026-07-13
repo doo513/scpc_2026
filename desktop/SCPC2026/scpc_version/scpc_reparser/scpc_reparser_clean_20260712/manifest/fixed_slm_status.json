@@ -1,0 +1,27 @@
+{
+  "schema": "scpc.fixed-slm-promotion.v1",
+  "decision": "KEEP_SHADOW",
+  "production_influence": false,
+  "official_interface": {
+    "class": "FixedSLMClient",
+    "method": "summarize_task(task) -> dict",
+    "model_id": "scpc-final-fixed-slm-local-facade",
+    "output_fields": [
+      "risk_flags",
+      "requires_redaction",
+      "requires_confirmation",
+      "audit_tags"
+    ]
+  },
+  "gate_results": {
+    "interface_and_schema_confirmed": true,
+    "parser_only_generalization_improvement": false,
+    "official_dev_regression_free": true,
+    "metamorphic_and_paraphrase_passed": false,
+    "hard_fact_authority_violations": 0,
+    "timeout_invalid_output_parser_only_recovery_verified": false
+  },
+  "reason": "The official facade is usable, but no held-out generalization improvement or byte-equivalent timeout/invalid-output recovery has been demonstrated. It remains shadow-only and is not merged into production evidence.",
+  "official_evidence": "SCPC2026_Final_baseline.ipynb cells 0 and 5",
+  "reconsideration_gate": "All PROMOTE criteria in implementation_master_plan.md Stage 3 must pass in one current-source run."
+}

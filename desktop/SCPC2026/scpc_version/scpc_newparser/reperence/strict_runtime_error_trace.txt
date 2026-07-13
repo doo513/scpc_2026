@@ -1,0 +1,38 @@
+$ PYTHONDONTWRITEBYTECODE=1 python run_submission.py --output strict_diagnostic_submission.csv
+Traceback (most recent call last):
+  File "/mnt/c/Users/doo33/Desktop/scpc_newparser/run_submission.py", line 165, in <module>
+    main()
+  File "/mnt/c/Users/doo33/Desktop/scpc_newparser/run_submission.py", line 161, in main
+    run_submission(args.output)
+  File "/mnt/c/Users/doo33/Desktop/scpc_newparser/run_submission.py", line 148, in run_submission
+    payload = run_tasks(tasks)
+              ^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/doo33/Desktop/scpc_newparser/run_submission.py", line 65, in run_tasks
+    raw_answer = harness.answer_task(
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/doo33/Desktop/scpc_newparser/harness.py", line 87, in answer_task
+    ConsistencyValidator.validate_strict(
+  File "/mnt/c/Users/doo33/Desktop/scpc_newparser/core/consistency.py", line 249, in validate_strict
+    raise ValueError("; ".join(task_errors))
+ValueError: exclusion 'numeric_value' has no focal-field provenance
+
+$ PYTHONDONTWRITEBYTECODE=1 pytest -q tests/test_safety_invariants.py::test_temporary_toggle_amend_uses_canonical_minimal_disclosure_plan -vv
+tests/test_safety_invariants.py::test_temporary_toggle_amend_uses_canonical_minimal_disclosure_plan FAILED [100%]
+
+=================================== FAILURES ===================================
+______ test_temporary_toggle_amend_uses_canonical_minimal_disclosure_plan ______
+
+tests/test_safety_invariants.py:53: in test_temporary_toggle_amend_uses_canonical_minimal_disclosure_plan
+    result = answer(
+tests/test_generalization.py:90: in answer
+    return FinalHarness().answer_task(task, {})
+harness.py:40: in answer_task
+    decision_matrix, final_decision = DecisionEngine.decide(state)
+core/decision.py:2869: in decide
+    final = FinalDecisionBuilder.build(state, matrix)
+core/decision.py:2344: in build
+    raise ValueError(
+E   ValueError: resolved plan diverges from final capability contract: expected=('read', 'verify', 'toggle') emitted=('read', 'redact', 'dispatch')
+=========================== short test summary info ============================
+FAILED tests/test_safety_invariants.py::test_temporary_toggle_amend_uses_canonical_minimal_disclosure_plan
+============================== 1 failed in 1.76s ===============================

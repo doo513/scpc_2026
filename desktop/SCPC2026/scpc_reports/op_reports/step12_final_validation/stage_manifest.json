@@ -1,0 +1,36 @@
+{
+  "artifacts": {
+    "ARCHITECTURE.md": "fad213b93161e7cb77d6418a8fb1aeb677267ad6f5149f66cc3fff0f7c2b8017",
+    "ARTIFACT_HASH_REPORT.json": "aa86f2c5553bb2d35bdeb374fe6682f6a1fb7fa702441bc97041b3c81833ec01",
+    "CONSTRAINT_EFFECT_ALGEBRA.md": "9cc3c3472fa1e05631de470470856f504b036f5a0a9e696b57da4e61a86713c0",
+    "CURRENT_STATE_REVALIDATION.md": "285cfa72f84074a233057b9c4c41d6c45103ae25692251b6dd42eab0c8e77efb",
+    "DECISION_IR_CONTRACT.md": "3bed067ebe91ac42cbcd03531164c29da92282a3cc54ffd5d9e9cea7d16c6a2b",
+    "EVALUATION_RELEASE.md": "68d0d5c7bd430dff6d3ac5805d144cb41a14b32e4525a0c66659aca600c16507",
+    "FINAL_REPORT.md": "0d31d20bbef174baaf841b344e819ba67197dac0f06c986f1616e4c93bba8c76",
+    "INVARIANT_TESTS.md": "a5b2b6fc8beeb6dd21fcbff22ce67511f08e3bcc431b6f9884c71660d661643f",
+    "ONTOLOGY_OWNERSHIP.md": "13c557471d20be44865821e18f25f5e8bddd80715bf46e031c5600c32562604b",
+    "PLAN_REQUIREMENTS_CONTRACT.md": "a0db3da50a0ffe1b02d3799a0cd29561e5ab397b37bb3932b9228373d8f32b8d",
+    "RULE_REGISTRY_SCHEMA.md": "740998517f8837225ba018cb0eec2570eb35b11a6eed2decd7048ea17f2d0885",
+    "SELF_REVIEW.md": "30640a4b7da9a59796a0f2534abb5006acd87646d45a14abc90da44ea2bc3b7c",
+    "STAGE_CHANGELOG.md": "7c5162c6c9b518d8f0fa6cac19479573bb7d112a9912ac88cfe688c056e79243",
+    "TRACE_DIFF.md": "4d507a2ee2944627f79d1dc1d9cb12585c1a178be2b08fa65c8ee8c4325e4a5a",
+    "TYPED_FACT_RECORD_CONTRACT.md": "f1b96fb52c3e8dd64e1cada2b8fe42f026ac3111c0b86cbe73ed621acea4b0ac",
+    "UNRESOLVED_ASSUMPTIONS.md": "967d0dd6dbb48686ba32edd31a5d5e3624da34fb7aa0d558c06c3cc0444b7e27",
+    "assumption_inventory.json": "774ae9c45ee998d557dad6b27b8c79311d52f98c9a89a70ce7bffa71d34d5560",
+    "candidate_manifest.json": "d6d83f8ef9945b228d67e3b9a6fcce5b2c0b3057bbb8bc7a8e96a1cdeda45ef3",
+    "consistency_report.md": "1b2475a6d6ce1fac05d77d5af440815cb7af75e656c6ead7f8a5ec041301e896",
+    "prior_candidate_manifest.json": "df1b7f018032148cdab4c33f54042b2cc16691dbdde70bdb25af9c90207929ba",
+    "reference_manifest.json": "8383fd504b05fb021663c8e935047970c213221274acaf122ff693cdee253f53",
+    "shadow_diff_vs_previous.md": "9ec380f594f610103a08ee97ff50ef792c2e319b93fae9e4f4d37d469eb1cf45",
+    "step12_result.json": "c23635c78144faca421962b6a1db935947ed3109a456afd355703e776d12a993",
+    "submission.csv": "bef9b996db7c883e26ea2c6bf595b4f4ea8597dd0f5b61913dc2d8ab87e241f0"
+  },
+  "generated_at": "2026-07-11T16:41:37.084118+00:00",
+  "official_data_sha256": {
+    "dev_answers.json": "2ec6723345c78ccb5613ed90b4b778ecf3b5da3db92e341e8b8bfaa7724bd1c3",
+    "dev_tasks.jsonl": "871fcb52708d66fa1eec39073a9803ef29204315c5ee3a013799cc364bc55e1d",
+    "screening_tasks.jsonl": "36248ede94b89fd0d89024ed14fd554ee75196d052dcac90dec579d8185ffd57"
+  },
+  "source_tree_sha256": "d75985cd38206600822190ed6adce6ca898dc8d77f2952558ad9b8d0b8b1c286",
+  "stage": "step12_final_validation"
+}

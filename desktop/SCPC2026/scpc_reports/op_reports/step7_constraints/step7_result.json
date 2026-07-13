@@ -1,0 +1,208 @@
+{
+  "baseline_command": "/home/doo33/.venv/bin/python step7_gate.py",
+  "boundary_audit": {
+    "catalog_implemented": true,
+    "production_active": false,
+    "production_imports": [],
+    "prohibited_tokens": []
+  },
+  "constraint_registry_sha256": "b2b881a3d5d18a09fad35d731e4c9fbee0a4a0c0fa84df43a1f4cdf3cdf7e9c9",
+  "contract_sha256": "cdb48859921be8206851d65cac170a3488186f447d317f85acb2e7093dd7991d",
+  "counterfactual_audit": {
+    "composed_status": "composed",
+    "conflicted_activation_preserved": true,
+    "conflicted_algebra_status": "conflicted",
+    "conflicted_fact_preserved": true,
+    "effect_idempotent": true,
+    "effect_permutation_equal": true,
+    "external_blocks": true,
+    "external_effects": [
+      "add_redaction",
+      "block_execution"
+    ],
+    "local_active_constraints": 0,
+    "record_permutation_equal": true
+  },
+  "dev": {
+    "axes": {
+      "content_scope": 0.7419,
+      "control": 0.9583,
+      "counterfactual": 0.0,
+      "focal": 1.0,
+      "plan": 0.6889,
+      "policy": 0.6845,
+      "semantic_response": 0.0,
+      "target": 0.9333
+    },
+    "control_confusion": {
+      "amend->amend": 25,
+      "amend->ask": 3,
+      "ask->ask": 24,
+      "ask->hold": 2,
+      "hold->hold": 20,
+      "proceed->proceed": 46
+    },
+    "exact_definition": "all required score axes equal 1.0",
+    "exact_match_count": 15,
+    "field_error_counts": {
+      "content_scope": 79,
+      "control": 5,
+      "plan": 49,
+      "policy": 99,
+      "target": 8
+    },
+    "mode_confusion": {
+      "none->none": 21,
+      "none->summary": 1,
+      "raw->raw": 4,
+      "redacted->none": 1,
+      "redacted->raw": 1,
+      "redacted->redacted": 19,
+      "redacted->status_only": 1,
+      "redacted->summary": 14,
+      "status_only->status_only": 38,
+      "status_only->summary": 2,
+      "summary->none": 2,
+      "summary->raw": 1,
+      "summary->redacted": 2,
+      "summary->summary": 13
+    },
+    "n": 120,
+    "non_exact_count": 105,
+    "overall": 0.8036
+  },
+  "dev_unchanged": true,
+  "generated_at": "2026-07-11T15:22:38.776070+00:00",
+  "official_fact_audit": {
+    "accuracy_claimed": false,
+    "errors": [],
+    "fact_types": {
+      "ambiguous_focal": 145,
+      "ambiguous_target": 316,
+      "calendar_conflict": 1,
+      "consent": 12,
+      "duration_ambiguous": 3,
+      "external_share_policy": 199,
+      "guardrail_ladder_signal": 207,
+      "memory_conflict": 5,
+      "payment_policy": 3,
+      "privacy_guard": 1,
+      "safety_mode": 5,
+      "security_alert": 6,
+      "session_share_policy": 820,
+      "temporary_override_allowed": 2
+    },
+    "polarities": {
+      "active": 1725
+    },
+    "structurally_processed": 820,
+    "task_count": 820
+  },
+  "output_dir": "/mnt/c/Users/doo33/Desktop/scpc_reports/step7_constraints",
+  "previous_stage": {
+    "checks": {
+      "manifest_present": true,
+      "manifest_submission_hash": true,
+      "release_gate": true,
+      "result_manifest_hash": true,
+      "stage_name": true,
+      "submission_hash": true,
+      "submission_present": true
+    },
+    "errors": [],
+    "resolved_directory": "/mnt/c/Users/doo33/Desktop/scpc_reports/step6_blueprints"
+  },
+  "release_gate": {
+    "checks": {
+      "boundary_isolation": true,
+      "catalog_implemented": true,
+      "conflict_preserved": true,
+      "constraint_registries_valid": true,
+      "dev_unchanged": true,
+      "effect_idempotence": true,
+      "effect_permutation": true,
+      "hard_block_monotonic": true,
+      "official_shapes_processed": true,
+      "only_known_full_test_failure": true,
+      "pair_specific_counterfactual": true,
+      "record_permutation": true,
+      "screening_submission_unchanged": true,
+      "shadow_only": true,
+      "source_stable_during_gate": true,
+      "stage_specific_tests": true,
+      "step6_artifact_integrity": true,
+      "without_known_dev_gate": true
+    },
+    "next_stage_allowed": true,
+    "reasons": [
+      "Global fact와 pair activation 경계가 전수 구조 검사와 반례를 통과했다.",
+      "effect permutation, idempotence, conflict 보존 검증이 통과했다.",
+      "constraint가 control을 직접 소유하지 않고 production에서 비활성임을 확인했다.",
+      "Step 6 대비 public dev 수치와 screening submission이 변하지 않았다."
+    ],
+    "status": "PASS_WITH_BASELINE_DEBT"
+  },
+  "report_root": "/mnt/c/Users/doo33/Desktop/scpc_reports",
+  "report_root_source": "user_desktop",
+  "screening_submission_sha256": "bef9b996db7c883e26ea2c6bf595b4f4ea8597dd0f5b61913dc2d8ab87e241f0",
+  "screening_submission_unchanged": true,
+  "source_tree_sha256": "c631d9f8d35f97534b633bd3628e10461f03d1c6f55a38370da25863413552d7",
+  "stage": "step7_constraints",
+  "stage_manifest_path": "/mnt/c/Users/doo33/Desktop/scpc_reports/step7_constraints/stage_manifest.json",
+  "tests": {
+    "full": {
+      "command": [
+        "/home/doo33/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "exit_code": 1,
+      "failed_tests": [
+        "tests/test_regression.py::test_dev_score_and_optional_fields"
+      ],
+      "log": "/mnt/c/Users/doo33/Desktop/scpc_reports/step7_constraints/pytest_full.log",
+      "summary": [
+        "1 failed",
+        "135 passed"
+      ]
+    },
+    "stage_specific": {
+      "command": [
+        "/home/doo33/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_constraints.py",
+        "tests/test_plan_requirements.py",
+        "tests/test_rulepacks.py",
+        "tests/test_ontology.py",
+        "tests/test_architecture.py"
+      ],
+      "exit_code": 0,
+      "failed_tests": [],
+      "log": "/mnt/c/Users/doo33/Desktop/scpc_reports/step7_constraints/pytest_stage.log",
+      "summary": [
+        "66 passed"
+      ]
+    },
+    "without_known_dev_gate": {
+      "command": [
+        "/home/doo33/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-k",
+        "not test_dev_score_and_optional_fields"
+      ],
+      "exit_code": 0,
+      "failed_tests": [],
+      "log": "/mnt/c/Users/doo33/Desktop/scpc_reports/step7_constraints/pytest_without_known_dev_gate.log",
+      "summary": [
+        "135 passed",
+        "1 deselected"
+      ]
+    }
+  },
+  "validation_errors": []
+}

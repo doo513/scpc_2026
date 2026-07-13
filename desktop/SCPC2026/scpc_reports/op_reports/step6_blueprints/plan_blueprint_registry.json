@@ -1,0 +1,974 @@
+{
+  "blueprints": [
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001",
+        "ASSUMPTION-TRANSFORM-001"
+      ],
+      "base_information_slots": [
+        "destination"
+      ],
+      "base_steps": [
+        {
+          "identity": "locate_content",
+          "internal_transform": "locate_content",
+          "output_verb": null,
+          "platform_capability": null,
+          "requirement_class": "internal_preparation",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-001:locate"
+        },
+        {
+          "identity": "read",
+          "internal_transform": null,
+          "output_verb": "read",
+          "platform_capability": "read",
+          "requirement_class": "platform_action",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-001:read"
+        },
+        {
+          "identity": "dispatch",
+          "internal_transform": null,
+          "output_verb": "dispatch",
+          "platform_capability": "dispatch",
+          "requirement_class": "platform_action",
+          "semantic_terminal": true,
+          "step_id": "BLUEPRINT-001:terminal"
+        }
+      ],
+      "blueprint_id": "BLUEPRINT-001",
+      "conditional_information_slots": [],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "dependency_semantics": [
+        {
+          "after": "BLUEPRINT-001:read",
+          "before": "BLUEPRINT-001:locate",
+          "kind": "requires_completion"
+        },
+        {
+          "after": "BLUEPRINT-001:terminal",
+          "before": "BLUEPRINT-001:read",
+          "kind": "requires_completion"
+        }
+      ],
+      "internal_transform_requirements": [
+        "locate_content"
+      ],
+      "permitted_disclosure_modes": [
+        "raw",
+        "summary",
+        "redacted"
+      ],
+      "platform_required_capabilities": [
+        "read",
+        "dispatch"
+      ],
+      "required_target_roles": [
+        "dispatch_destination"
+      ],
+      "rulepack_key": {
+        "domain": "content",
+        "operation": "share",
+        "variant": null
+      },
+      "semantic_terminal": "dispatch",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001",
+        "ASSUMPTION-TARGET-001",
+        "ASSUMPTION-TRANSFORM-001"
+      ],
+      "base_information_slots": [
+        "local_resource"
+      ],
+      "base_steps": [
+        {
+          "identity": "read",
+          "internal_transform": null,
+          "output_verb": "read",
+          "platform_capability": "read",
+          "requirement_class": "platform_action",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-002:read"
+        },
+        {
+          "identity": "verify",
+          "internal_transform": null,
+          "output_verb": "verify",
+          "platform_capability": "verify",
+          "requirement_class": "platform_action",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-002:verify"
+        },
+        {
+          "identity": "update",
+          "internal_transform": null,
+          "output_verb": "update",
+          "platform_capability": "update",
+          "requirement_class": "platform_action",
+          "semantic_terminal": true,
+          "step_id": "BLUEPRINT-002:terminal"
+        }
+      ],
+      "blueprint_id": "BLUEPRINT-002",
+      "conditional_information_slots": [],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "dependency_semantics": [
+        {
+          "after": "BLUEPRINT-002:verify",
+          "before": "BLUEPRINT-002:read",
+          "kind": "requires_completion"
+        },
+        {
+          "after": "BLUEPRINT-002:terminal",
+          "before": "BLUEPRINT-002:verify",
+          "kind": "requires_completion"
+        }
+      ],
+      "internal_transform_requirements": [],
+      "permitted_disclosure_modes": [
+        "status_only"
+      ],
+      "platform_required_capabilities": [
+        "read",
+        "verify",
+        "update"
+      ],
+      "required_target_roles": [
+        "local_resource"
+      ],
+      "rulepack_key": {
+        "domain": "memory",
+        "operation": "local_update",
+        "variant": "local_state"
+      },
+      "semantic_terminal": "update",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001",
+        "ASSUMPTION-TARGET-001",
+        "ASSUMPTION-TRANSFORM-001"
+      ],
+      "base_information_slots": [
+        "local_resource",
+        "memory_value"
+      ],
+      "base_steps": [
+        {
+          "identity": "read",
+          "internal_transform": null,
+          "output_verb": "read",
+          "platform_capability": "read",
+          "requirement_class": "platform_action",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-003:read"
+        },
+        {
+          "identity": "verify",
+          "internal_transform": null,
+          "output_verb": "verify",
+          "platform_capability": "verify",
+          "requirement_class": "platform_action",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-003:verify"
+        },
+        {
+          "identity": "update",
+          "internal_transform": null,
+          "output_verb": "update",
+          "platform_capability": "update",
+          "requirement_class": "platform_action",
+          "semantic_terminal": true,
+          "step_id": "BLUEPRINT-003:terminal"
+        }
+      ],
+      "blueprint_id": "BLUEPRINT-003",
+      "conditional_information_slots": [],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "dependency_semantics": [
+        {
+          "after": "BLUEPRINT-003:verify",
+          "before": "BLUEPRINT-003:read",
+          "kind": "requires_completion"
+        },
+        {
+          "after": "BLUEPRINT-003:terminal",
+          "before": "BLUEPRINT-003:verify",
+          "kind": "requires_completion"
+        }
+      ],
+      "internal_transform_requirements": [],
+      "permitted_disclosure_modes": [
+        "status_only"
+      ],
+      "platform_required_capabilities": [
+        "read",
+        "verify",
+        "update"
+      ],
+      "required_target_roles": [
+        "memory_owner"
+      ],
+      "rulepack_key": {
+        "domain": "memory",
+        "operation": "local_update",
+        "variant": "persistent_memory"
+      },
+      "semantic_terminal": "update",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001",
+        "ASSUMPTION-TARGET-001",
+        "ASSUMPTION-TRANSFORM-001"
+      ],
+      "base_information_slots": [
+        "local_resource",
+        "memory_value"
+      ],
+      "base_steps": [
+        {
+          "identity": "read",
+          "internal_transform": null,
+          "output_verb": "read",
+          "platform_capability": "read",
+          "requirement_class": "platform_action",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-004:read"
+        },
+        {
+          "identity": "verify",
+          "internal_transform": null,
+          "output_verb": "verify",
+          "platform_capability": "verify",
+          "requirement_class": "platform_action",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-004:verify"
+        },
+        {
+          "identity": "update",
+          "internal_transform": null,
+          "output_verb": "update",
+          "platform_capability": "update",
+          "requirement_class": "platform_action",
+          "semantic_terminal": true,
+          "step_id": "BLUEPRINT-004:terminal"
+        }
+      ],
+      "blueprint_id": "BLUEPRINT-004",
+      "conditional_information_slots": [],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "dependency_semantics": [
+        {
+          "after": "BLUEPRINT-004:verify",
+          "before": "BLUEPRINT-004:read",
+          "kind": "requires_completion"
+        },
+        {
+          "after": "BLUEPRINT-004:terminal",
+          "before": "BLUEPRINT-004:verify",
+          "kind": "requires_completion"
+        }
+      ],
+      "internal_transform_requirements": [],
+      "permitted_disclosure_modes": [
+        "status_only"
+      ],
+      "platform_required_capabilities": [
+        "read",
+        "verify",
+        "update"
+      ],
+      "required_target_roles": [
+        "memory_owner"
+      ],
+      "rulepack_key": {
+        "domain": "memory",
+        "operation": "store",
+        "variant": "persistent_memory"
+      },
+      "semantic_terminal": "update",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001",
+        "ASSUMPTION-TRANSFORM-001"
+      ],
+      "base_information_slots": [
+        "merchant",
+        "amount",
+        "method"
+      ],
+      "base_steps": [
+        {
+          "identity": "read",
+          "internal_transform": null,
+          "output_verb": "read",
+          "platform_capability": "read",
+          "requirement_class": "platform_action",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-005:read"
+        },
+        {
+          "identity": "verify",
+          "internal_transform": null,
+          "output_verb": "verify",
+          "platform_capability": "verify",
+          "requirement_class": "platform_action",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-005:verify"
+        },
+        {
+          "identity": "pay",
+          "internal_transform": null,
+          "output_verb": "pay",
+          "platform_capability": "pay",
+          "requirement_class": "platform_action",
+          "semantic_terminal": true,
+          "step_id": "BLUEPRINT-005:terminal"
+        }
+      ],
+      "blueprint_id": "BLUEPRINT-005",
+      "conditional_information_slots": [],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "dependency_semantics": [
+        {
+          "after": "BLUEPRINT-005:verify",
+          "before": "BLUEPRINT-005:read",
+          "kind": "requires_completion"
+        },
+        {
+          "after": "BLUEPRINT-005:terminal",
+          "before": "BLUEPRINT-005:verify",
+          "kind": "requires_completion"
+        }
+      ],
+      "internal_transform_requirements": [],
+      "permitted_disclosure_modes": [
+        "status_only"
+      ],
+      "platform_required_capabilities": [
+        "read",
+        "verify",
+        "pay"
+      ],
+      "required_target_roles": [
+        "merchant"
+      ],
+      "rulepack_key": {
+        "domain": "payment",
+        "operation": "execute",
+        "variant": null
+      },
+      "semantic_terminal": "pay",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001",
+        "ASSUMPTION-TRANSFORM-001"
+      ],
+      "base_information_slots": [
+        "operation_reference"
+      ],
+      "base_steps": [
+        {
+          "identity": "read",
+          "internal_transform": null,
+          "output_verb": "read",
+          "platform_capability": "read",
+          "requirement_class": "platform_action",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-006:read"
+        },
+        {
+          "identity": "verify",
+          "internal_transform": null,
+          "output_verb": "verify",
+          "platform_capability": "verify",
+          "requirement_class": "platform_action",
+          "semantic_terminal": true,
+          "step_id": "BLUEPRINT-006:terminal"
+        }
+      ],
+      "blueprint_id": "BLUEPRINT-006",
+      "conditional_information_slots": [],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "dependency_semantics": [
+        {
+          "after": "BLUEPRINT-006:terminal",
+          "before": "BLUEPRINT-006:read",
+          "kind": "requires_completion"
+        }
+      ],
+      "internal_transform_requirements": [],
+      "permitted_disclosure_modes": [
+        "none"
+      ],
+      "platform_required_capabilities": [
+        "read",
+        "verify"
+      ],
+      "required_target_roles": [
+        "merchant"
+      ],
+      "rulepack_key": {
+        "domain": "payment",
+        "operation": "verify",
+        "variant": null
+      },
+      "semantic_terminal": "verify",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001",
+        "ASSUMPTION-TRANSFORM-001"
+      ],
+      "base_information_slots": [
+        "device_target",
+        "desired_state"
+      ],
+      "base_steps": [
+        {
+          "identity": "read",
+          "internal_transform": null,
+          "output_verb": "read",
+          "platform_capability": "read",
+          "requirement_class": "platform_action",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-007:read"
+        },
+        {
+          "identity": "verify",
+          "internal_transform": null,
+          "output_verb": "verify",
+          "platform_capability": "verify",
+          "requirement_class": "platform_action",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-007:verify"
+        },
+        {
+          "identity": "toggle",
+          "internal_transform": null,
+          "output_verb": "toggle",
+          "platform_capability": "toggle",
+          "requirement_class": "platform_action",
+          "semantic_terminal": true,
+          "step_id": "BLUEPRINT-007:terminal"
+        }
+      ],
+      "blueprint_id": "BLUEPRINT-007",
+      "conditional_information_slots": [
+        "duration"
+      ],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "dependency_semantics": [
+        {
+          "after": "BLUEPRINT-007:verify",
+          "before": "BLUEPRINT-007:read",
+          "kind": "requires_completion"
+        },
+        {
+          "after": "BLUEPRINT-007:terminal",
+          "before": "BLUEPRINT-007:verify",
+          "kind": "requires_completion"
+        }
+      ],
+      "internal_transform_requirements": [],
+      "permitted_disclosure_modes": [
+        "status_only"
+      ],
+      "platform_required_capabilities": [
+        "read",
+        "verify",
+        "toggle"
+      ],
+      "required_target_roles": [
+        "device_target"
+      ],
+      "rulepack_key": {
+        "domain": "device_control",
+        "operation": "modify",
+        "variant": null
+      },
+      "semantic_terminal": "toggle",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001",
+        "ASSUMPTION-TRANSFORM-001"
+      ],
+      "base_information_slots": [
+        "device_target",
+        "desired_state"
+      ],
+      "base_steps": [
+        {
+          "identity": "read",
+          "internal_transform": null,
+          "output_verb": "read",
+          "platform_capability": "read",
+          "requirement_class": "platform_action",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-008:read"
+        },
+        {
+          "identity": "verify",
+          "internal_transform": null,
+          "output_verb": "verify",
+          "platform_capability": "verify",
+          "requirement_class": "platform_action",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-008:verify"
+        },
+        {
+          "identity": "toggle",
+          "internal_transform": null,
+          "output_verb": "toggle",
+          "platform_capability": "toggle",
+          "requirement_class": "platform_action",
+          "semantic_terminal": true,
+          "step_id": "BLUEPRINT-008:terminal"
+        }
+      ],
+      "blueprint_id": "BLUEPRINT-008",
+      "conditional_information_slots": [
+        "duration"
+      ],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "dependency_semantics": [
+        {
+          "after": "BLUEPRINT-008:verify",
+          "before": "BLUEPRINT-008:read",
+          "kind": "requires_completion"
+        },
+        {
+          "after": "BLUEPRINT-008:terminal",
+          "before": "BLUEPRINT-008:verify",
+          "kind": "requires_completion"
+        }
+      ],
+      "internal_transform_requirements": [],
+      "permitted_disclosure_modes": [
+        "status_only"
+      ],
+      "platform_required_capabilities": [
+        "read",
+        "verify",
+        "toggle"
+      ],
+      "required_target_roles": [
+        "device_target"
+      ],
+      "rulepack_key": {
+        "domain": "device_control",
+        "operation": "execute",
+        "variant": "legacy_execute"
+      },
+      "semantic_terminal": "toggle",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001",
+        "ASSUMPTION-TRANSFORM-001"
+      ],
+      "base_information_slots": [
+        "operation_reference"
+      ],
+      "base_steps": [
+        {
+          "identity": "read",
+          "internal_transform": null,
+          "output_verb": "read",
+          "platform_capability": "read",
+          "requirement_class": "platform_action",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-009:read"
+        },
+        {
+          "identity": "verify",
+          "internal_transform": null,
+          "output_verb": "verify",
+          "platform_capability": "verify",
+          "requirement_class": "platform_action",
+          "semantic_terminal": true,
+          "step_id": "BLUEPRINT-009:terminal"
+        }
+      ],
+      "blueprint_id": "BLUEPRINT-009",
+      "conditional_information_slots": [],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "dependency_semantics": [
+        {
+          "after": "BLUEPRINT-009:terminal",
+          "before": "BLUEPRINT-009:read",
+          "kind": "requires_completion"
+        }
+      ],
+      "internal_transform_requirements": [],
+      "permitted_disclosure_modes": [
+        "none"
+      ],
+      "platform_required_capabilities": [
+        "read",
+        "verify"
+      ],
+      "required_target_roles": [
+        "device_target"
+      ],
+      "rulepack_key": {
+        "domain": "device_control",
+        "operation": "verify",
+        "variant": null
+      },
+      "semantic_terminal": "verify",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001",
+        "ASSUMPTION-TRANSFORM-001"
+      ],
+      "base_information_slots": [
+        "event",
+        "time"
+      ],
+      "base_steps": [
+        {
+          "identity": "read",
+          "internal_transform": null,
+          "output_verb": "read",
+          "platform_capability": "read",
+          "requirement_class": "platform_action",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-010:read"
+        },
+        {
+          "identity": "verify",
+          "internal_transform": null,
+          "output_verb": "verify",
+          "platform_capability": "verify",
+          "requirement_class": "platform_action",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-010:verify"
+        },
+        {
+          "identity": "schedule",
+          "internal_transform": null,
+          "output_verb": "schedule",
+          "platform_capability": "schedule",
+          "requirement_class": "platform_action",
+          "semantic_terminal": true,
+          "step_id": "BLUEPRINT-010:terminal"
+        }
+      ],
+      "blueprint_id": "BLUEPRINT-010",
+      "conditional_information_slots": [],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "dependency_semantics": [
+        {
+          "after": "BLUEPRINT-010:verify",
+          "before": "BLUEPRINT-010:read",
+          "kind": "requires_completion"
+        },
+        {
+          "after": "BLUEPRINT-010:terminal",
+          "before": "BLUEPRINT-010:verify",
+          "kind": "requires_completion"
+        }
+      ],
+      "internal_transform_requirements": [],
+      "permitted_disclosure_modes": [
+        "status_only"
+      ],
+      "platform_required_capabilities": [
+        "read",
+        "verify",
+        "schedule"
+      ],
+      "required_target_roles": [
+        "calendar_target"
+      ],
+      "rulepack_key": {
+        "domain": "calendar",
+        "operation": "create",
+        "variant": null
+      },
+      "semantic_terminal": "schedule",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001",
+        "ASSUMPTION-TRANSFORM-001"
+      ],
+      "base_information_slots": [
+        "event",
+        "time"
+      ],
+      "base_steps": [
+        {
+          "identity": "read",
+          "internal_transform": null,
+          "output_verb": "read",
+          "platform_capability": "read",
+          "requirement_class": "platform_action",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-011:read"
+        },
+        {
+          "identity": "verify",
+          "internal_transform": null,
+          "output_verb": "verify",
+          "platform_capability": "verify",
+          "requirement_class": "platform_action",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-011:verify"
+        },
+        {
+          "identity": "schedule",
+          "internal_transform": null,
+          "output_verb": "schedule",
+          "platform_capability": "schedule",
+          "requirement_class": "platform_action",
+          "semantic_terminal": true,
+          "step_id": "BLUEPRINT-011:terminal"
+        }
+      ],
+      "blueprint_id": "BLUEPRINT-011",
+      "conditional_information_slots": [],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "dependency_semantics": [
+        {
+          "after": "BLUEPRINT-011:verify",
+          "before": "BLUEPRINT-011:read",
+          "kind": "requires_completion"
+        },
+        {
+          "after": "BLUEPRINT-011:terminal",
+          "before": "BLUEPRINT-011:verify",
+          "kind": "requires_completion"
+        }
+      ],
+      "internal_transform_requirements": [],
+      "permitted_disclosure_modes": [
+        "status_only"
+      ],
+      "platform_required_capabilities": [
+        "read",
+        "verify",
+        "schedule"
+      ],
+      "required_target_roles": [
+        "calendar_target"
+      ],
+      "rulepack_key": {
+        "domain": "calendar",
+        "operation": "modify",
+        "variant": null
+      },
+      "semantic_terminal": "schedule",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001",
+        "ASSUMPTION-TRANSFORM-001"
+      ],
+      "base_information_slots": [
+        "event",
+        "time"
+      ],
+      "base_steps": [
+        {
+          "identity": "read",
+          "internal_transform": null,
+          "output_verb": "read",
+          "platform_capability": "read",
+          "requirement_class": "platform_action",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-012:read"
+        },
+        {
+          "identity": "verify",
+          "internal_transform": null,
+          "output_verb": "verify",
+          "platform_capability": "verify",
+          "requirement_class": "platform_action",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-012:verify"
+        },
+        {
+          "identity": "schedule",
+          "internal_transform": null,
+          "output_verb": "schedule",
+          "platform_capability": "schedule",
+          "requirement_class": "platform_action",
+          "semantic_terminal": true,
+          "step_id": "BLUEPRINT-012:terminal"
+        }
+      ],
+      "blueprint_id": "BLUEPRINT-012",
+      "conditional_information_slots": [],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "dependency_semantics": [
+        {
+          "after": "BLUEPRINT-012:verify",
+          "before": "BLUEPRINT-012:read",
+          "kind": "requires_completion"
+        },
+        {
+          "after": "BLUEPRINT-012:terminal",
+          "before": "BLUEPRINT-012:verify",
+          "kind": "requires_completion"
+        }
+      ],
+      "internal_transform_requirements": [],
+      "permitted_disclosure_modes": [
+        "status_only"
+      ],
+      "platform_required_capabilities": [
+        "read",
+        "verify",
+        "schedule"
+      ],
+      "required_target_roles": [
+        "calendar_target"
+      ],
+      "rulepack_key": {
+        "domain": "calendar",
+        "operation": "execute",
+        "variant": "legacy_execute"
+      },
+      "semantic_terminal": "schedule",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001",
+        "ASSUMPTION-TRANSFORM-001"
+      ],
+      "base_information_slots": [
+        "operation_reference"
+      ],
+      "base_steps": [
+        {
+          "identity": "read",
+          "internal_transform": null,
+          "output_verb": "read",
+          "platform_capability": "read",
+          "requirement_class": "platform_action",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-013:read"
+        },
+        {
+          "identity": "verify",
+          "internal_transform": null,
+          "output_verb": "verify",
+          "platform_capability": "verify",
+          "requirement_class": "platform_action",
+          "semantic_terminal": true,
+          "step_id": "BLUEPRINT-013:terminal"
+        }
+      ],
+      "blueprint_id": "BLUEPRINT-013",
+      "conditional_information_slots": [],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "dependency_semantics": [
+        {
+          "after": "BLUEPRINT-013:terminal",
+          "before": "BLUEPRINT-013:read",
+          "kind": "requires_completion"
+        }
+      ],
+      "internal_transform_requirements": [],
+      "permitted_disclosure_modes": [
+        "none"
+      ],
+      "platform_required_capabilities": [
+        "read",
+        "verify"
+      ],
+      "required_target_roles": [
+        "calendar_target"
+      ],
+      "rulepack_key": {
+        "domain": "calendar",
+        "operation": "verify",
+        "variant": null
+      },
+      "semantic_terminal": "verify",
+      "version": "1.0.0"
+    },
+    {
+      "assumption_refs": [
+        "ASSUMPTION-ACTIONS-001",
+        "ASSUMPTION-TARGET-001",
+        "ASSUMPTION-TRANSFORM-001"
+      ],
+      "base_information_slots": [
+        "clarification_target"
+      ],
+      "base_steps": [
+        {
+          "identity": "read",
+          "internal_transform": null,
+          "output_verb": "read",
+          "platform_capability": "read",
+          "requirement_class": "platform_action",
+          "semantic_terminal": false,
+          "step_id": "BLUEPRINT-014:read"
+        },
+        {
+          "identity": "clarify",
+          "internal_transform": null,
+          "output_verb": "clarify",
+          "platform_capability": "clarify",
+          "requirement_class": "platform_action",
+          "semantic_terminal": true,
+          "step_id": "BLUEPRINT-014:terminal"
+        }
+      ],
+      "blueprint_id": "BLUEPRINT-014",
+      "conditional_information_slots": [],
+      "contract_status": "SUPPORTED_INTERPRETATION",
+      "dependency_semantics": [
+        {
+          "after": "BLUEPRINT-014:terminal",
+          "before": "BLUEPRINT-014:read",
+          "kind": "requires_completion"
+        }
+      ],
+      "internal_transform_requirements": [],
+      "permitted_disclosure_modes": [
+        "none"
+      ],
+      "platform_required_capabilities": [
+        "read",
+        "clarify"
+      ],
+      "required_target_roles": [
+        "clarification_target",
+        "confirmation_authority"
+      ],
+      "rulepack_key": {
+        "domain": "general",
+        "operation": "clarify",
+        "variant": null
+      },
+      "semantic_terminal": "clarify",
+      "version": "1.0.0"
+    }
+  ],
+  "production_active": false
+}

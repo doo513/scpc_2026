@@ -1,0 +1,48 @@
+{
+  "boundaries": {
+    "catalog_implemented": true,
+    "production_active": false,
+    "production_imports": [],
+    "prohibited_tokens": []
+  },
+  "counterfactuals": {
+    "composed_status": "composed",
+    "conflicted_activation_preserved": true,
+    "conflicted_algebra_status": "conflicted",
+    "conflicted_fact_preserved": true,
+    "effect_idempotent": true,
+    "effect_permutation_equal": true,
+    "external_blocks": true,
+    "external_effects": [
+      "add_redaction",
+      "block_execution"
+    ],
+    "local_active_constraints": 0,
+    "record_permutation_equal": true
+  },
+  "official_facts": {
+    "accuracy_claimed": false,
+    "errors": [],
+    "fact_types": {
+      "ambiguous_focal": 145,
+      "ambiguous_target": 316,
+      "calendar_conflict": 1,
+      "consent": 12,
+      "duration_ambiguous": 3,
+      "external_share_policy": 199,
+      "guardrail_ladder_signal": 207,
+      "memory_conflict": 5,
+      "payment_policy": 3,
+      "privacy_guard": 1,
+      "safety_mode": 5,
+      "security_alert": 6,
+      "session_share_policy": 820,
+      "temporary_override_allowed": 2
+    },
+    "polarities": {
+      "active": 1725
+    },
+    "structurally_processed": 820,
+    "task_count": 820
+  }
+}

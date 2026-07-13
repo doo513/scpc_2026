@@ -1,0 +1,117 @@
+{
+  "spec_version": "2.1.0",
+  "baseline_manifest": "manifest/reference_manifest.json",
+  "baseline_source_tree_sha256": "dcc1407ca242cbc9ad78cbceab2c87a1c2ee6d9c6d87b3d1665e57f99b247bbf",
+  "legacy_reference": {
+    "dev_overall": 0.9468,
+    "dev_focal": 1.0,
+    "dev_target": 1.0,
+    "dev_control": 1.0
+  },
+  "dev_hard_gate": {
+    "release_blocking": false,
+    "reference": "official dev_answers.json",
+    "minimum_overall": 0.9421,
+    "minimum_axes": {
+      "focal": 1.0,
+      "target": 0.975,
+      "control": 0.9917,
+      "content_scope": 0.975,
+      "policy": 0.9643,
+      "plan": 0.975
+    },
+    "required_axes": [
+      "focal",
+      "target",
+      "control",
+      "content_scope",
+      "policy",
+      "plan"
+    ],
+    "maximum_non_exact_tasks": 10,
+    "score_exclusions_allowed": false,
+    "new_regressions_allowed": false
+  },
+  "hard_gates": [
+    "official_schema_valid_and_identical",
+    "consistency_valid",
+    "available_actions_respected",
+    "array_order_invariant",
+    "action_target_pair_constraints",
+    "session_lifecycle",
+    "evidence_ablation",
+    "artifact_content_hash_current"
+  ],
+  "diagnostic_gates": [
+    "dev_hard_gate"
+  ],
+  "cases": [
+    {
+      "id": "connector_suffix_not_boundary",
+      "mutation": "replace independent 하지만 with 듯하지만",
+      "expected_changed_axes": [],
+      "expected_unchanged_axes": ["intent_evidence"],
+      "expected_reason_codes": []
+    },
+    {
+      "id": "dispatch_to_local_override",
+      "mutation": "append explicit local-only correction",
+      "expected_changed_axes": ["target", "control", "content_scope", "plan"],
+      "expected_unchanged_axes": ["focal"],
+      "expected_reason_codes": ["decisive_dispatch_cancel"]
+    },
+    {
+      "id": "pay_capability_ablation",
+      "mutation": "remove pay from available_actions",
+      "expected_changed_axes": ["control", "plan"],
+      "expected_unchanged_axes": ["focal", "target", "information_status"],
+      "expected_reason_codes": ["CAPABILITY_UNAVAILABLE"]
+    },
+    {
+      "id": "pay_required_slot_missing",
+      "mutation": "remove amount from selected payment_request",
+      "expected_changed_axes": ["control", "plan", "information_status"],
+      "expected_unchanged_axes": ["focal", "target", "capability_status"],
+      "expected_reason_codes": ["REQUIRED_INFORMATION_MISSING"]
+    },
+    {
+      "id": "target_scoped_consent",
+      "mutation": "compare external dispatch and explicit local update under revoked consent",
+      "expected_changed_axes": ["selected_candidate", "control"],
+      "expected_unchanged_axes": ["focal"],
+      "expected_reason_codes": ["consent_revoked"]
+    },
+    {
+      "id": "domain_cancel_without_capability",
+      "mutation": "replace payment execution with payment cancellation",
+      "expected_changed_axes": ["operation_mode", "capability_status", "control", "plan"],
+      "expected_unchanged_axes": ["focal", "domain_context"],
+      "expected_reason_codes": ["CAPABILITY_UNAVAILABLE"],
+      "prohibited_behavior": "fall back to generic dispatch or local update"
+    },
+    {
+      "id": "domain_verify_only",
+      "mutation": "replace device execution with verification of the domain state",
+      "expected_changed_axes": ["operation_mode", "content_scope", "plan"],
+      "expected_unchanged_axes": ["focal", "domain_context"],
+      "expected_reason_codes": ["VERIFY_ONLY_REQUEST"]
+    },
+    {
+      "id": "missing_persistent_memory_value",
+      "mutation": "retain a persistent_memory_recall fact while removing the referenced MemoryStore entry",
+      "expected_changed_axes": ["information_status", "control"],
+      "expected_unchanged_axes": ["focal", "intent_evidence", "record_facts", "capability_status"],
+      "expected_reason_codes": ["REQUIRED_MEMORY_UNAVAILABLE"],
+      "expected_missing_slot": "memory_value",
+      "prohibited_behavior": "select a target from person names, memory keys, or memorized task templates",
+      "scoring_treatment": "included in the official full-dev score"
+    }
+  ],
+  "regression_policy": {
+    "official_reference_is_primary": true,
+    "score_exclusions_allowed": false,
+    "new_required_axis_regressions_allowed": false,
+    "screening_structure_is_not_accuracy": true,
+    "screening_distributions_are_not_inference_priors": true
+  }
+}

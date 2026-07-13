@@ -1,0 +1,357 @@
+{
+  "boundaries": {
+    "candidate_evaluator_prerequisite_calls": [],
+    "default_fallback_registry_empty": true,
+    "production_active": false,
+    "production_imports": []
+  },
+  "candidate_counterfactual": {
+    "blocked_state": "blocked",
+    "local_candidate_id": "candidate:18554c3b0bd950eabb30",
+    "local_state": "executable",
+    "rank_bypass_prevented": true,
+    "same_semantic_candidate_count": 2,
+    "same_semantic_distinct_ids": true,
+    "same_semantic_lineage_count": 2,
+    "same_semantic_selection_status": "selected",
+    "selected_candidate_id": "candidate:18554c3b0bd950eabb30"
+  },
+  "fallback": {
+    "applied_status": "applied",
+    "cycle_rejected": true,
+    "destination_rulepack_id": "RULEPACK-001",
+    "expected_destination_id": "candidate:06247b63a89454956a07",
+    "selected_destination_id": "candidate:06247b63a89454956a07",
+    "self_loop_rejected": true,
+    "source_rulepack_id": "RULEPACK-005",
+    "trace_destinations": [
+      "candidate:06247b63a89454956a07"
+    ],
+    "without_edge_status": "not_applied"
+  },
+  "rulepack_matrix": {
+    "capability_ablation_errors": [],
+    "errors": [],
+    "evaluated_count": 14,
+    "rows": [
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "dispatch"
+        ],
+        "rulepack_id": "RULEPACK-001"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify",
+          "update"
+        ],
+        "rulepack_id": "RULEPACK-002"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify",
+          "update"
+        ],
+        "rulepack_id": "RULEPACK-003"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify",
+          "update"
+        ],
+        "rulepack_id": "RULEPACK-004"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify",
+          "pay"
+        ],
+        "rulepack_id": "RULEPACK-005"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify"
+        ],
+        "rulepack_id": "RULEPACK-006"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify",
+          "toggle"
+        ],
+        "rulepack_id": "RULEPACK-007"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify",
+          "toggle"
+        ],
+        "rulepack_id": "RULEPACK-008"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify"
+        ],
+        "rulepack_id": "RULEPACK-009"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify",
+          "schedule"
+        ],
+        "rulepack_id": "RULEPACK-010"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify",
+          "schedule"
+        ],
+        "rulepack_id": "RULEPACK-011"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify",
+          "schedule"
+        ],
+        "rulepack_id": "RULEPACK-012"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "verify"
+        ],
+        "rulepack_id": "RULEPACK-013"
+      },
+      {
+        "assessment_order": [
+          "rulepack_lookup",
+          "base_blueprint_load",
+          "required_role_evaluation",
+          "information_evaluation",
+          "global_constraint_activation",
+          "pair_constraint_activation",
+          "conditional_information_finalization",
+          "constraint_effect_composition",
+          "final_plan_requirements",
+          "full_capability_evaluation"
+        ],
+        "candidate_state": "executable",
+        "capability_status": "available",
+        "information_status": "complete",
+        "platform_capabilities": [
+          "read",
+          "clarify"
+        ],
+        "rulepack_id": "RULEPACK-014"
+      }
+    ],
+    "rulepack_count": 14
+  }
+}

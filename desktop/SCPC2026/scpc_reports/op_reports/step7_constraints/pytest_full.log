@@ -1,0 +1,44 @@
+........................................................................ [ 52%]
+...............F................................................         [100%]
+=================================== FAILURES ===================================
+______________________ test_dev_score_and_optional_fields ______________________
+
+    def test_dev_score_and_optional_fields() -> None:
+        data_dir = find_data_dir()
+        tasks = load_jsonl(data_dir / "dev_tasks.jsonl")
+        reference_payload = json.loads((data_dir / "dev_answers.json").read_text(encoding="utf-8"))
+        public_values = set(reference_payload["plan_arg_ontology"]["values"])
+        payload = run_tasks(tasks)
+        assert "compatibility" not in json.dumps(payload["_traces"], ensure_ascii=False)
+        rows = []
+        for task_id, reference in reference_payload["answers"].items():
+            row = score_answer(payload["answers"][task_id], reference, public_values)
+            assert row["focal"] == 1.0
+            rows.append(row)
+        axes = {
+            key: round(sum(row[key] for row in rows) / len(rows), 4)
+            for key in WEIGHTS
+        }
+        overall = round(
+            sum(
+                sum(row[key] * WEIGHTS[key] for key in WEIGHTS)
+                for row in rows
+            )
+            / len(rows),
+            4,
+        )
+        spec = json.loads(
+            (
+                Path(__file__).resolve().parent
+                / "specs"
+                / "generalization_v1.json"
+            ).read_text(encoding="utf-8")
+        )
+        gate = spec["dev_hard_gate"]
+>       assert overall >= gate["minimum_overall"]
+E       assert 0.8036 >= 0.9421
+
+tests/test_regression.py:44: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_regression.py::test_dev_score_and_optional_fields - assert ...
+1 failed, 135 passed in 14.23s

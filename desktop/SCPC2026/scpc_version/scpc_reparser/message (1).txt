@@ -1,0 +1,159 @@
+재평가 결과, `content_scope=0.7099`라는 계산 자체는 정확합니다. 다만 “89건의 content_scope 구조가 틀렸다”는 해석은 정확하지 않았습니다.
+
+## 계산 검증
+
+공식 노트북 scorer와 로컬 scorer는 완전히 같은 결과를 냈습니다. `content_scope`는 다음처럼 계산됩니다.
+
+| 구성요소 | 유사도 | 상위 target/control 반영 후 기여도 |
+|---|---:|---:|
+| mode | 0.7917 | 0.3067 |
+| allowed_fields | 0.9417 | 0.2229 |
+| excluded_fields | 0.3762 | 0.0887 |
+| confirmation | 0.9667 | 0.0917 |
+| 합계 | 원시 0.7428 | **0.7099** |
+
+즉:
+
+- 순수 scope 유사도는 `0.7428`
+- target/control 오답 때문에 `0.0329`가 추가로 차감
+- 최종 공식 축 점수는 `0.7099`
+
+따라서 점수 계산은 논리적으로 유효합니다.
+
+## 89건의 정확한 의미
+
+120건 중:
+
+- 실제 `content_scope` 객체 불일치: **87건**
+- scope 자체는 정확하지만 target/control 오류로 0점 처리: **2건**
+- 최종 content_scope 축에서 1점 미만: **89건**
+- scope 완전 일치: **33건**
+
+87건의 구조 오류 구성은 다음과 같습니다.
+
+- `excluded_fields`만 틀림: **62건**
+- mode와 excluded_fields가 함께 틀림: **16건**
+- mode·allowed·excluded 동시 오류: **5건**
+- 나머지 복합 오류: **4건**
+
+따라서 핵심 문제는 mode보다도 `excluded_fields`입니다.
+
+## 1. 가장 큰 원인: 서로 다른 excluded_fields 의미 모델
+
+참조답안은 excluded_fields를 사실상 다섯 가지 정책 템플릿으로 사용합니다.
+
+- `[]`: 36건
+- `["raw_quote"]`: 36건
+- `["location", "numeric_value", "raw_quote"]`: 35건
+- `["name", "numeric_value", "raw_quote", "rrn"]`: 8건
+- `["name"]`: 5건
+
+반면 현재 엔진은 focal 객체의 실제 `contains`, `fields`, 직접 속성을 읽고, 비공개로 분류된 모든 속성을 excluded_fields로 출력합니다. 그래서 다음과 같은 예측 집합이 만들어집니다.
+
+- 파일: `amount, name, raw_quote, rrn`
+- 건강기록: `doctor_note, numeric_value, status`
+- 개인 메모: `birthday, gift_hint, privacy_rule, tone`
+- 속성 인벤토리가 없는 메시지: `[]`
+
+즉 두 모델이 다릅니다.
+
+- 참조답안: 상황별 공개 정책 프로필
+- 현재 엔진: focal 객체에 실제 존재하는 비공개 속성 목록
+
+현재 엔진의 방식은 보안상 설명 가능하지만, benchmark의 의미 계약과 일치하지 않습니다. 이것이 excluded_fields 평균 유사도가 `0.3762`까지 떨어진 직접 원인입니다.
+
+대표적으로 `external_share_policy=raw_quote_forbidden`인 메시지는 참조답안에서 `["raw_quote"]`를 요구합니다. 그러나 메시지 객체의 속성 인벤토리에는 `raw_quote`가 없기 때문에 현재 엔진은 mode만 `redacted`로 바꾸고 excluded_fields는 `[]`로 출력합니다. 이런 유형이 대량으로 반복됩니다.
+
+## 2. 정책 record가 mode만 바꾸고 필드 정보를 전달하지 않음
+
+현재 제약 파이프라인에서:
+
+- `external_share_policy` → `ADD_REDACTION`
+- `session_share_policy=strict` → `FORCE_SUMMARY`
+
+효과는 Blueprint의 mode를 바꾸지만, “구체적으로 어떤 필드를 제외해야 하는가”는 전달하지 않습니다.
+
+최종 `_disclosure_projection()`은 정책 record가 아니라 오직 focal 객체의 PropertyDescriptor만 보고 excluded_fields를 만듭니다. 이 때문에:
+
+- `raw_quote_forbidden`인데 `raw_quote`가 누락됨
+- strict policy인데 참조의 기본 `raw_quote` 제외가 누락됨
+- 반대로 객체에 존재하는 모든 민감 속성을 과도하게 출력함
+
+즉, 현재 구조에는 “정책 제약이 요구한 제외 필드”와 “객체 메타데이터에서 발견한 제외 필드”를 합성하는 계층이 없습니다.
+
+## 3. mode 결정 우선순위의 불일치
+
+mode 자체는 25건이 틀렸습니다.
+
+- 기대 `redacted`, 예측 `summary`: 11건
+- 기대 `summary`, 예측 `redacted`: 7건
+- 기대 `status_only`, 예측 `redacted`: 2건
+- 기타: 5건
+
+BlueprintCompiler의 현재 우선순위는 대략 다음과 같습니다.
+
+`ADD_REDACTION > FORCE_SUMMARY > ALLOW_RAW`
+
+따라서 비공개 속성이 하나라도 발견되면 `ADD_REDACTION`이 strict summary나 확인 흐름보다 우선해 redacted가 됩니다. 반대 방향으로는 속성 인벤토리가 없는 메시지에서 strict policy가 summary만 만들지만 참조답안은 redacted를 요구합니다.
+
+즉, mode가 “작업 목적·경계·확인 상태·정책 record”의 교차 결과가 아니라 가장 강한 단일 효과로 결정되는 것이 문제입니다.
+
+## 4. 내부 논리 모순도 3건 존재
+
+건강기록의 status-only 결과 중 3건에서 다음이 동시에 출력됩니다.
+
+```json
+{
+  "allowed_fields": ["status"],
+  "excluded_fields": ["doctor_note", "numeric_value", "status"]
+}
+```
+
+`status`가 허용 목록과 제외 목록에 동시에 존재합니다.
+
+원인은:
+
+- status-only projection은 무조건 `status`를 허용
+- PropertyPolicy는 `status`를 INTERNAL로 분류해 제외
+
+두 규칙 사이에 교집합 제거 또는 불변식 검증이 없습니다. 이것은 scorer와 무관하게 실제 논리적 결함입니다.
+
+## 5. `none` 모드의 의미도 일관되지 않음
+
+참조답안은 `mode=none`인 22건 모두 excluded_fields를 빈 배열로 둡니다. 정보 자체를 사용하지 않으므로 별도 제외 목록도 필요 없다는 의미입니다.
+
+현재 엔진은 `mode=none`이어도 focal 객체의 민감 속성을 excluded_fields에 계속 나열합니다. 보안적으로 위험하지는 않지만 표현 계약이 다르고 불필요한 정보가 포함됩니다.
+
+## 6. 상위 target/control 종속성
+
+scorer는 다음처럼 계산합니다.
+
+```python
+downstream = target_correct * control_correct
+content_scope = downstream * scope_similarity
+```
+
+현재 target/control 중 하나라도 틀린 태스크가 10건입니다. 따라서 scope를 전부 완벽하게 고치더라도, 상위 오류를 그대로 두면 content_scope의 이론적 최대치는:
+
+```text
+110 / 120 = 0.9167
+```
+
+입니다. dev 기준 `0.975`에는 도달할 수 없습니다.
+
+즉 `content_scope` 기준을 충족하려면:
+
+- scope 자체를 고치는 것뿐 아니라
+- target/control 오류의 합집합을 현재 10건에서 최대 3건 이하로 줄여야 합니다.
+
+## 최종 판단
+
+- `0.7099` 계산: 타당함
+- “89개 scope 구조 오류”라는 표현: 부정확함 → 실제 구조 오류는 87건
+- 가장 큰 원인: `excluded_fields` 의미 모델 불일치
+- 구조적 원인: 정책 record와 속성 메타데이터를 합성하는 DisclosureProfile 계층 부재
+- mode 원인: 단일 효과 우선순위가 상황별 의미를 충분히 반영하지 못함
+- 독립적인 논리 결함: allowed/excluded 교집합 3건
+- dev 기준 달성 가능성: scope만 수정해서는 불가능하며 target/control도 함께 개선해야 함
+
+결론적으로 단순히 “메타데이터가 부족하다”기보다는, 메타데이터는 이미 존재하지만 그것을 benchmark가 기대하는 정책 기반 content scope로 변환하는 의미 계층이 잘못 설계된 것이 더 정확한 원인입니다.
